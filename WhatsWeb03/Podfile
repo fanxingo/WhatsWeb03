@@ -1,0 +1,14 @@
+#source 'https://github.com/CocoaPods/Specs.git'
+
+platform :ios,'15.0'
+use_modular_headers!
+def testing_pods
+  pod 'Firebase/Core'
+  pod 'Firebase/Crashlytics'
+end
+
+target 'WhatsWeb03' do
+    testing_pods
+end
+
+

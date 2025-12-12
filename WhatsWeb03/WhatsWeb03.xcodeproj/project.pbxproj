@@ -8,15 +8,62 @@
 
 /* Begin PBXBuildFile section */
 		0A8240852EEA775300DC26F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A8240812EEA775300DC26F3 /* Assets.xcassets */; };
-		0A8240862EEA775300DC26F3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8240822EEA775300DC26F3 /* ContentView.swift */; };
 		0A8240872EEA775300DC26F3 /* WhatsWeb03App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8240832EEA775300DC26F3 /* WhatsWeb03App.swift */; };
+		0ABBB8822EEA9EED00A8B846 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8812EEA9EED00A8B846 /* SceneDelegate.swift */; };
+		0ABBB8852EEA9FFD00A8B846 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8842EEA9FFC00A8B846 /* SettingsManager.swift */; };
+		0ABBB8882EEAA09C00A8B846 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8872EEAA09B00A8B846 /* LoadingView.swift */; };
+		0ABBB88A2EEAA2E000A8B846 /* GuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8892EEAA2D900A8B846 /* GuideView.swift */; };
+		0ABBB88D2EEAA34000A8B846 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB88C2EEAA33800A8B846 /* Color.swift */; };
+		0ABBB88F2EEAA3DF00A8B846 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB88E2EEAA3D900A8B846 /* Constants.swift */; };
+		0ABBB8912EEAA41300A8B846 /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8902EEAA41200A8B846 /* UserDefaultsHelper.swift */; };
+		0ABBB8952EEAA56100A8B846 /* TabMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8942EEAA55F00A8B846 /* TabMainView.swift */; };
+		0ABBB8972EEAA6EF00A8B846 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8962EEAA6ED00A8B846 /* AppDelegate.swift */; };
+		0ABBB8992EEAA71100A8B846 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8982EEAA71000A8B846 /* NetworkMonitor.swift */; };
+		0ABBB89C2EEAB1F800A8B846 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ABBB89B2EEAB1F800A8B846 /* LaunchScreen.storyboard */; };
+		0ABBB89E2EEAB84500A8B846 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB89D2EEAB84300A8B846 /* String.swift */; };
+		0ABBB8A02EEAC7F300A8B846 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB89F2EEAC7F100A8B846 /* View.swift */; };
+		0ABBB8A22EEAD1A900A8B846 /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8A12EEAD1A800A8B846 /* RoundedCorner.swift */; };
+		0ABBB8A42EEBA58200A8B846 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8A32EEBA57E00A8B846 /* CustomView.swift */; };
+		0ABBB8A62EEBB9BF00A8B846 /* TipsAffirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8A52EEBB9BA00A8B846 /* TipsAffirmView.swift */; };
+		0ABBB8AD2EEC027000A8B846 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8AC2EEC026E00A8B846 /* HomeView.swift */; };
+		0ABBB8AF2EEC02A900A8B846 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8AE2EEC02A700A8B846 /* ChatView.swift */; };
+		0ABBB8B12EEC02BE00A8B846 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8B02EEC02BC00A8B846 /* TextView.swift */; };
+		0ABBB8B32EEC02C700A8B846 /* SetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8B22EEC02C700A8B846 /* SetView.swift */; };
+		0ABBB8B72EEC115E00A8B846 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8B62EEC115C00A8B846 /* TestView.swift */; };
+		0ABBB8B92EEC15C000A8B846 /* PayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8B82EEC15BE00A8B846 /* PayView.swift */; };
+		917DEB8807D80E7F8D096A64 /* libPods-WhatsWeb03.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FEDF1DE58567675AE2FAC02B /* libPods-WhatsWeb03.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0A8240732EEA774900DC26F3 /* WhatsWeb03.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhatsWeb03.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A8240812EEA775300DC26F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0A8240822EEA775300DC26F3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0A8240832EEA775300DC26F3 /* WhatsWeb03App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsWeb03App.swift; sourceTree = "<group>"; };
+		0ABBB8812EEA9EED00A8B846 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		0ABBB8842EEA9FFC00A8B846 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
+		0ABBB8872EEAA09B00A8B846 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		0ABBB8892EEAA2D900A8B846 /* GuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideView.swift; sourceTree = "<group>"; };
+		0ABBB88C2EEAA33800A8B846 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		0ABBB88E2EEAA3D900A8B846 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0ABBB8902EEAA41200A8B846 /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
+		0ABBB8942EEAA55F00A8B846 /* TabMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabMainView.swift; sourceTree = "<group>"; };
+		0ABBB8962EEAA6ED00A8B846 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0ABBB8982EEAA71000A8B846 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		0ABBB89A2EEAAA1100A8B846 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0ABBB89B2EEAB1F800A8B846 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		0ABBB89D2EEAB84300A8B846 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		0ABBB89F2EEAC7F100A8B846 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		0ABBB8A12EEAD1A800A8B846 /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
+		0ABBB8A32EEBA57E00A8B846 /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
+		0ABBB8A52EEBB9BA00A8B846 /* TipsAffirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipsAffirmView.swift; sourceTree = "<group>"; };
+		0ABBB8AC2EEC026E00A8B846 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		0ABBB8AE2EEC02A700A8B846 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		0ABBB8B02EEC02BC00A8B846 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
+		0ABBB8B22EEC02C700A8B846 /* SetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetView.swift; sourceTree = "<group>"; };
+		0ABBB8B62EEC115C00A8B846 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		0ABBB8B82EEC15BE00A8B846 /* PayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayView.swift; sourceTree = "<group>"; };
+		2F4ED27C142998BA03C53B03 /* Pods-WhatsWeb03.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsWeb03.debug.xcconfig"; path = "Target Support Files/Pods-WhatsWeb03/Pods-WhatsWeb03.debug.xcconfig"; sourceTree = "<group>"; };
+		B4FCDF8A0D6AB8163F7FF221 /* Pods-WhatsWeb03.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsWeb03.release.xcconfig"; path = "Target Support Files/Pods-WhatsWeb03/Pods-WhatsWeb03.release.xcconfig"; sourceTree = "<group>"; };
+		FEDF1DE58567675AE2FAC02B /* libPods-WhatsWeb03.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WhatsWeb03.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -24,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				917DEB8807D80E7F8D096A64 /* libPods-WhatsWeb03.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -35,6 +83,8 @@
 			children = (
 				0A8240842EEA775300DC26F3 /* WhatsWeb03 */,
 				0A8240742EEA774900DC26F3 /* Products */,
+				A0FB6DAF8F524BC638AA5F5C /* Pods */,
+				CDD88C96A84EC5F1A55FA8E0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -49,11 +99,130 @@
 		0A8240842EEA775300DC26F3 /* WhatsWeb03 */ = {
 			isa = PBXGroup;
 			children = (
+				0ABBB8832EEA9FF200A8B846 /* Manager */,
+				0ABBB8802EEA9ECD00A8B846 /* Main */,
+				0ABBB87F2EEA9EC500A8B846 /* UI */,
 				0A8240812EEA775300DC26F3 /* Assets.xcassets */,
-				0A8240822EEA775300DC26F3 /* ContentView.swift */,
 				0A8240832EEA775300DC26F3 /* WhatsWeb03App.swift */,
+				0ABBB8812EEA9EED00A8B846 /* SceneDelegate.swift */,
+				0ABBB8962EEAA6ED00A8B846 /* AppDelegate.swift */,
+				0ABBB89A2EEAAA1100A8B846 /* Info.plist */,
+				0ABBB89B2EEAB1F800A8B846 /* LaunchScreen.storyboard */,
 			);
 			path = WhatsWeb03;
+			sourceTree = "<group>";
+		};
+		0ABBB87F2EEA9EC500A8B846 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				0ABBB8B62EEC115C00A8B846 /* TestView.swift */,
+				0ABBB8A92EEC023600A8B846 /* P1 */,
+				0ABBB8A72EEC023100A8B846 /* P2 */,
+				0ABBB8A82EEC023500A8B846 /* P3 */,
+				0ABBB8AB2EEC024B00A8B846 /* P4 */,
+				0ABBB8932EEAA55B00A8B846 /* Tab */,
+				0ABBB8862EEAA09200A8B846 /* guide */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		0ABBB8802EEA9ECD00A8B846 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				0ABBB88B2EEAA33100A8B846 /* Extension */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		0ABBB8832EEA9FF200A8B846 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				0ABBB88E2EEAA3D900A8B846 /* Constants.swift */,
+				0ABBB8842EEA9FFC00A8B846 /* SettingsManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		0ABBB8862EEAA09200A8B846 /* guide */ = {
+			isa = PBXGroup;
+			children = (
+				0ABBB8B82EEC15BE00A8B846 /* PayView.swift */,
+				0ABBB8A52EEBB9BA00A8B846 /* TipsAffirmView.swift */,
+				0ABBB8892EEAA2D900A8B846 /* GuideView.swift */,
+				0ABBB8872EEAA09B00A8B846 /* LoadingView.swift */,
+			);
+			path = guide;
+			sourceTree = "<group>";
+		};
+		0ABBB88B2EEAA33100A8B846 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				0ABBB89F2EEAC7F100A8B846 /* View.swift */,
+				0ABBB8A32EEBA57E00A8B846 /* CustomView.swift */,
+				0ABBB8A12EEAD1A800A8B846 /* RoundedCorner.swift */,
+				0ABBB89D2EEAB84300A8B846 /* String.swift */,
+				0ABBB8982EEAA71000A8B846 /* NetworkMonitor.swift */,
+				0ABBB8902EEAA41200A8B846 /* UserDefaultsHelper.swift */,
+				0ABBB88C2EEAA33800A8B846 /* Color.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		0ABBB8932EEAA55B00A8B846 /* Tab */ = {
+			isa = PBXGroup;
+			children = (
+				0ABBB8942EEAA55F00A8B846 /* TabMainView.swift */,
+			);
+			path = Tab;
+			sourceTree = "<group>";
+		};
+		0ABBB8A72EEC023100A8B846 /* P2 */ = {
+			isa = PBXGroup;
+			children = (
+				0ABBB8AE2EEC02A700A8B846 /* ChatView.swift */,
+			);
+			path = P2;
+			sourceTree = "<group>";
+		};
+		0ABBB8A82EEC023500A8B846 /* P3 */ = {
+			isa = PBXGroup;
+			children = (
+				0ABBB8B02EEC02BC00A8B846 /* TextView.swift */,
+			);
+			path = P3;
+			sourceTree = "<group>";
+		};
+		0ABBB8A92EEC023600A8B846 /* P1 */ = {
+			isa = PBXGroup;
+			children = (
+				0ABBB8AC2EEC026E00A8B846 /* HomeView.swift */,
+			);
+			path = P1;
+			sourceTree = "<group>";
+		};
+		0ABBB8AB2EEC024B00A8B846 /* P4 */ = {
+			isa = PBXGroup;
+			children = (
+				0ABBB8B22EEC02C700A8B846 /* SetView.swift */,
+			);
+			path = P4;
+			sourceTree = "<group>";
+		};
+		A0FB6DAF8F524BC638AA5F5C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2F4ED27C142998BA03C53B03 /* Pods-WhatsWeb03.debug.xcconfig */,
+				B4FCDF8A0D6AB8163F7FF221 /* Pods-WhatsWeb03.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		CDD88C96A84EC5F1A55FA8E0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FEDF1DE58567675AE2FAC02B /* libPods-WhatsWeb03.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -63,17 +232,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0A82407E2EEA774A00DC26F3 /* Build configuration list for PBXNativeTarget "WhatsWeb03" */;
 			buildPhases = (
+				902D0F817F2E69B69C24BE49 /* [CP] Check Pods Manifest.lock */,
 				0A82406F2EEA774900DC26F3 /* Sources */,
 				0A8240702EEA774900DC26F3 /* Frameworks */,
 				0A8240712EEA774900DC26F3 /* Resources */,
+				A6D08A65F95674831560BC87 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = WhatsWeb03;
-			packageProductDependencies = (
-			);
 			productName = WhatsWeb03;
 			productReference = 0A8240732EEA774900DC26F3 /* WhatsWeb03.app */;
 			productType = "com.apple.product-type.application";
@@ -117,19 +286,86 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0ABBB89C2EEAB1F800A8B846 /* LaunchScreen.storyboard in Resources */,
 				0A8240852EEA775300DC26F3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		902D0F817F2E69B69C24BE49 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WhatsWeb03-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A6D08A65F95674831560BC87 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WhatsWeb03/Pods-WhatsWeb03-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WhatsWeb03/Pods-WhatsWeb03-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WhatsWeb03/Pods-WhatsWeb03-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		0A82406F2EEA774900DC26F3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A8240862EEA775300DC26F3 /* ContentView.swift in Sources */,
+				0ABBB8A02EEAC7F300A8B846 /* View.swift in Sources */,
+				0ABBB8A42EEBA58200A8B846 /* CustomView.swift in Sources */,
+				0ABBB8B72EEC115E00A8B846 /* TestView.swift in Sources */,
+				0ABBB8912EEAA41300A8B846 /* UserDefaultsHelper.swift in Sources */,
+				0ABBB8852EEA9FFD00A8B846 /* SettingsManager.swift in Sources */,
+				0ABBB8AF2EEC02A900A8B846 /* ChatView.swift in Sources */,
+				0ABBB8952EEAA56100A8B846 /* TabMainView.swift in Sources */,
+				0ABBB8B32EEC02C700A8B846 /* SetView.swift in Sources */,
+				0ABBB8AD2EEC027000A8B846 /* HomeView.swift in Sources */,
+				0ABBB8A62EEBB9BF00A8B846 /* TipsAffirmView.swift in Sources */,
+				0ABBB88D2EEAA34000A8B846 /* Color.swift in Sources */,
+				0ABBB8B92EEC15C000A8B846 /* PayView.swift in Sources */,
 				0A8240872EEA775300DC26F3 /* WhatsWeb03App.swift in Sources */,
+				0ABBB8A22EEAD1A900A8B846 /* RoundedCorner.swift in Sources */,
+				0ABBB88A2EEAA2E000A8B846 /* GuideView.swift in Sources */,
+				0ABBB89E2EEAB84500A8B846 /* String.swift in Sources */,
+				0ABBB8882EEAA09C00A8B846 /* LoadingView.swift in Sources */,
+				0ABBB8992EEAA71100A8B846 /* NetworkMonitor.swift in Sources */,
+				0ABBB8822EEA9EED00A8B846 /* SceneDelegate.swift in Sources */,
+				0ABBB8972EEAA6EF00A8B846 /* AppDelegate.swift in Sources */,
+				0ABBB8B12EEC02BE00A8B846 /* TextView.swift in Sources */,
+				0ABBB88F2EEAA3DF00A8B846 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,18 +493,21 @@
 		};
 		0A82407F2EEA774A00DC26F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2F4ED27C142998BA03C53B03 /* Pods-WhatsWeb03.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = WhatsWeb03/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -291,18 +530,21 @@
 		};
 		0A8240802EEA774A00DC26F3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B4FCDF8A0D6AB8163F7FF221 /* Pods-WhatsWeb03.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = WhatsWeb03/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

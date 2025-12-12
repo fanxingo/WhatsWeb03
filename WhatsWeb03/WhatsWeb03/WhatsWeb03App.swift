@@ -6,12 +6,20 @@
 //
 
 import SwiftUI
+import Combine
 
-@main
-struct WhatsWeb03App: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
+struct WhatsWeb03App: View  {
+    
+    @StateObject var settings = SettingsManager()
+    @StateObject var navManager = NavigationManager()
+    
+    var body: some View {
+        LoadingView()
+            .environmentObject(settings)
+            .environmentObject(navManager)
     }
+}
+
+class NavigationManager: ObservableObject {
+    @Published var path = NavigationPath()
 }

@@ -1,0 +1,6 @@
+module Pods_WhatsWeb03 {
+  umbrella header "Pods-WhatsWeb03-umbrella.h"
+
+  export *
+  module * { export * }
+}
