@@ -14,17 +14,148 @@ struct HomeView: View{
     
     var body: some View{
         ZStack{
-            Color(.red)
-            Button (action:{
-//                navManager.path.append(AppRoute.testView)
-                showFullPayScreen = true
-            }){
-                Text("Push")
+            VStack(spacing: 8){
+                
+                TitleView(showFullPayScreen: $showFullPayScreen, title: "Home".localized())
+                
+                Button(action:{
+                    currentTab = .chat
+                }){
+                    ButtonAction()
+                }
+                .padding(.top,8)
+                
+                HStack{
+                    Button(action:{
+                        navManager.path.append(AppRoute.messageList)
+                    }){
+                        ItemView(bgImg: "home_linebg_item2", iconImg: "home_icon2", title: "消息备份".localized(), desc: "数据备份".localized())
+                    }
+                    Button(action:{
+                        navManager.path.append(AppRoute.appLockView)
+                    }){
+                        ItemView(bgImg: "home_linebg_item2", iconImg: "home_icon3", title: "应用锁".localized(), desc: "保护您的隐私".localized())
+                    }
+                }
+
+                LineSpace(title: "更多功能".localized())
+                
+                Button(action: {
+                    
+                }){
+                    ItemView2(bgImg: "home_linebg_item3", iconImg: "home_icon4", title: "社交头像".localized())
+                }
+                Button(action: {
+                    
+                }){
+                    ItemView2(bgImg: "home_linebg_item3", iconImg: "home_icon5", title: "生成二维码".localized())
+                }
+                Button(action: {
+                    
+                }){
+                    ItemView2(bgImg: "home_linebg_item3", iconImg: "home_icon6", title: "日程提醒".localized())
+                }
+                Spacer()
             }
+            .padding(.top,safeTop)
+            .padding(.horizontal,16)
         }
+        .fullScreenBackground("loding_bgimage")
         .fullScreenCover(isPresented: $showFullPayScreen) {
             PayView()
         }
-        
     }
+}
+
+
+extension HomeView{
+    @ViewBuilder
+    private func ButtonAction() -> some View {
+        ZStack{
+            Image("home_linebg_item1")
+                .resizable()
+                .scaledToFit()
+            HStack{
+                Image("home_icon1")
+                    .frame(width: 40,height: 40)
+                VStack(alignment: .leading){
+                    CustomText(text: "聊天".localized(), fontName: Constants.FontString.semibold,fontSize: 20, colorHex: "#101010FF")
+                    CustomText(text: "Dual Chat".localized(), fontName: Constants.FontString.medium,fontSize: 14, colorHex: "#7D7D7DFF")
+                }
+                Spacer()
+                Image("home_arrow")
+                    .resizable()
+                    .frame(width: 24,height: 24)
+            }
+            .padding(.horizontal,24)
+            .padding(.bottom,8)
+        }
+    }
+    
+    private struct ItemView:View {
+        var bgImg : String
+        var iconImg : String
+        var title : String
+        var desc : String
+        
+        var body: some View{
+            ZStack{
+                Image(bgImg)
+                    .resizable()
+                    .scaledToFit()
+                HStack{
+                    Image(iconImg)
+                        .resizable()
+                        .frame(width: 40,height: 40)
+                    VStack(alignment: .leading){
+                        CustomText(text: title, fontName: Constants.FontString.medium,fontSize: 14, colorHex: "#101010FF")
+                        CustomText(text: desc, fontName: Constants.FontString.medium,fontSize: 12, colorHex: "#7D7D7DFF")
+                    }
+                    Spacer()
+                }
+                .padding(.horizontal,24)
+                .padding(.bottom,8)
+
+            }
+        }
+    }
+    
+    private struct ItemView2:View {
+        var bgImg : String
+        var iconImg : String
+        var title : String
+
+        var body: some View{
+            ZStack{
+                Image(bgImg)
+                    .resizable()
+                    .scaledToFit()
+                HStack(spacing:10){
+                    Image(iconImg)
+                        .resizable()
+                        .frame(width: 34,height: 34)
+                    CustomText(text: title, fontName: Constants.FontString.medium,fontSize: 14, colorHex: "#101010FF")
+                    Spacer()
+                    Image("home_arrow")
+                        .resizable()
+                        .frame(width: 20,height: 20)
+                }
+                .padding(.horizontal,24)
+                .padding(.bottom,8)
+
+            }
+        }
+    }
+}
+
+#Preview {
+
+    @Previewable @StateObject var settings = SettingsManager()
+    @Previewable @StateObject var navManager = NavigationManager()
+    @Previewable @StateObject var popManager = PopManager.shared
+    
+    TabMainView()
+        .environmentObject(settings)
+        .environmentObject(navManager)
+        .environmentObject(popManager)
 }

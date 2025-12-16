@@ -10,17 +10,20 @@ enum CustomTab: Hashable {
     case home, chat, text, mine
 }
 enum AppRoute: Hashable {
-    case testView
+    case messageList
+    case appLockView
+    case backupTutorial
+    case appLockTutorialView
 }
 
 
 struct TabMainView: View {
     
     @State private var currentTab: CustomTab = .home
-    @State private var previousTab: CustomTab = .home
-    
+
     @EnvironmentObject var navManager: NavigationManager
     @EnvironmentObject var settings: SettingsManager
+    @EnvironmentObject var popManager: PopManager
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -39,11 +42,17 @@ struct TabMainView: View {
                 }
                 .applyRoutes()
                 .edgesIgnoringSafeArea(.all)
+                
+
             }
             if navManager.path.isEmpty {
                 FloatingTabBar(selection: $currentTab)
                     .padding(.horizontal, 30)
                     .padding(.bottom, safeBottom)
+            }
+            //弹窗控制器
+            if let popup = popManager.currentPopup {
+                popup
             }
         }
         .edgesIgnoringSafeArea(.bottom)
@@ -96,8 +105,14 @@ extension View {
     func applyRoutes() -> some View {
         self.navigationDestination(for: AppRoute.self) { route in
             switch route {
-            case .testView:
-                TestView()
+            case .messageList:
+                MessageList()
+            case .appLockView:
+                AppLockView()
+            case .backupTutorial:
+                BackupTutorialView()
+            case .appLockTutorialView:
+                AppLockTutorialView()
             }
         }
     }

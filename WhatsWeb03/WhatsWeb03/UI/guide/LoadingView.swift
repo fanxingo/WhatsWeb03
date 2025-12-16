@@ -60,13 +60,7 @@ struct LoadingView: View {
                 }
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(
-            Image("loding_bgimage")
-                .resizable()
-                .scaledToFill()
-                .ignoresSafeArea()
-        )
+        .fullScreenBackground("loding_bgimage")
     }
     
     @ViewBuilder

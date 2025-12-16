@@ -12,11 +12,13 @@ struct WhatsWeb03App: View  {
     
     @StateObject var settings = SettingsManager()
     @StateObject var navManager = NavigationManager()
+    @StateObject private var popManager = PopManager.shared
     
     var body: some View {
         LoadingView()
             .environmentObject(settings)
             .environmentObject(navManager)
+            .environmentObject(popManager)
     }
 }
 

@@ -8,7 +8,6 @@
 import SwiftUI
 
 extension View {
-    
     /// 获取整个安全区域 Insets
     var safeInsets: UIEdgeInsets {
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
@@ -33,5 +32,16 @@ extension View {
     /// 右侧安全区
     var safeRight: CGFloat {
         safeInsets.right
+    }
+}
+
+extension View {
+    func fullScreenBackground(_ imageName: String) -> some View {
+        self.modifier(FullScreenBackground(imageName: imageName))
+    }
+}
+extension View {
+    func dismissKeyboardOnTap() -> some View {
+        modifier(DismissKeyboardOnTapModifier())
     }
 }

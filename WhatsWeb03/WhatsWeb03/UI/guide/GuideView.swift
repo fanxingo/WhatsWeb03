@@ -20,7 +20,7 @@ struct GuideView: View {
     var onComplete: () -> Void
     var onPayCancelComplete:() -> Void
     
-    @State private var currentPage = 3
+    @State private var currentPage = 0
     
     @State var currentIndex = 0
     @State private var isOn: Bool = false
@@ -38,15 +38,13 @@ struct GuideView: View {
     ]
     var body: some View{
         ZStack{
-            Image("loding_bgimage")
-                .resizable()
             if  currentPage == baseGuideData.count {
                 guidePayContentView()
             }else{
                 guideContentView()
             }
         }
-        .ignoresSafeArea()
+        .fullScreenBackground("loding_bgimage")
     }
 }
 

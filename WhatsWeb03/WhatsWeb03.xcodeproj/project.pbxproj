@@ -19,7 +19,7 @@
 		0ABBB8952EEAA56100A8B846 /* TabMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8942EEAA55F00A8B846 /* TabMainView.swift */; };
 		0ABBB8972EEAA6EF00A8B846 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8962EEAA6ED00A8B846 /* AppDelegate.swift */; };
 		0ABBB8992EEAA71100A8B846 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8982EEAA71000A8B846 /* NetworkMonitor.swift */; };
-		0ABBB89C2EEAB1F800A8B846 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ABBB89B2EEAB1F800A8B846 /* LaunchScreen.storyboard */; };
+		0ABBB89C2EEAB1F800A8B846 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ABBB89B2EEAB1F800A8B846 /* Launch Screen.storyboard */; };
 		0ABBB89E2EEAB84500A8B846 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB89D2EEAB84300A8B846 /* String.swift */; };
 		0ABBB8A02EEAC7F300A8B846 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB89F2EEAC7F100A8B846 /* View.swift */; };
 		0ABBB8A22EEAD1A900A8B846 /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8A12EEAD1A800A8B846 /* RoundedCorner.swift */; };
@@ -29,8 +29,16 @@
 		0ABBB8AF2EEC02A900A8B846 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8AE2EEC02A700A8B846 /* ChatView.swift */; };
 		0ABBB8B12EEC02BE00A8B846 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8B02EEC02BC00A8B846 /* TextView.swift */; };
 		0ABBB8B32EEC02C700A8B846 /* SetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8B22EEC02C700A8B846 /* SetView.swift */; };
-		0ABBB8B72EEC115E00A8B846 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8B62EEC115C00A8B846 /* TestView.swift */; };
+		0ABBB8B72EEC115E00A8B846 /* ExtensionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8B62EEC115C00A8B846 /* ExtensionView.swift */; };
 		0ABBB8B92EEC15C000A8B846 /* PayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8B82EEC15BE00A8B846 /* PayView.swift */; };
+		0ABBB8BB2EF00C0B00A8B846 /* PopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8BA2EF00C0400A8B846 /* PopView.swift */; };
+		0ABBB8BD2EF00EA800A8B846 /* PopManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8BC2EF00EA700A8B846 /* PopManager.swift */; };
+		0ABBB8BF2EF0F88C00A8B846 /* NavigationBarHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8BE2EF0F88C00A8B846 /* NavigationBarHelper.swift */; };
+		0ABBB8C12EF0F8DA00A8B846 /* MessageList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8C02EF0F8D100A8B846 /* MessageList.swift */; };
+		0ABBB8C32EF104E700A8B846 /* BackupTutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8C22EF104DE00A8B846 /* BackupTutorialView.swift */; };
+		0ABBB8C52EF15D3400A8B846 /* AppLockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8C42EF15D2D00A8B846 /* AppLockView.swift */; };
+		0ABBB8C72EF15D9D00A8B846 /* AppLockTutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8C62EF15D9B00A8B846 /* AppLockTutorialView.swift */; };
+		0ABBB8C92EF1647600A8B846 /* AppLockInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8C82EF1646E00A8B846 /* AppLockInputView.swift */; };
 		917DEB8807D80E7F8D096A64 /* libPods-WhatsWeb03.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FEDF1DE58567675AE2FAC02B /* libPods-WhatsWeb03.a */; };
 /* End PBXBuildFile section */
 
@@ -49,7 +57,7 @@
 		0ABBB8962EEAA6ED00A8B846 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0ABBB8982EEAA71000A8B846 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		0ABBB89A2EEAAA1100A8B846 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0ABBB89B2EEAB1F800A8B846 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		0ABBB89B2EEAB1F800A8B846 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		0ABBB89D2EEAB84300A8B846 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		0ABBB89F2EEAC7F100A8B846 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		0ABBB8A12EEAD1A800A8B846 /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
@@ -59,8 +67,16 @@
 		0ABBB8AE2EEC02A700A8B846 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		0ABBB8B02EEC02BC00A8B846 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		0ABBB8B22EEC02C700A8B846 /* SetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetView.swift; sourceTree = "<group>"; };
-		0ABBB8B62EEC115C00A8B846 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		0ABBB8B62EEC115C00A8B846 /* ExtensionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionView.swift; sourceTree = "<group>"; };
 		0ABBB8B82EEC15BE00A8B846 /* PayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayView.swift; sourceTree = "<group>"; };
+		0ABBB8BA2EF00C0400A8B846 /* PopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopView.swift; sourceTree = "<group>"; };
+		0ABBB8BC2EF00EA700A8B846 /* PopManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopManager.swift; sourceTree = "<group>"; };
+		0ABBB8BE2EF0F88C00A8B846 /* NavigationBarHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarHelper.swift; sourceTree = "<group>"; };
+		0ABBB8C02EF0F8D100A8B846 /* MessageList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageList.swift; sourceTree = "<group>"; };
+		0ABBB8C22EF104DE00A8B846 /* BackupTutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupTutorialView.swift; sourceTree = "<group>"; };
+		0ABBB8C42EF15D2D00A8B846 /* AppLockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLockView.swift; sourceTree = "<group>"; };
+		0ABBB8C62EF15D9B00A8B846 /* AppLockTutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLockTutorialView.swift; sourceTree = "<group>"; };
+		0ABBB8C82EF1646E00A8B846 /* AppLockInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLockInputView.swift; sourceTree = "<group>"; };
 		2F4ED27C142998BA03C53B03 /* Pods-WhatsWeb03.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsWeb03.debug.xcconfig"; path = "Target Support Files/Pods-WhatsWeb03/Pods-WhatsWeb03.debug.xcconfig"; sourceTree = "<group>"; };
 		B4FCDF8A0D6AB8163F7FF221 /* Pods-WhatsWeb03.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsWeb03.release.xcconfig"; path = "Target Support Files/Pods-WhatsWeb03/Pods-WhatsWeb03.release.xcconfig"; sourceTree = "<group>"; };
 		FEDF1DE58567675AE2FAC02B /* libPods-WhatsWeb03.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WhatsWeb03.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,7 +123,7 @@
 				0ABBB8812EEA9EED00A8B846 /* SceneDelegate.swift */,
 				0ABBB8962EEAA6ED00A8B846 /* AppDelegate.swift */,
 				0ABBB89A2EEAAA1100A8B846 /* Info.plist */,
-				0ABBB89B2EEAB1F800A8B846 /* LaunchScreen.storyboard */,
+				0ABBB89B2EEAB1F800A8B846 /* Launch Screen.storyboard */,
 			);
 			path = WhatsWeb03;
 			sourceTree = "<group>";
@@ -115,7 +131,6 @@
 		0ABBB87F2EEA9EC500A8B846 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				0ABBB8B62EEC115C00A8B846 /* TestView.swift */,
 				0ABBB8A92EEC023600A8B846 /* P1 */,
 				0ABBB8A72EEC023100A8B846 /* P2 */,
 				0ABBB8A82EEC023500A8B846 /* P3 */,
@@ -157,6 +172,9 @@
 		0ABBB88B2EEAA33100A8B846 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				0ABBB8BC2EF00EA700A8B846 /* PopManager.swift */,
+				0ABBB8BA2EF00C0400A8B846 /* PopView.swift */,
+				0ABBB8B62EEC115C00A8B846 /* ExtensionView.swift */,
 				0ABBB89F2EEAC7F100A8B846 /* View.swift */,
 				0ABBB8A32EEBA57E00A8B846 /* CustomView.swift */,
 				0ABBB8A12EEAD1A800A8B846 /* RoundedCorner.swift */,
@@ -171,6 +189,7 @@
 		0ABBB8932EEAA55B00A8B846 /* Tab */ = {
 			isa = PBXGroup;
 			children = (
+				0ABBB8BE2EF0F88C00A8B846 /* NavigationBarHelper.swift */,
 				0ABBB8942EEAA55F00A8B846 /* TabMainView.swift */,
 			);
 			path = Tab;
@@ -196,6 +215,11 @@
 			isa = PBXGroup;
 			children = (
 				0ABBB8AC2EEC026E00A8B846 /* HomeView.swift */,
+				0ABBB8C02EF0F8D100A8B846 /* MessageList.swift */,
+				0ABBB8C42EF15D2D00A8B846 /* AppLockView.swift */,
+				0ABBB8C82EF1646E00A8B846 /* AppLockInputView.swift */,
+				0ABBB8C22EF104DE00A8B846 /* BackupTutorialView.swift */,
+				0ABBB8C62EF15D9B00A8B846 /* AppLockTutorialView.swift */,
 			);
 			path = P1;
 			sourceTree = "<group>";
@@ -286,7 +310,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0ABBB89C2EEAB1F800A8B846 /* LaunchScreen.storyboard in Resources */,
+				0ABBB89C2EEAB1F800A8B846 /* Launch Screen.storyboard in Resources */,
 				0A8240852EEA775300DC26F3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -345,15 +369,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				0ABBB8A02EEAC7F300A8B846 /* View.swift in Sources */,
+				0ABBB8C52EF15D3400A8B846 /* AppLockView.swift in Sources */,
 				0ABBB8A42EEBA58200A8B846 /* CustomView.swift in Sources */,
-				0ABBB8B72EEC115E00A8B846 /* TestView.swift in Sources */,
+				0ABBB8B72EEC115E00A8B846 /* ExtensionView.swift in Sources */,
+				0ABBB8C72EF15D9D00A8B846 /* AppLockTutorialView.swift in Sources */,
 				0ABBB8912EEAA41300A8B846 /* UserDefaultsHelper.swift in Sources */,
+				0ABBB8C92EF1647600A8B846 /* AppLockInputView.swift in Sources */,
+				0ABBB8BB2EF00C0B00A8B846 /* PopView.swift in Sources */,
+				0ABBB8C12EF0F8DA00A8B846 /* MessageList.swift in Sources */,
 				0ABBB8852EEA9FFD00A8B846 /* SettingsManager.swift in Sources */,
 				0ABBB8AF2EEC02A900A8B846 /* ChatView.swift in Sources */,
 				0ABBB8952EEAA56100A8B846 /* TabMainView.swift in Sources */,
+				0ABBB8BF2EF0F88C00A8B846 /* NavigationBarHelper.swift in Sources */,
 				0ABBB8B32EEC02C700A8B846 /* SetView.swift in Sources */,
 				0ABBB8AD2EEC027000A8B846 /* HomeView.swift in Sources */,
 				0ABBB8A62EEBB9BF00A8B846 /* TipsAffirmView.swift in Sources */,
+				0ABBB8C32EF104E700A8B846 /* BackupTutorialView.swift in Sources */,
 				0ABBB88D2EEAA34000A8B846 /* Color.swift in Sources */,
 				0ABBB8B92EEC15C000A8B846 /* PayView.swift in Sources */,
 				0A8240872EEA775300DC26F3 /* WhatsWeb03App.swift in Sources */,
@@ -363,6 +394,7 @@
 				0ABBB8882EEAA09C00A8B846 /* LoadingView.swift in Sources */,
 				0ABBB8992EEAA71100A8B846 /* NetworkMonitor.swift in Sources */,
 				0ABBB8822EEA9EED00A8B846 /* SceneDelegate.swift in Sources */,
+				0ABBB8BD2EF00EA800A8B846 /* PopManager.swift in Sources */,
 				0ABBB8972EEAA6EF00A8B846 /* AppDelegate.swift in Sources */,
 				0ABBB8B12EEC02BE00A8B846 /* TextView.swift in Sources */,
 				0ABBB88F2EEAA3DF00A8B846 /* Constants.swift in Sources */,
@@ -504,10 +536,10 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WhatsWeb03/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -541,10 +573,10 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WhatsWeb03/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

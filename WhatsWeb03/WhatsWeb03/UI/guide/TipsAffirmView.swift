@@ -182,17 +182,14 @@ struct TipsAffirmView : View {
                         
                     }
                 }
+                .scrollIndicators(.hidden)
                 BottomView(remindMe: $remindMe, onComplete: {
                     onComplete()
                 })
             }
             .id(remindMe)
         }
-        .background(
-            Image("loding_bgimage")
-                .resizable()
-        )
-        .ignoresSafeArea()
+        .fullScreenBackground("loding_bgimage")
         .onAppear{
             DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
                 showCloseButton = true
@@ -280,6 +277,9 @@ extension TipsAffirmView{
                         startPoint: .top,
                         endPoint: .bottom
                     )
+                )
+                .clipShape(
+                    RoundedCorner(radius: 20, corners: [.topLeft, .topRight])
                 )
             }
         }
