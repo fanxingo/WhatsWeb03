@@ -152,3 +152,48 @@ struct HighlightedText: View {
         }
     }
 }
+
+
+struct NumericKeyboardView: View {
+    var onKeyTap: (String) -> Void
+    var disableKeys: Bool = false
+    
+    private let keyboardRows: [[String]] = [
+        ["1","2","3"],
+        ["4","5","6"],
+        ["7","8","9"],
+        ["" ,"0","⌫"]
+    ]
+    
+    var body: some View {
+        VStack(spacing: 20) {
+            ForEach(keyboardRows, id: \.self) { row in
+                HStack(spacing: 0) {
+                    ForEach(row, id: \.self) { key in
+                        Button(action: {
+                            if !disableKeys {
+                                onKeyTap(key)
+                            }
+                        }) {
+                            ZStack {
+                                if key == "⌫" {
+                                    Image(systemName: "delete.left")
+                                        .font(.system(size: 20, weight: .bold))
+                                        .foregroundColor(Color(hex: "#000000FF"))
+                                } else {
+                                    Text(key)
+                                        .font(.system(size: 20, weight: .semibold))
+                                        .foregroundColor(Color(hex: "#000000FF"))
+                                }
+                            }
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 65)
+                            .contentShape(Rectangle())
+                        }
+                        .disabled(key.isEmpty || disableKeys)
+                    }
+                }
+            }
+        }
+    }
+}

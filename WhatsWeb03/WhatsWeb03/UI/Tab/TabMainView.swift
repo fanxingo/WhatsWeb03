@@ -9,17 +9,36 @@ import SwiftUI
 enum CustomTab: Hashable {
     case home, chat, text, mine
 }
-enum AppRoute: Hashable {
+enum AppRoute: Hashable{
     case messageList
     case appLockView
     case backupTutorial
     case appLockTutorialView
+    case forgetPasswordView
+}
+extension View {
+    func applyRoutes() -> some View {
+        self.navigationDestination(for: AppRoute.self) { route in
+            switch route {
+            case .messageList:
+                MessageList()
+            case .appLockView:
+                AppLockView()
+            case .backupTutorial:
+                BackupTutorialView()
+            case .appLockTutorialView:
+                AppLockTutorialView()
+            case .forgetPasswordView:
+                ForgetPasswordView()
+            }
+        }
+    }
 }
 
 
 struct TabMainView: View {
     
-    @State private var currentTab: CustomTab = .home
+    @State private var currentTab: CustomTab = .mine
 
     @EnvironmentObject var navManager: NavigationManager
     @EnvironmentObject var settings: SettingsManager
@@ -101,19 +120,4 @@ struct FloatingTabBar: View {
 
 
 
-extension View {
-    func applyRoutes() -> some View {
-        self.navigationDestination(for: AppRoute.self) { route in
-            switch route {
-            case .messageList:
-                MessageList()
-            case .appLockView:
-                AppLockView()
-            case .backupTutorial:
-                BackupTutorialView()
-            case .appLockTutorialView:
-                AppLockTutorialView()
-            }
-        }
-    }
-}
+

@@ -39,6 +39,7 @@
 		0ABBB8C52EF15D3400A8B846 /* AppLockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8C42EF15D2D00A8B846 /* AppLockView.swift */; };
 		0ABBB8C72EF15D9D00A8B846 /* AppLockTutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8C62EF15D9B00A8B846 /* AppLockTutorialView.swift */; };
 		0ABBB8C92EF1647600A8B846 /* AppLockInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8C82EF1646E00A8B846 /* AppLockInputView.swift */; };
+		0ABBB8CB2EF3B2ED00A8B846 /* ForgetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8CA2EF3B2E500A8B846 /* ForgetPasswordView.swift */; };
 		917DEB8807D80E7F8D096A64 /* libPods-WhatsWeb03.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FEDF1DE58567675AE2FAC02B /* libPods-WhatsWeb03.a */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +78,7 @@
 		0ABBB8C42EF15D2D00A8B846 /* AppLockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLockView.swift; sourceTree = "<group>"; };
 		0ABBB8C62EF15D9B00A8B846 /* AppLockTutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLockTutorialView.swift; sourceTree = "<group>"; };
 		0ABBB8C82EF1646E00A8B846 /* AppLockInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLockInputView.swift; sourceTree = "<group>"; };
+		0ABBB8CA2EF3B2E500A8B846 /* ForgetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordView.swift; sourceTree = "<group>"; };
 		2F4ED27C142998BA03C53B03 /* Pods-WhatsWeb03.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsWeb03.debug.xcconfig"; path = "Target Support Files/Pods-WhatsWeb03/Pods-WhatsWeb03.debug.xcconfig"; sourceTree = "<group>"; };
 		B4FCDF8A0D6AB8163F7FF221 /* Pods-WhatsWeb03.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsWeb03.release.xcconfig"; path = "Target Support Files/Pods-WhatsWeb03/Pods-WhatsWeb03.release.xcconfig"; sourceTree = "<group>"; };
 		FEDF1DE58567675AE2FAC02B /* libPods-WhatsWeb03.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WhatsWeb03.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -218,6 +220,7 @@
 				0ABBB8C02EF0F8D100A8B846 /* MessageList.swift */,
 				0ABBB8C42EF15D2D00A8B846 /* AppLockView.swift */,
 				0ABBB8C82EF1646E00A8B846 /* AppLockInputView.swift */,
+				0ABBB8CA2EF3B2E500A8B846 /* ForgetPasswordView.swift */,
 				0ABBB8C22EF104DE00A8B846 /* BackupTutorialView.swift */,
 				0ABBB8C62EF15D9B00A8B846 /* AppLockTutorialView.swift */,
 			);
@@ -379,6 +382,7 @@
 				0ABBB8C12EF0F8DA00A8B846 /* MessageList.swift in Sources */,
 				0ABBB8852EEA9FFD00A8B846 /* SettingsManager.swift in Sources */,
 				0ABBB8AF2EEC02A900A8B846 /* ChatView.swift in Sources */,
+				0ABBB8CB2EF3B2ED00A8B846 /* ForgetPasswordView.swift in Sources */,
 				0ABBB8952EEAA56100A8B846 /* TabMainView.swift in Sources */,
 				0ABBB8BF2EF0F88C00A8B846 /* NavigationBarHelper.swift in Sources */,
 				0ABBB8B32EEC02C700A8B846 /* SetView.swift in Sources */,

@@ -24,4 +24,6 @@ struct WhatsWeb03App: View  {
 
 class NavigationManager: ObservableObject {
     @Published var path = NavigationPath()
+    
+//    @Published var onForgetPasswordComplete: (() -> Void)? = nil
 }
