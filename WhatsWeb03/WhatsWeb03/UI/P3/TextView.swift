@@ -9,6 +9,8 @@ import SwiftUI
 
 struct TextView: View{
     
+    @EnvironmentObject var navManager: NavigationManager
+    
     @Binding var currentTab: CustomTab
     
     @State private var showFullPayScreen = false
@@ -34,7 +36,7 @@ struct TextView: View{
             .padding(.top,safeTop)
             .padding(.horizontal,16)
         }
-        .fullScreenBackground("loding_bgimage")
+        .fullScreenBackground("loding_bgimage",true)
         .fullScreenCover(isPresented: $showFullPayScreen) {
             PayView()
         }
@@ -48,23 +50,23 @@ struct TextView: View{
     private func handleAction(_ action: TextToolAction) {
         switch action {
         case .fastSend:
-            print("fastSend tapped")
+            navManager.path.append(AppRoute.sendQuicklyView)
         case .artFont:
-            print("artFont tapped")
+            navManager.path.append(AppRoute.artisticFontsView)
         case .emoji:
-            print("emoji tapped")
+            navManager.path.append(AppRoute.emojisView)
         case .commonPhrase:
-            print("commonPhrase tapped")
+            navManager.path.append(AppRoute.commonPhraseView)
         case .translate:
-            print("translate tapped")
+            navManager.path.append(AppRoute.translateView)
         case .repeatText:
-            print("repeat tapped")
+            navManager.path.append(AppRoute.repeatingTextView)
         case .reverse:
-            print("reverse tapped")
+            navManager.path.append(AppRoute.flipTextView)
         case .shuffle:
-            print("shuffle tapped")
+            navManager.path.append(AppRoute.shuffleView)
         case .textToEmoji:
-            print("textToEmoji tapped")
+            navManager.path.append(AppRoute.convertTextEmojiView)
         }
     }
 }

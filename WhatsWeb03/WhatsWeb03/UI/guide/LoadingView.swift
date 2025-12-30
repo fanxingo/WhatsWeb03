@@ -51,8 +51,8 @@ struct LoadingView: View {
                         .font(.custom("PingFangSC-Medium", size: 12))
                         .padding(.bottom,10)
                     ProgressBarView(progress: progress)
-                        .padding(.bottom,40)
                         .padding(.horizontal,60)
+                        .padding(.bottom,80)
                     
                 }
                 .onAppear {
@@ -60,7 +60,7 @@ struct LoadingView: View {
                 }
             }
         }
-        .fullScreenBackground("loding_bgimage")
+        .fullScreenBackground("loding_bgimage", true)
     }
     
     @ViewBuilder

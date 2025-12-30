@@ -41,7 +41,7 @@ struct ChatView: View{
             .padding(.top,safeTop)
             .padding(.horizontal,16)
         }
-        .fullScreenBackground("loding_bgimage")
+        .fullScreenBackground("loding_bgimage",true)
         .fullScreenCover(isPresented: $showFullPayScreen) {
             PayView()
         }

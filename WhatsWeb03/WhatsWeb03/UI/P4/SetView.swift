@@ -16,6 +16,8 @@ struct SettingItem: Identifiable {
 
 struct SetView: View{
     
+    @EnvironmentObject var navManager: NavigationManager
+    
     @Binding var currentTab: CustomTab
     
     @State private var showFullPayScreen = false
@@ -37,7 +39,7 @@ struct SetView: View{
                         icon: "set_icon3",
                         title: "Password Lock".localized()
                     ) {
-                        print("Password Lock")
+                        navManager.path.append(AppRoute.appLockView)
                     }
                 ])
                 
@@ -49,13 +51,13 @@ struct SetView: View{
                         icon: "set_icon5",
                         title: "Privacy Policy".localized()
                     ) {
-                        print("Privacy Policy")
+                        UIApplication.shared.open(URL(string: "https://www.baidu.com")!)
                     },
                     SettingItem(
                         icon: "set_icon6",
                         title: "Terms of Use".localized()
                     ) {
-                        print("Terms of Use")
+                        UIApplication.shared.open(URL(string: "https://www.baidu.com")!)
                     },
                     SettingItem(
                         icon: "set_icon7",
@@ -67,7 +69,7 @@ struct SetView: View{
                         icon: "set_icon8",
                         title: "Feedback".localized()
                     ) {
-                        print("Feedback")
+                        navManager.path.append(AppRoute.feedbackView)
                     }
                 ])
                 Spacer()
@@ -75,7 +77,7 @@ struct SetView: View{
             .padding(.top,safeTop)
             .padding(.horizontal,16)
         }
-        .fullScreenBackground("loding_bgimage")
+        .fullScreenBackground("loding_bgimage",true)
         .fullScreenCover(isPresented: $showFullPayScreen) {
             PayView()
         }

@@ -105,6 +105,32 @@ extension View {
             }
             .enableSwipeBack()
     }
+    func navigationModifiersWithRightView<RightView: View>(
+        title: String,
+        onBack: @escaping () -> Void,
+        @ViewBuilder rightView: @escaping () -> RightView
+    ) -> some View {
+        self
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: onBack) {
+                        Image("nav_back_image")
+                    }
+                }
+                ToolbarItem(placement: .principal) {
+                    CustomText(text: title, fontName: Constants.FontString.medium, fontSize: 16, colorHex: "#101010FF")
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    rightView()
+                }
+            }
+            .onAppear {
+                NavigationBarHelper.setDarkAppearance()
+            }
+            .enableSwipeBack()
+    }
     func navigationPlainStyle() -> some View {
         self
             .navigationBarTitleDisplayMode(.inline)

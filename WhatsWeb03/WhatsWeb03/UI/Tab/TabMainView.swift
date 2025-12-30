@@ -9,12 +9,34 @@ import SwiftUI
 enum CustomTab: Hashable {
     case home, chat, text, mine
 }
+
 enum AppRoute: Hashable{
+    
     case messageList
+    case messageDetalis(mainModel:ChatItem)
+    case messageMediaCollectionView(mainModel:ChatItem)
     case appLockView
     case backupTutorial
     case appLockTutorialView
     case forgetPasswordView
+    
+    case userIconView
+    case selectedIconView(iconName:String)
+    case generateQRCodesView
+    case remindView
+    case createRemindView(itemID:UUID?)
+    
+    case sendQuicklyView
+    case artisticFontsView
+    case emojisView
+    case commonPhraseView
+    case translateView
+    case repeatingTextView
+    case flipTextView
+    case shuffleView
+    case convertTextEmojiView
+    
+    case feedbackView
 }
 extension View {
     func applyRoutes() -> some View {
@@ -22,6 +44,10 @@ extension View {
             switch route {
             case .messageList:
                 MessageList()
+            case .messageDetalis(let mainModel):
+                MessageDetails(mainModel: mainModel)
+            case .messageMediaCollectionView(let mainModel):
+                MessageMediaCollectionView(mainModel: mainModel)
             case .appLockView:
                 AppLockView()
             case .backupTutorial:
@@ -30,6 +56,38 @@ extension View {
                 AppLockTutorialView()
             case .forgetPasswordView:
                 ForgetPasswordView()
+                
+            case .userIconView:
+                UserIconView()
+            case .selectedIconView(let iconName):
+                SelectedIconView(iconName: iconName)
+            case .generateQRCodesView:
+                GenerateQRCodesView()
+            case .remindView:
+                RemindView()
+            case .createRemindView(let itemID):
+                CreateRemindView(itemID: itemID)
+                
+            case .sendQuicklyView:
+                SendQuicklyView()
+            case .artisticFontsView:
+                ArtisticFontsView()
+            case .emojisView:
+                EmojisView()
+            case .commonPhraseView:
+                CommonPhraseView()
+            case .translateView:
+                TranslateView()
+            case .repeatingTextView:
+                RepeatingTextView()
+            case .flipTextView:
+                FlipTextView()
+            case .shuffleView:
+                ShuffleView()
+            case .convertTextEmojiView:
+                ConvertTextEmojiView()
+            case .feedbackView:
+                FeedbackView()
             }
         }
     }
@@ -38,7 +96,7 @@ extension View {
 
 struct TabMainView: View {
     
-    @State private var currentTab: CustomTab = .mine
+    @State private var currentTab: CustomTab = .home
 
     @EnvironmentObject var navManager: NavigationManager
     @EnvironmentObject var settings: SettingsManager
@@ -74,6 +132,7 @@ struct TabMainView: View {
                 popup
             }
         }
+        .toast()
         .edgesIgnoringSafeArea(.bottom)
     }
 }

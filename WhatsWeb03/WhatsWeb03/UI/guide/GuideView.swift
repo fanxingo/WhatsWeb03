@@ -44,7 +44,7 @@ struct GuideView: View {
                 guideContentView()
             }
         }
-        .fullScreenBackground("loding_bgimage")
+        .fullScreenBackground("loding_bgimage",true)
     }
 }
 
@@ -302,6 +302,9 @@ extension GuideView {
                             colorHex: "#838383FF"
                         )
                         .underline()
+                        .onTapGesture {
+                            UIApplication.shared.open(URL(string: "https://www.baidu.com")!)
+                        }
                         
                         CustomText(
                             text: "&",
@@ -317,6 +320,9 @@ extension GuideView {
                             colorHex: "#838383FF"
                         )
                         .underline()
+                        .onTapGesture {
+                            UIApplication.shared.open(URL(string: "https://www.baidu.com")!)
+                        }
                         Spacer()
                         CustomText(
                             text: "恢复".localized(),

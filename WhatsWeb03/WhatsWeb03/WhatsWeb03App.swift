@@ -20,10 +20,11 @@ struct WhatsWeb03App: View  {
             .environmentObject(navManager)
             .environmentObject(popManager)
     }
+    
 }
 
 class NavigationManager: ObservableObject {
     @Published var path = NavigationPath()
     
-//    @Published var onForgetPasswordComplete: (() -> Void)? = nil
+    //    @Published var onForgetPasswordComplete: (() -> Void)? = nil
 }

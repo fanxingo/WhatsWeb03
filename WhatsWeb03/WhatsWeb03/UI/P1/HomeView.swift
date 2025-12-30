@@ -9,8 +9,12 @@ import SwiftUI
 struct HomeView: View{
     @Binding var currentTab: CustomTab
     @EnvironmentObject var navManager: NavigationManager
-    
+    @EnvironmentObject var settings: SettingsManager
     @State private var showFullPayScreen = false
+    
+    @State private var showInputLockView = false
+    
+    @State private var route: AppRoute?
     
     var body: some View{
         ZStack{
@@ -27,7 +31,12 @@ struct HomeView: View{
                 
                 HStack{
                     Button(action:{
-                        navManager.path.append(AppRoute.messageList)
+                        if settings.hasPassword {
+                            showInputLockView = true
+                            route = AppRoute.messageList;
+                        }else{
+                            navManager.path.append(AppRoute.messageList)
+                        }
                     }){
                         ItemView(bgImg: "home_linebg_item2", iconImg: "home_icon2", title: "消息备份".localized(), desc: "数据备份".localized())
                     }
@@ -41,17 +50,17 @@ struct HomeView: View{
                 LineSpace(title: "更多功能".localized())
                 
                 Button(action: {
-                    
+                    navManager.path.append(AppRoute.userIconView)
                 }){
                     ItemView2(bgImg: "home_linebg_item3", iconImg: "home_icon4", title: "社交头像".localized())
                 }
                 Button(action: {
-                    
+                    navManager.path.append(AppRoute.generateQRCodesView)
                 }){
                     ItemView2(bgImg: "home_linebg_item3", iconImg: "home_icon5", title: "生成二维码".localized())
                 }
                 Button(action: {
-                    
+                    navManager.path.append(AppRoute.remindView)
                 }){
                     ItemView2(bgImg: "home_linebg_item3", iconImg: "home_icon6", title: "日程提醒".localized())
                 }
@@ -60,9 +69,30 @@ struct HomeView: View{
             .padding(.top,safeTop)
             .padding(.horizontal,16)
         }
-        .fullScreenBackground("loding_bgimage")
+        .fullScreenBackground("loding_bgimage",false)
         .fullScreenCover(isPresented: $showFullPayScreen) {
             PayView()
+        }
+        .fullScreenCover(isPresented: $showInputLockView) {
+            AppLockInputView { action in
+                switch action {
+                case .forgetPassword:
+                    showInputLockView = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3){
+                        navManager.path.append(AppRoute.forgetPasswordView)
+                    }
+                case .success:
+                    showInputLockView = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        if let route {
+                            navManager.path.append(route)
+                            self.route = nil   // ⭐️ 非常重要
+                        }
+                    }
+                case .cancel:
+                    showInputLockView = false
+                }
+            }
         }
     }
 }

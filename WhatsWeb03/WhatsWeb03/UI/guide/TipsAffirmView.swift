@@ -162,9 +162,15 @@ struct TipsAffirmView : View {
                         HStack(spacing:0){
                             CustomText(text: "条款".localized(), fontName: Constants.FontString.medium, fontSize: 10, colorHex: "#838383FF")
                                 .underline()
+                                .onTapGesture {
+                                    UIApplication.shared.open(URL(string: "https://www.baidu.com")!)
+                                }
                             CustomText(text: "&", fontName: Constants.FontString.medium, fontSize: 10, colorHex: "#838383FF")
                             CustomText(text: "隐私".localized(), fontName: Constants.FontString.medium, fontSize: 10, colorHex: "#838383FF")
                                 .underline()
+                                .onTapGesture {
+                                    UIApplication.shared.open(URL(string: "https://www.baidu.com")!)
+                                }
                             Spacer()
                             if showCloseButton{
                                 CustomText(text: "限制版".localized(), fontName: Constants.FontString.medium, fontSize: 10, colorHex: "#838383FF")
@@ -189,7 +195,7 @@ struct TipsAffirmView : View {
             }
             .id(remindMe)
         }
-        .fullScreenBackground("loding_bgimage")
+        .fullScreenBackground("loding_bgimage",true)
         .onAppear{
             DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
                 showCloseButton = true
