@@ -26,7 +26,7 @@ struct LoadingView: View {
     var body: some View {
         VStack {
             if isActive {
-                if settings.hasWhatsPayStatus {
+                if settings.hasWhatsPayStatusTest {
                     routeToMain()
                 } else if !guideFinished {
                     GuideView(onComplete: {
@@ -119,10 +119,4 @@ struct ProgressBarView: View {
         }
         .frame(height: height)
     }
-}
-
-#Preview{
-    LoadingView()
-        .environmentObject(SettingsManager())
-        .environmentObject(NavigationManager())
 }

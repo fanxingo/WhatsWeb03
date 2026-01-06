@@ -142,7 +142,10 @@ extension ArtisticFontsView{
         List {
             ForEach(resultList, id: \.self) { text in
                 HStack{
-                    CustomText(text: text, fontName: Constants.FontString.medium, fontSize: 14, colorHex: "#363636FF")
+                    CustomText(text: text,
+                               fontName: Constants.FontString.medium,
+                               fontSize: 14,
+                               colorHex: "#363636FF")
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal, 12)
                     Image("lab_icon12")
@@ -152,7 +155,7 @@ extension ArtisticFontsView{
                         .padding(.trailing,20)
                         .onTapGesture {
                             UIPasteboard.general.string = text
-                            ToastManager.shared.showToast(message: "复制成功".localized())
+                            ToastManager.shared.showToast(message: "Copy successful".localized())
                         }
                 }
                 .frame(minHeight: 44)
@@ -171,8 +174,4 @@ extension ArtisticFontsView{
         }
         .listStyle(.plain)
     }
-}
-
-#Preview {
-    ArtisticFontsView()
 }

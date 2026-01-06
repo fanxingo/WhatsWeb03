@@ -142,6 +142,37 @@ extension View {
             }
             .enableSwipeBack()
     }
+
+    /// 新增：中间自定义 View + 右侧按钮图片可配置（返回按钮固定）
+    func navigationModifiersWithCustomCenterAndRightImage<CenterView: View>(
+        onBack: @escaping () -> Void,
+        rightButtonImage: String,
+        onRightButtonTap: @escaping () -> Void,
+        @ViewBuilder centerView: @escaping () -> CenterView
+    ) -> some View {
+        self
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: onBack) {
+                        Image("nav_back_image")
+                    }
+                }
+                ToolbarItem(placement: .principal) {
+                    centerView()
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: onRightButtonTap) {
+                        Image(rightButtonImage)
+                    }
+                }
+            }
+            .onAppear {
+                NavigationBarHelper.setDarkAppearance()
+            }
+            .enableSwipeBack()
+    }
     func navigationHidden() -> some View {
         self
             .navigationBarHidden(true)

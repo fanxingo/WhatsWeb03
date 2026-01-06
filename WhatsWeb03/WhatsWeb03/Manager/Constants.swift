@@ -7,7 +7,7 @@
 
 struct Constants {
     struct UserDefaultsKeys {
-        static let hasWhatsPayStatus = "hasWhatsPayStatus"
+        static let hasWhatsPayStatusTest = "hasWhatsPayStatusTest"
 
     }
     

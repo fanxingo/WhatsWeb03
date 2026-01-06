@@ -50,7 +50,7 @@ struct ChatMapCellView: View {
                     + thoroughfare
                     + subThoroughfare
             } else {
-                self.titleText = "无法获取地址"
+                self.titleText = "Unable to obtain address".localized()
                 self.addressText = ""
             }
         }

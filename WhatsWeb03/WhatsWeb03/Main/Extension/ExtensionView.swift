@@ -57,20 +57,24 @@ struct TitleText: View {
 }
 
 struct TitleView: View {
+    @EnvironmentObject var settings: SettingsManager
     @Binding var showFullPayScreen: Bool
     let title:String
     var body: some View {
         ZStack {
             TitleText(title: title)
-            HStack {
-                Spacer()
-                Button(action:{
-                    showFullPayScreen = true
-                }){
-                    Image("home_vip_icon")
-                        .frame(width: 24, height: 24)
+
+            if !settings.hasWhatsPayStatusTest {
+                HStack {
+                    Spacer()
+                    Button(action:{
+                        showFullPayScreen = true
+                    }){
+                        Image("home_vip_icon")
+                            .frame(width: 24, height: 24)
+                    }
+                    .padding(.trailing,12)
                 }
-                .padding(.trailing,12)
             }
         }
     }
@@ -88,7 +92,6 @@ struct FullScreenBackground: ViewModifier {
                     .resizable()
                     .scaledToFill()
             )
-            // 当 ignore 为 true 时忽略全屏，否则不忽略
             .ignoresSafeArea(ignore ? .all : [])
     }
 }
@@ -102,7 +105,6 @@ struct FullScreenColorBackground: ViewModifier {
             .background(
                 Color(hex: hex)
             )
-        // 当 ignore 为 true 时忽略全屏，否则不忽略
         .ignoresSafeArea(ignore ? .all : [])
     }
 }

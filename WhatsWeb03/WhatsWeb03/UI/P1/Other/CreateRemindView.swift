@@ -89,10 +89,10 @@ struct CreateRemindView: View {
                 HStack(spacing: 20) {
                     Button(action: {
                         if let id = itemID {
-                            PopManager.shared.show(DeletePopView(title: "确认是否删除", onComplete: {
+                            PopManager.shared.show(DeletePopView(title: "Confirm whether to delete".localized(), onComplete: {
                                 PlistManager.shared.removeItem(by: id)
                                 dismiss()
-                                ToastManager.shared.showToast(message: "删除成功".localized())
+                                ToastManager.shared.showToast(message: "Deletion successful".localized().localized())
                             }))
                         }
 
@@ -133,7 +133,7 @@ struct CreateRemindView: View {
                         }
                         dismiss()
                     }) {
-                        CustomText(text: "Save".localized(),
+                        CustomText(text: "save".localized(),
                                    fontName: Constants.FontString.semibold,
                                    fontSize: 14,
                                    colorHex: "#FFFFFFFF")
@@ -178,7 +178,7 @@ extension CreateRemindView{
     private func InputView() -> some View{
         VStack(spacing: 0){
             
-            TextField("标题".localized(), text: $inputTitle)
+            TextField("title".localized(), text: $inputTitle)
                 .font(.custom(Constants.FontString.medium, size: 14))
                 .padding(EdgeInsets(top: 12, leading: 14, bottom: 10, trailing: 14))
             Divider()
@@ -190,7 +190,7 @@ extension CreateRemindView{
                     .frame(minHeight: 160, maxHeight: 160)
                     .padding(8)
                 if inputDesc.isEmpty {
-                    Text("信息内容".localized())
+                    Text("Information content".localized())
                         .font(.custom(Constants.FontString.medium, size: 14))
                         .foregroundColor(Color(hex: "#BABDBD"))
                         .allowsHitTesting(false)
@@ -207,7 +207,7 @@ extension CreateRemindView{
         VStack(spacing:0){
             itemRow(
                 icon: "remind_icon2",
-                title: "日期".localized(),
+                title: "date".localized(),
                 rightView:
                     CustomText(
                         text: selectDate.map {
@@ -240,7 +240,7 @@ extension CreateRemindView{
         VStack(spacing:0){
             itemRow(
                 icon: "remind_icon3",
-                title: "时间".localized(),
+                title: "time".localized(),
                 rightView:
                     CustomText(
                         text: selectedTime.wrappedValue,
@@ -267,7 +267,7 @@ extension CreateRemindView{
         VStack{
             itemRow(
                 icon: "remind_icon4",
-                title: "提醒".localized(),
+                title: "remind".localized(),
                 rightView:
                     Toggle("", isOn: $isRemind)
             )

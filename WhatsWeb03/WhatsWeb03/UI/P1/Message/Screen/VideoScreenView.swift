@@ -8,6 +8,7 @@
 import SwiftUI
 import AVFoundation
 import Combine
+import Photos
 
 struct VideoScreenView : View {
     
@@ -20,9 +21,6 @@ struct VideoScreenView : View {
     // 视频播放器状态管理
     @StateObject private var playerManager = VideoPlayerManager()
     @State private var controlsTimer: Timer?
-    @State private var showError = false
-    @State private var errorMessage = ""
-    @State private var loadFailed = false
     
     var body: some View {
         VStack(spacing: 16) {
@@ -42,7 +40,7 @@ struct VideoScreenView : View {
                 )
                 Spacer()
                 Button(action: {
-                    // 可以添加其他功能，比如分享视频等
+                    saveVideoToAlbum()
                 }) {
                     Image("select_view_icon2")
                         .resizable()
@@ -60,7 +58,7 @@ struct VideoScreenView : View {
                         .progressViewStyle(CircularProgressViewStyle(tint: .white))
                         .scaleEffect(1.5)
                     CustomText(
-                        text: "加载视频中...".localized(),
+                        text: "Loading video...".localized(),
                         fontName: Constants.FontString.medium,
                         fontSize: 16,
                         colorHex: "#FFFFFF"
@@ -132,13 +130,7 @@ struct VideoScreenView : View {
             loadVideo()
         }
         .onDisappear {
-            // 清理播放器资源
             playerManager.cleanup()
-            // 清理 VideoPlayerView 的 AVPlayer
-            if let player = playerManager.player {
-                playerManager.player = nil
-            }
-            // 可选关闭 AVAudioSession
             try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
             controlsTimer?.invalidate()
             controlsTimer = nil
@@ -147,7 +139,6 @@ struct VideoScreenView : View {
     
     // MARK: - 视频加载
     private func loadVideo() {
-        guard !loadFailed else { return }
         playerManager.isLoading = true
 
         let filePath = FileDefManager.getFileName(contentName: selectModel.content, dicName: pathName)
@@ -155,7 +146,7 @@ struct VideoScreenView : View {
         // 检查文件是否存在
         let fileManager = FileManager.default
         if !fileManager.fileExists(atPath: filePath) {
-            showError(message: "视频文件不存在")
+            showError(message: "Video file does not exist".localized())
             return
         }
         
@@ -165,11 +156,11 @@ struct VideoScreenView : View {
         do {
             let readable = try fileURL.checkResourceIsReachable()
             if !readable {
-                showError(message: "视频文件不可读")
+                showError(message: "The video file is unreadable.".localized())
                 return
             }
         } catch {
-            showError(message: "视频文件不可访问")
+            showError(message: "Video file inaccessible".localized())
             return
         }
         
@@ -179,9 +170,9 @@ struct VideoScreenView : View {
                 playerManager.isLoading = false
                 if !success {
                     if let error = error {
-                        showError(message: "播放失败: \(error.localizedDescription)")
+                        showError(message: "Playback failed".localized())
                     } else {
-                        showError(message: "无法播放视频格式")
+                        showError(message: "Unable to play video format".localized())
                     }
                 }
             }
@@ -196,9 +187,7 @@ struct VideoScreenView : View {
     // MARK: - 错误处理
     private func showError(message: String) {
         playerManager.isLoading = false
-        errorMessage = message
-        showError = true
-        loadFailed = true
+        ToastManager.shared.showToast(message: message)
     }
     
     // MARK: - 清理资源
@@ -216,6 +205,44 @@ struct VideoScreenView : View {
         let minutes = totalSeconds / 60
         let seconds = totalSeconds % 60
         return String(format: "%02d:%02d", minutes, seconds)
+    }
+    
+    // MARK: - 保存视频到相册
+    private func saveVideoToAlbum() {
+        let filePath = FileDefManager.getFileName(
+            contentName: selectModel.content,
+            dicName: pathName
+        )
+
+        guard FileManager.default.fileExists(atPath: filePath) else {
+            ToastManager.shared.showToast(message: "Video file does not exist".localized())
+            return
+        }
+        
+        let fileURL = URL(fileURLWithPath: filePath)
+        
+        PHPhotoLibrary.requestAuthorization { status in
+            guard status == .authorized || status == .limited else {
+                DispatchQueue.main.async {
+                    ToastManager.shared.showToast(message: "No photo album access".localized())
+                }
+                return
+            }
+            
+            PHPhotoLibrary.shared().performChanges({
+                PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: fileURL)
+            }) { success, error in
+                DispatchQueue.main.async {
+                    if success {
+                        ToastManager.shared.showToast(message: "Saved to album".localized())
+                    } else {
+                        ToastManager.shared.showToast(
+                            message: "Save failed".localized()
+                        )
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -438,3 +465,5 @@ struct ProgressSlider: View {
         .frame(height: 20)
     }
 }
+
+    

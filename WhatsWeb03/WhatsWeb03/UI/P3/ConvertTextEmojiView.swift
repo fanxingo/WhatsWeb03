@@ -19,14 +19,14 @@ struct ConvertTextEmojiView : View {
         ZStack {
             VStack(spacing: 16){
                 BorderedTextEditor(text: $inputString,
-                                   placeholder: "编辑您需要的文本".localized(),
+                                   placeholder: "Edit the text you need".localized(),
                                    cornerRadius: 20,
                                    minHeight: 100,
                                    maxHeight: 100)
                     .padding(.top,12)
                 
                 HStack(spacing:16){
-                    CustomText(text: "表情符号".localized(), fontName: Constants.FontString.medium, fontSize: 14, colorHex: "#000000FF")
+                    CustomText(text: "emojis".localized(), fontName: Constants.FontString.medium, fontSize: 14, colorHex: "#000000FF")
                     TextField("", text: $inputEmoji)
                         .multilineTextAlignment(.center)
                         .frame(width: 65, height: 35)
@@ -99,7 +99,7 @@ struct ConvertTextEmojiView : View {
                         }
                         createString = result
                     }) {
-                        CustomText(text: "生成".localized(),
+                        CustomText(text: "generate".localized(),
                                    fontName: Constants.FontString.semibold,
                                    fontSize: 14,
                                    colorHex: "#FFFFFFFF")
@@ -111,11 +111,11 @@ struct ConvertTextEmojiView : View {
 
                 VStack(spacing: 0){
                     HStack{
-                        CustomText(text: "生成结果".localized(), fontName: Constants.FontString.medium, fontSize: 14, colorHex: "#101010FF")
+                        CustomText(text: "Result".localized(), fontName: Constants.FontString.medium, fontSize: 14, colorHex: "#101010FF")
                         Spacer()
                         Button(action:{
                             UIPasteboard.general.string = createString
-                            ToastManager.shared.showToast(message: "复制成功".localized())
+                            ToastManager.shared.showToast(message: "Copy successful".localized())
                         }){
                             Image("lab_icon12")
                                 .resizable()
@@ -146,7 +146,7 @@ struct ConvertTextEmojiView : View {
             
         }
         .fullScreenColorBackground("#FBFFFCFF", false)
-        .navigationModifiers(title: "Flip Text".localized(), onBack: {
+        .navigationModifiers(title: "Text to emoji".localized(), onBack: {
             dismiss()
         })
         .ignoresSafeArea(.keyboard)

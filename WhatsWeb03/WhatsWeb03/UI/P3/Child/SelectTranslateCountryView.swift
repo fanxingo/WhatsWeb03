@@ -38,7 +38,7 @@ struct SelectTranslateCountryView:View {
 
                 HStack {
                     CustomText(
-                        text: "选择语言".localized(),
+                        text: "Select language".localized(),
                         fontName: Constants.FontString.medium,
                         fontSize: 16,
                         colorHex: "#00B81CFF"
@@ -48,7 +48,7 @@ struct SelectTranslateCountryView:View {
                         dismiss()
                     }) {
                         CustomText(
-                            text: "取消".localized(),
+                            text: "Cancel".localized(),
                             fontName: Constants.FontString.medium,
                             fontSize: 12,
                             colorHex: "#A9A9A9FF"

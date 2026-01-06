@@ -10,7 +10,7 @@ import SwiftUI
 struct TextView: View{
     
     @EnvironmentObject var navManager: NavigationManager
-    
+    @EnvironmentObject var settings: SettingsManager
     @Binding var currentTab: CustomTab
     
     @State private var showFullPayScreen = false
@@ -48,6 +48,13 @@ struct TextView: View{
     }
     
     private func handleAction(_ action: TextToolAction) {
+        
+        
+        if !settings.hasWhatsPayStatusTest{
+            showFullPayScreen.toggle()
+            return
+        }
+        
         switch action {
         case .fastSend:
             navManager.path.append(AppRoute.sendQuicklyView)
@@ -76,20 +83,20 @@ extension TextView {
     // Data for LongItemView buttons
     private var longItemButtons: [(iconImg: String, title: String, desc: String, action: TextToolAction)] {
         [
-            ("lab_icon1", "快速发送".localized(), "让回复更快一步".localized(), .fastSend),
-            ("lab_icon2", "艺术字体".localized(), "让文字更有态度".localized(), .artFont),
-            ("lab_icon3", "表情符号".localized(), "用情绪表达比文字更直接".localized(), .emoji),
-            ("lab_icon4", "常用短语".localized(), "一键开启有趣对话氛围".localized(), .commonPhrase)
+            ("lab_icon1", "Send quickly".localized(), "Make your reply faster".localized(), .fastSend),
+            ("lab_icon2", "Artistic Fonts".localized(), "Make words more expressive".localized(), .artFont),
+            ("lab_icon3", "emojis".localized(), "Expressing emotions is more direct than using words.".localized(), .emoji),
+            ("lab_icon4", "Common phrases".localized(), "Start a fun conversation with one click".localized(), .commonPhrase)
         ]
     }
     // Data for ShortItemView grid (2 per row, last row may have one item)
     private var shortItems: [(isVip: Bool, iconImg: String, title: String, action: TextToolAction)] {
         [
-            (false, "lab_icon6", "文本翻译".localized(), .translate),
-            (true, "lab_icon7", "重复文本".localized(), .repeatText),
-            (true, "lab_icon8", "翻转文本".localized(), .reverse),
-            (true, "lab_icon9", "随机排列单词".localized(), .shuffle),
-            (true, "lab_icon10", "文本转表情符号".localized(), .textToEmoji)
+            (settings.hasWhatsPayStatusTest, "lab_icon6", "Text translation".localized(), .translate),
+            (settings.hasWhatsPayStatusTest, "lab_icon7", "Repeated text".localized(), .repeatText),
+            (settings.hasWhatsPayStatusTest, "lab_icon8", "Flip text".localized(), .reverse),
+            (settings.hasWhatsPayStatusTest, "lab_icon9", "Randomly arrange words".localized(), .shuffle),
+            (settings.hasWhatsPayStatusTest, "lab_icon10", "Text to emoji".localized(), .textToEmoji)
         ]
     }
 
@@ -147,9 +154,12 @@ extension TextView{
                         fontSize: 14,
                         colorHex: "#101010FF"
                     )
+                    .multilineTextAlignment(.leading)
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.8)
                     Spacer()
                 }
-                .padding(EdgeInsets(top: 16, leading: 16, bottom: 24, trailing: 16))
+                .padding(EdgeInsets(top: 16, leading: 16, bottom: 24, trailing: 8))
                 .background(
                     Image("home_linebg_item3")
                         .resizable(
@@ -197,6 +207,8 @@ extension TextView{
                             colorHex: "#7D7D7DFF"
                         )
                         .fixedSize(horizontal: false, vertical: true)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
                     }
 
                     Spacer()

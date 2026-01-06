@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        UserDefaultsHelper.set(true, forKey: Constants.UserDefaultsKeys.hasWhatsPayStatus)
+        UserDefaultsHelper.set(true, forKey: Constants.UserDefaultsKeys.hasWhatsPayStatusTest)
 //        NetworkMonitor.shared.startMonitoring { [self] in
 //
 //        }

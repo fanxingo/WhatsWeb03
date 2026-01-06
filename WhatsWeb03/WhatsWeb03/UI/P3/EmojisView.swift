@@ -7,8 +7,7 @@
 
 import SwiftUI
 
-// 1. 定义数据结构，用于解析 JSON
-private struct EmojiData: Codable {
+struct EmojiData: Codable {
     let emojis: [String]
 }
 
@@ -32,7 +31,7 @@ struct EmojisView: View {
                             )
                             .onTapGesture {
                                 UIPasteboard.general.string = emoji
-                                ToastManager.shared.showToast(message: "复制成功".localized())
+                                ToastManager.shared.showToast(message: "Copy successful".localized())
                             }
                     }
                 }
@@ -58,8 +57,4 @@ struct EmojisView: View {
             self.emojiList = decodedData.emojis
         }
     }
-}
-
-#Preview {
-    EmojisView()
 }

@@ -71,10 +71,10 @@ struct MessageDetails: View {
                         navManager.path.append(AppRoute.messageMediaCollectionView(mainModel: mainModel))
                     },
                     onDelete: {
-                        PopManager.shared.show(DeletePopView(title: "确认是否删除", onComplete: {
+                        PopManager.shared.show(DeletePopView(title: "Confirm whether to delete".localized(), onComplete: {
                             FileDefManager.deleteChatFileDirectory(withID: mainModel.id) { isSuccess in
                                 if isSuccess{
-                                    ToastManager.shared.showToast(message: "删除成功".localized())
+                                    ToastManager.shared.showToast(message: "Deletion successful".localized())
                                     dismiss()
                                 }
                             }

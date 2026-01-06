@@ -48,7 +48,6 @@
 		0ABBB8DB2EF92C2300A8B846 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 0ABBB8DA2EF92C2300A8B846 /* Kingfisher */; };
 		0ABBB8DD2EF9399D00A8B846 /* ArtisticFontsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8DC2EF9399800A8B846 /* ArtisticFontsView.swift */; };
 		0ABBB8E12EF9588F00A8B846 /* artisticfont.json in Resources */ = {isa = PBXBuildFile; fileRef = 0ABBB8E02EF9588F00A8B846 /* artisticfont.json */; };
-		0ABBB8E32EFA2E0F00A8B846 /* ArtisticFontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8E22EFA2E0B00A8B846 /* ArtisticFontManager.swift */; };
 		0ABBB8E52EFA471200A8B846 /* EmojisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8E42EFA470E00A8B846 /* EmojisView.swift */; };
 		0ABBB8E92EFA486000A8B846 /* emojis.json in Resources */ = {isa = PBXBuildFile; fileRef = 0ABBB8E82EFA486000A8B846 /* emojis.json */; };
 		0ABBB8EB2EFA697500A8B846 /* CommonPhraseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB8EA2EFA696D00A8B846 /* CommonPhraseView.swift */; };
@@ -98,6 +97,11 @@
 		0ABBB95A2F03B6A400A8B846 /* libswresample.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0ABBB9412F03B64800A8B846 /* libswresample.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0ABBB95B2F03B6A500A8B846 /* libswscale.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ABBB9422F03B64800A8B846 /* libswscale.xcframework */; };
 		0ABBB95C2F03B6A500A8B846 /* libswscale.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0ABBB9422F03B64800A8B846 /* libswscale.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0ABBB95E2F0A020100A8B846 /* DefWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB95D2F0A01F900A8B846 /* DefWebView.swift */; };
+		0ABBB9612F0A153800A8B846 /* MbDoubleOpenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB9602F0A153800A8B846 /* MbDoubleOpenManager.m */; };
+		0ABBB9632F0A1A4900A8B846 /* LoadingMaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB9622F0A1A4800A8B846 /* LoadingMaskManager.swift */; };
+		0ABBB9652F0A471900A8B846 /* WhatsWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB9642F0A471300A8B846 /* WhatsWebView.swift */; };
+		0ABBB9672F0B551500A8B846 /* RecentCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABBB9662F0B551500A8B846 /* RecentCacheManager.swift */; };
 		917DEB8807D80E7F8D096A64 /* libPods-WhatsWeb03.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FEDF1DE58567675AE2FAC02B /* libPods-WhatsWeb03.a */; };
 /* End PBXBuildFile section */
 
@@ -165,7 +169,6 @@
 		0ABBB8D72EF91C7C00A8B846 /* SelectCountryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCountryView.swift; sourceTree = "<group>"; };
 		0ABBB8DC2EF9399800A8B846 /* ArtisticFontsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtisticFontsView.swift; sourceTree = "<group>"; };
 		0ABBB8E02EF9588F00A8B846 /* artisticfont.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = artisticfont.json; sourceTree = "<group>"; };
-		0ABBB8E22EFA2E0B00A8B846 /* ArtisticFontManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtisticFontManager.swift; sourceTree = "<group>"; };
 		0ABBB8E42EFA470E00A8B846 /* EmojisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojisView.swift; sourceTree = "<group>"; };
 		0ABBB8E82EFA486000A8B846 /* emojis.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = emojis.json; sourceTree = "<group>"; };
 		0ABBB8EA2EFA696D00A8B846 /* CommonPhraseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonPhraseView.swift; sourceTree = "<group>"; };
@@ -208,6 +211,12 @@
 		0ABBB9402F03B64800A8B846 /* libavutil.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libavutil.xcframework; sourceTree = "<group>"; };
 		0ABBB9412F03B64800A8B846 /* libswresample.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libswresample.xcframework; sourceTree = "<group>"; };
 		0ABBB9422F03B64800A8B846 /* libswscale.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libswscale.xcframework; sourceTree = "<group>"; };
+		0ABBB95D2F0A01F900A8B846 /* DefWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefWebView.swift; sourceTree = "<group>"; };
+		0ABBB95F2F0A153800A8B846 /* MbDoubleOpenManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MbDoubleOpenManager.h; sourceTree = "<group>"; };
+		0ABBB9602F0A153800A8B846 /* MbDoubleOpenManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MbDoubleOpenManager.m; sourceTree = "<group>"; };
+		0ABBB9622F0A1A4800A8B846 /* LoadingMaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingMaskManager.swift; sourceTree = "<group>"; };
+		0ABBB9642F0A471300A8B846 /* WhatsWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsWebView.swift; sourceTree = "<group>"; };
+		0ABBB9662F0B551500A8B846 /* RecentCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentCacheManager.swift; sourceTree = "<group>"; };
 		2F4ED27C142998BA03C53B03 /* Pods-WhatsWeb03.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsWeb03.debug.xcconfig"; path = "Target Support Files/Pods-WhatsWeb03/Pods-WhatsWeb03.debug.xcconfig"; sourceTree = "<group>"; };
 		B4FCDF8A0D6AB8163F7FF221 /* Pods-WhatsWeb03.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsWeb03.release.xcconfig"; path = "Target Support Files/Pods-WhatsWeb03/Pods-WhatsWeb03.release.xcconfig"; sourceTree = "<group>"; };
 		FEDF1DE58567675AE2FAC02B /* libPods-WhatsWeb03.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WhatsWeb03.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -294,13 +303,15 @@
 		0ABBB8832EEA9FF200A8B846 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				0ABBB9662F0B551500A8B846 /* RecentCacheManager.swift */,
+				0ABBB9622F0A1A4800A8B846 /* LoadingMaskManager.swift */,
 				0ABBB9072EFD400500A8B846 /* PlistManager.swift */,
 				0ABBB8D52EF9010A00A8B846 /* ToastManager.swift */,
 				0ABBB8D02EF8F01200A8B846 /* CountryManager.swift */,
 				0ABBB88E2EEAA3D900A8B846 /* Constants.swift */,
 				0ABBB8842EEA9FFC00A8B846 /* SettingsManager.swift */,
-				0ABBB8E22EFA2E0B00A8B846 /* ArtisticFontManager.swift */,
 				0ABBB9102EFE2E9B00A8B846 /* FileDefManager.swift */,
+				0ABBB8BC2EF00EA700A8B846 /* PopManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -321,7 +332,6 @@
 			children = (
 				0ABBB9092EFD433800A8B846 /* MonthCalendarView.swift */,
 				0ABBB9052EFD348600A8B846 /* CustomTimePickView.swift */,
-				0ABBB8BC2EF00EA700A8B846 /* PopManager.swift */,
 				0ABBB8BA2EF00C0400A8B846 /* PopView.swift */,
 				0ABBB8B62EEC115C00A8B846 /* ExtensionView.swift */,
 				0ABBB89F2EEAC7F100A8B846 /* View.swift */,
@@ -348,6 +358,8 @@
 			isa = PBXGroup;
 			children = (
 				0ABBB8AE2EEC02A700A8B846 /* ChatView.swift */,
+				0ABBB95D2F0A01F900A8B846 /* DefWebView.swift */,
+				0ABBB9642F0A471300A8B846 /* WhatsWebView.swift */,
 			);
 			path = P2;
 			sourceTree = "<group>";
@@ -468,6 +480,8 @@
 				0ABBB9432F03B64800A8B846 /* ffmpeg-kit-ios-full */,
 				0ABBB9382F03B64200A8B846 /* AudioTool.h */,
 				0ABBB9392F03B64200A8B846 /* AudioTool.m */,
+				0ABBB95F2F0A153800A8B846 /* MbDoubleOpenManager.h */,
+				0ABBB9602F0A153800A8B846 /* MbDoubleOpenManager.m */,
 				0ABBB9342F03B61600A8B846 /* WhatsWeb03-Bridging-Header.h */,
 			);
 			path = OC;
@@ -643,6 +657,7 @@
 				0ABBB8912EEAA41300A8B846 /* UserDefaultsHelper.swift in Sources */,
 				0ABBB9222F02244C00A8B846 /* ChatAudioCellView.swift in Sources */,
 				0ABBB8C92EF1647600A8B846 /* AppLockInputView.swift in Sources */,
+				0ABBB9652F0A471900A8B846 /* WhatsWebView.swift in Sources */,
 				0ABBB8BB2EF00C0B00A8B846 /* PopView.swift in Sources */,
 				0ABBB9242F02246700A8B846 /* ChatDocCellView.swift in Sources */,
 				0ABBB92B2F02635600A8B846 /* ImageScreenView.swift in Sources */,
@@ -657,6 +672,7 @@
 				0ABBB8AF2EEC02A900A8B846 /* ChatView.swift in Sources */,
 				0ABBB8CB2EF3B2ED00A8B846 /* ForgetPasswordView.swift in Sources */,
 				0ABBB9152EFE62DF00A8B846 /* MessageDetails.swift in Sources */,
+				0ABBB95E2F0A020100A8B846 /* DefWebView.swift in Sources */,
 				0ABBB8952EEAA56100A8B846 /* TabMainView.swift in Sources */,
 				0ABBB8BF2EF0F88C00A8B846 /* NavigationBarHelper.swift in Sources */,
 				0ABBB8B32EEC02C700A8B846 /* SetView.swift in Sources */,
@@ -669,12 +685,12 @@
 				0ABBB8FC2EFB80EA00A8B846 /* SelectTranslateCountryView.swift in Sources */,
 				0ABBB8D82EF91C8E00A8B846 /* SelectCountryView.swift in Sources */,
 				0ABBB8C32EF104E700A8B846 /* BackupTutorialView.swift in Sources */,
-				0ABBB8E32EFA2E0F00A8B846 /* ArtisticFontManager.swift in Sources */,
 				0ABBB8F92EFAB94D00A8B846 /* TranslateView.swift in Sources */,
 				0ABBB8D12EF8F01300A8B846 /* CountryManager.swift in Sources */,
 				0ABBB8CF2EF8DF4600A8B846 /* SendQuicklyView.swift in Sources */,
 				0ABBB88D2EEAA34000A8B846 /* Color.swift in Sources */,
 				0ABBB8B92EEC15C000A8B846 /* PayView.swift in Sources */,
+				0ABBB9672F0B551500A8B846 /* RecentCacheManager.swift in Sources */,
 				0A8240872EEA775300DC26F3 /* WhatsWeb03App.swift in Sources */,
 				0ABBB8A22EEAD1A900A8B846 /* RoundedCorner.swift in Sources */,
 				0ABBB88A2EEAA2E000A8B846 /* GuideView.swift in Sources */,
@@ -688,6 +704,7 @@
 				0ABBB9112EFE2E9E00A8B846 /* FileDefManager.swift in Sources */,
 				0ABBB8992EEAA71100A8B846 /* NetworkMonitor.swift in Sources */,
 				0ABBB90A2EFD433A00A8B846 /* MonthCalendarView.swift in Sources */,
+				0ABBB9632F0A1A4900A8B846 /* LoadingMaskManager.swift in Sources */,
 				0ABBB9262F02247800A8B846 /* ChatMapCellView.swift in Sources */,
 				0ABBB8F72EFA99B800A8B846 /* LetterTextUtil.swift in Sources */,
 				0ABBB8D62EF9010B00A8B846 /* ToastManager.swift in Sources */,
@@ -700,6 +717,7 @@
 				0ABBB8972EEAA6EF00A8B846 /* AppDelegate.swift in Sources */,
 				0ABBB8B12EEC02BE00A8B846 /* TextView.swift in Sources */,
 				0ABBB88F2EEAA3DF00A8B846 /* Constants.swift in Sources */,
+				0ABBB9612F0A153800A8B846 /* MbDoubleOpenManager.m in Sources */,
 				0ABBB8DD2EF9399D00A8B846 /* ArtisticFontsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -840,6 +858,8 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WhatsWeb03/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Dual Web Chat";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save the avatar to the album for user use.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
@@ -851,7 +871,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = zy.com.WhatsWeb03.WhatsWeb03;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dual.messenger.ark;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -882,6 +902,8 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WhatsWeb03/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Dual Web Chat";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save the avatar to the album for user use.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
@@ -893,7 +915,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = zy.com.WhatsWeb03.WhatsWeb03;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dual.messenger.ark;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

@@ -13,9 +13,9 @@ import Combine
 class AppLockQuestions: ObservableObject {
     @Published var answers: [String] = Array(repeating: "", count: 3)
     let titles = [
-        "你最喜欢的儿时伙伴叫什么名字？".localized(),
-        "你最喜欢的电影是什么？".localized(),
-        "你最喜欢的食物是什么？".localized()
+        "What's the name of your favorite childhood friend?".localized(),
+        "What is your favorite movie?".localized(),
+        "What is your favorite food?".localized()
     ]
 }
 
@@ -33,10 +33,16 @@ struct ForgetPasswordView: View {
     var body: some View {
         ZStack(alignment: .topLeading){
             VStack(spacing: 0){
-                CustomText(text: "请您回答正确答案".localized(), fontName: Constants.FontString.medium, fontSize: 12, colorHex: "#06C36EFF")
+                CustomText(text: "Please answer the correct question.".localized(),
+                           fontName: Constants.FontString.medium,
+                           fontSize: 12,
+                           colorHex: "#06C36EFF")
                 
                 HStack {
-                    CustomText(text: questionsManager.titles[selectedQuestionIndex], fontName: Constants.FontString.medium, fontSize: 14, colorHex: "#101010FF")
+                    CustomText(text: questionsManager.titles[selectedQuestionIndex],
+                               fontName: Constants.FontString.medium,
+                               fontSize: 14,
+                               colorHex: "#101010FF")
                     Spacer()
                     Button(action:{
                         withAnimation {
@@ -61,7 +67,8 @@ struct ForgetPasswordView: View {
                 .padding(.top,34)
                 
                 HStack {
-                    TextField("请填写您的答案".localized(), text: $inputQuestionAnswer)
+                    TextField("Please fill in your answer.".localized(),
+                              text: $inputQuestionAnswer)
                         .foregroundColor(Color(hex: "#101010FF"))
                         .font(.custom(Constants.FontString.medium, size: 12))
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -79,7 +86,7 @@ struct ForgetPasswordView: View {
                 .padding(.top,16)
                 
                 if showError {
-                    Text("答案错误，请重试".localized())
+                    Text("Incorrect answer, please try again.".localized())
                         .foregroundColor(.red)
                         .font(.custom(Constants.FontString.medium, size: 12))
                         .padding(.top, 8)
@@ -113,7 +120,7 @@ struct ForgetPasswordView: View {
                         }
                     }
                 }) {
-                    CustomText(text: "确定".localized(),
+                    CustomText(text: "Sure".localized(),
                                fontName: Constants.FontString.semibold,
                                fontSize: 14,
                                colorHex: "#FFFFFFFF")
@@ -140,7 +147,7 @@ struct ForgetPasswordView: View {
         )
         .ignoresSafeArea(.keyboard)
         .dismissKeyboardOnTap()
-        .navigationModifiers(title: "忘记密码".localized(), onBack: {
+        .navigationModifiers(title: "Forget the password".localized(), onBack: {
             dismiss()
         })
     }
@@ -170,11 +177,4 @@ extension View {
         .shadow(color: Color.black.opacity(0.2), radius: 6, x: 0, y: 4)
         .zIndex(1)
     }
-}
-
-#Preview {
-    @Previewable @StateObject var settings = SettingsManager()
-    ForgetPasswordView()
-        .environmentObject(settings)
-
 }

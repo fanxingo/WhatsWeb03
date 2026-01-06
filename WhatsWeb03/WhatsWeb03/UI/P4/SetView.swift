@@ -17,6 +17,7 @@ struct SettingItem: Identifiable {
 struct SetView: View{
     
     @EnvironmentObject var navManager: NavigationManager
+    @EnvironmentObject var settings: SettingsManager
     
     @Binding var currentTab: CustomTab
     
@@ -26,11 +27,15 @@ struct SetView: View{
         ZStack{
             VStack{
                 TitleView(showFullPayScreen: $showFullPayScreen, title: "Settings".localized())
-                Button(action: {
-                    showFullPayScreen = true
-                }){
-                    VipItemView()
+                
+                if !settings.hasWhatsPayStatusTest {
+                    Button(action: {
+                        showFullPayScreen = true
+                    }){
+                        VipItemView()
+                    }
                 }
+                
                 LineSpace(title: "Settings".localized())
                     .padding(.top,8)
                 
@@ -168,15 +173,4 @@ extension SetView {
         .background(Color(hex: "#FFFFFF80"))
         .cornerRadius(20)
     }
-}
-
-#Preview {
-    @Previewable @StateObject var settings = SettingsManager()
-    @Previewable @StateObject var navManager = NavigationManager()
-    @Previewable @StateObject var popManager = PopManager.shared
-    
-    TabMainView()
-        .environmentObject(settings)
-        .environmentObject(navManager)
-        .environmentObject(popManager)
 }

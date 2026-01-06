@@ -19,14 +19,17 @@ struct RepeatingTextView : View {
         ZStack {
             VStack(spacing: 16){
                 BorderedTextEditor(text: $inputString,
-                                   placeholder: "请输入文本内容".localized(),
+                                   placeholder: "Please enter text content.".localized(),
                                    cornerRadius: 20,
                                    minHeight: 100,
                                    maxHeight: 100)
                 .padding(.top,12)
                 
                 HStack(spacing:16){
-                    CustomText(text: "重复次数".localized(), fontName: Constants.FontString.medium, fontSize: 14, colorHex: "#000000FF")
+                    CustomText(text: "Number of repetitions".localized(),
+                               fontName: Constants.FontString.medium,
+                               fontSize: 14,
+                               colorHex: "#000000FF")
                     TextField("", text: $inputRepe)
                         .multilineTextAlignment(.center)
                         .keyboardType(.numberPad)
@@ -62,7 +65,7 @@ struct RepeatingTextView : View {
                             createString += selectedIndex == 1 ? "\n" + generated : generated
                         }
                     }){
-                        CustomText(text: "生成".localized(),
+                        CustomText(text: "generate".localized(),
                                    fontName: Constants.FontString.semibold,
                                    fontSize: 14,
                                    colorHex: "#FFFFFFFF")
@@ -74,13 +77,13 @@ struct RepeatingTextView : View {
                 
                 HStack(spacing: 24) {
                     SelectableButton(
-                        title: "水平".localized(),
+                        title: "level".localized(),
                         isSelected: selectedIndex == 0
                     ) {
                         selectedIndex = 0
                     }
                     SelectableButton(
-                        title: "垂直".localized(),
+                        title: "vertical".localized(),
                         isSelected: selectedIndex == 1
                     ) {
                         selectedIndex = 1
@@ -88,11 +91,11 @@ struct RepeatingTextView : View {
                 }
                 VStack(spacing: 0){
                     HStack{
-                        CustomText(text: "生成结果".localized(), fontName: Constants.FontString.medium, fontSize: 14, colorHex: "#101010FF")
+                        CustomText(text: "Result".localized(), fontName: Constants.FontString.medium, fontSize: 14, colorHex: "#101010FF")
                         Spacer()
                         Button(action:{
                             UIPasteboard.general.string = createString
-                            ToastManager.shared.showToast(message: "复制成功".localized())
+                            ToastManager.shared.showToast(message: "Copy successful".localized())
                         }){
                             Image("lab_icon12")
                                 .resizable()
@@ -156,8 +159,4 @@ struct SelectableButton: View {
                 )
         }
     }
-}
-
-#Preview {
-    RepeatingTextView()
 }

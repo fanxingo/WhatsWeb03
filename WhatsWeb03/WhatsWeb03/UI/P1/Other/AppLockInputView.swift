@@ -21,7 +21,7 @@ struct AppLockInputView : View {
     
     var onAction: (AppLockAction) -> Void
     
-    @State private var inputCount : Int = 0
+    @State private var inputCount : Int = 3
     @State private var inputText: String = ""
     @State private var disableKeyboard: Bool = false
     
@@ -42,13 +42,13 @@ struct AppLockInputView : View {
                 
                 VStack(spacing: 8) {
                     
-                    CustomText(text: disableKeyboard ? "密码错误" : "输入密码".localized(),
+                    CustomText(text: disableKeyboard ? "Incorrect password".localized() : "Enter password".localized(),
                                fontName: Constants.FontString.semibold,
                                fontSize: 16, colorHex: disableKeyboard ? "#FF0000FF" : "#101010FF")
                     
                     ZStack {
                         if inputCount <= 0 {
-                            CustomText(text: "忘记密码?", fontName: Constants.FontString.medium, fontSize: 14, colorHex: "#147D0DFF")
+                            CustomText(text: "forget the password?".localized(), fontName: Constants.FontString.medium, fontSize: 14, colorHex: "#147D0DFF")
                                 .underline()
                                 .onTapGesture {
                                     onAction(.forgetPassword)
@@ -123,11 +123,5 @@ extension AppLockInputView{
                 }
             }
         }
-    }
-}
-
-#Preview {
-    AppLockInputView { action in
-        
     }
 }

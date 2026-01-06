@@ -23,22 +23,22 @@ struct SendQuicklyView:View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 206,height: 137)
-                CustomText(text: "选择国家代码并输入电话号码".localized(), fontName: Constants.FontString.medium
+                CustomText(text: "Select the country code and enter the phone number.".localized(), fontName: Constants.FontString.medium
                            , fontSize: 14, colorHex: "#00B81CFF")
                 .frame(maxWidth: .infinity,alignment: .leading)
                 .padding(.top,20)
                 InputTopView()
-                CustomText(text: "发送文本".localized(), fontName: Constants.FontString.medium
+                CustomText(text: "Send text".localized(), fontName: Constants.FontString.medium
                            , fontSize: 14, colorHex: "#00B81CFF")
                 .frame(maxWidth: .infinity,alignment: .leading)
                 .padding(.top,16)
                 
-                BorderedTextEditor(text: $inputString, placeholder: "请输入文本内容".localized())
+                BorderedTextEditor(text: $inputString, placeholder: "Please enter text content.".localized())
                     .padding(.top,12)
 
                 VStack(spacing: 20) {
                     CustomButton(
-                        title: "发送".localized(),
+                        title: "send".localized(),
                         imageName: "lab_c_icon2",
                         titleColor: "#FFFFFFFF",
                         backgroundColor: "#00B81CFF",
@@ -57,7 +57,7 @@ struct SendQuicklyView:View {
                         }
                     )
                     CustomButton(
-                        title: "发送".localized(),
+                        title: "send".localized(),
                         imageName: "lab_c_icon3",
                         titleColor: "#00B81CFF",
                         backgroundColor: "#E1FFDEFF",
@@ -131,7 +131,7 @@ extension SendQuicklyView{
             Divider()
             HStack(spacing:25){
                 CustomText(text: selectedCountry?.number ?? "", fontName: Constants.FontString.medium, fontSize: 14, colorHex: "#101010FF")
-                TextField("请输入".localized(), text: $phoneString)
+                TextField("Please enter".localized(), text: $phoneString)
                     .foregroundColor(Color(hex: "#101010FF"))
                     .font(.system(size: 14, weight: .medium))
             }
@@ -176,8 +176,4 @@ extension SendQuicklyView{
             }
         }
     }
-}
-
-#Preview {
-    SendQuicklyView()
 }

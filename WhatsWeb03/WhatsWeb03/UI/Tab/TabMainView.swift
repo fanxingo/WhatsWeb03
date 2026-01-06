@@ -37,6 +37,9 @@ enum AppRoute: Hashable{
     case convertTextEmojiView
     
     case feedbackView
+    
+    case defWebView(urlString:String,titleString:String)
+    case whatsWebView(ids:String)
 }
 extension View {
     func applyRoutes() -> some View {
@@ -88,6 +91,12 @@ extension View {
                 ConvertTextEmojiView()
             case .feedbackView:
                 FeedbackView()
+                
+            case .defWebView(let urlString,let titleString):
+                DefWebView(urlString: urlString,titleString: titleString)
+            
+            case .whatsWebView(let ids):
+                WhatsWebView(ids: ids)
             }
         }
     }
@@ -130,9 +139,15 @@ struct TabMainView: View {
             //弹窗控制器
             if let popup = popManager.currentPopup {
                 popup
+                    .id(UUID()) // 强制视图更新
+                    .transition(popManager.animationStyle == .fade
+                                ? .opacity
+                                : .move(edge: .bottom).combined(with: .opacity))
+                    .zIndex(1000)
             }
         }
         .toast()
+        .loadingMask()
         .edgesIgnoringSafeArea(.bottom)
     }
 }

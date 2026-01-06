@@ -66,7 +66,7 @@ struct SelectedIconView: View {
                     Button(action: {
                         if let uiImage = UIImage(named: iconName) {
                             UIImageWriteToSavedPhotosAlbum(uiImage, nil, nil, nil)
-                            ToastManager.shared.showToast(message: "已保存至相册".localized())
+                            ToastManager.shared.showToast(message: "Saved to album".localized())
                         }
                     }) {
                         Text("Download".localized())

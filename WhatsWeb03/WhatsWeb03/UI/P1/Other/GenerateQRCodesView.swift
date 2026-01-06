@@ -69,7 +69,7 @@ struct GenerateQRCodesView : View {
         ZStack {
             VStack(spacing: 16) {
                 BorderedTextEditor(text: $inputString,
-                                   placeholder: "编辑您需要的文本".localized(),
+                                   placeholder: "Edit the text you need".localized(),
                                    cornerRadius: 20,
                                    minHeight: 150,
                                    maxHeight: 150)
@@ -81,7 +81,7 @@ struct GenerateQRCodesView : View {
                         qrCodeImage = nil
                     }
                 }) {
-                    CustomText(text: "生成".localized(),
+                    CustomText(text: "generate".localized(),
                                fontName: Constants.FontString.semibold,
                                fontSize: 14,
                                colorHex: "#FFFFFFFF")
@@ -109,25 +109,25 @@ struct GenerateQRCodesView : View {
                         qrCodeImage = nil
                     }) {
                         QRCodeActionButton(imageName: "code_icon1",
-                                           text: "删除".localized(),
+                                           text: "delete".localized(),
                                            colorHex: "#FF4545FF")
                     }
                     Spacer()
                     Button(action: {
                         copyQRCodeToClipboard()
-                        ToastManager.shared.showToast(message: "复制成功".localized())
+                        ToastManager.shared.showToast(message: "Copy successful".localized())
                     }) {
                         QRCodeActionButton(imageName: "code_icon2",
-                                           text: "复制".localized(),
+                                           text: "copy".localized(),
                                            colorHex: "#00B81CFF")
                     }
                     Spacer()
                     Button(action: {
                         saveQRCodeToPhotos()
-                        ToastManager.shared.showToast(message: "保存成功".localized())
+                        ToastManager.shared.showToast(message: "Saved successfully".localized())
                     }) {
                         QRCodeActionButton(imageName: "code_icon3",
-                                           text: "保存".localized(),
+                                           text: "save".localized(),
                                            colorHex: "#00AEFFFF")
                     }
                     Spacer()
@@ -147,6 +147,3 @@ struct GenerateQRCodesView : View {
     }
 }
 
-#Preview {
-    GenerateQRCodesView()
-}

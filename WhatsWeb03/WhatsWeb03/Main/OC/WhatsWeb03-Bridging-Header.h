@@ -3,3 +3,4 @@
 //
 
 #import "AudioTool.h"
+#import "MbDoubleOpenManager.h"

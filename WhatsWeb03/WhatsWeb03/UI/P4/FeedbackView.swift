@@ -17,7 +17,7 @@ struct FeedbackView:View {
         ZStack {
             VStack(spacing: 16){
                 BorderedTextEditor(text: $inputString,
-                                   placeholder: "请输入您的反馈信息".localized(),
+                                   placeholder: "Please enter your feedback information.".localized(),
                                    cornerRadius: 20,
                                    minHeight: 200,
                                    maxHeight: 200)
@@ -27,7 +27,7 @@ struct FeedbackView:View {
                 Button(action:{
                     
                 }) {
-                    CustomText(text: "提交".localized(),
+                    CustomText(text: "submit".localized(),
                                fontName: Constants.FontString.semibold,
                                fontSize: 14,
                                colorHex: "#FFFFFFFF")

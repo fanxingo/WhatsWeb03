@@ -52,11 +52,15 @@ extension SelectCountryView{
                     Button(action:{
                         dismiss()
                     }){
-                        CustomText(text: "取消".localized(), fontName: Constants.FontString.semibold, fontSize: 16, colorHex: "#007AFFFF")
+                        CustomText(text: "Cancel".localized(),
+                                   fontName: Constants.FontString.semibold,
+                                   fontSize: 16, colorHex: "#007AFFFF")
                     }
                     Spacer()
                 }
-                CustomText(text: "选择国家".localized(), fontName: Constants.FontString.semibold, fontSize: 17, colorHex: "#000000FF")
+                CustomText(text: "Select country".localized(),
+                           fontName: Constants.FontString.semibold,
+                           fontSize: 17, colorHex: "#000000FF")
             }
             .padding(.horizontal,16)
             .frame(maxWidth: .infinity)
@@ -74,7 +78,7 @@ extension SelectCountryView{
                 .scaledToFill()
                 .frame(width: 20,height: 20)
             
-            TextField("请输入".localized(), text: $searchString)
+            TextField("Please enter".localized(), text: $searchString)
                 .foregroundColor(Color(hex: "#101010FF"))
                 .font(.system(size: 14, weight: .medium))
         }

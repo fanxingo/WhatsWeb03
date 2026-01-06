@@ -28,13 +28,13 @@ struct GuideView: View {
     let baseGuideData: [GuideItem] = [
         GuideItem(image: "guide1",
                   title: "Dual Chat".localized(),
-                  subtitleTemplate: "工作生活，一键切换".localized()),
+                  subtitleTemplate: "Work and life, switch with one click".localized()),
         GuideItem(image: "guide2",
-                  title: "信息备份".localized(),
-                  subtitleTemplate: "消息永不丢失".localized()),
+                  title: "Information Backup".localized(),
+                  subtitleTemplate: "Messages are never lost".localized()),
         GuideItem(image: "guide3",
-                  title: "信息加密".localized(),
-                  subtitleTemplate: "安全守护每条消息".localized()),
+                  title: "Information encryption".localized(),
+                  subtitleTemplate: "Protect every message".localized()),
     ]
     var body: some View{
         ZStack{
@@ -138,14 +138,14 @@ extension GuideView {
                 Spacer()
                 VStack(spacing:0){
                     CustomText(
-                        text: "免费 3 天升级到专业版？".localized(),
+                        text: "Free 3-day upgrade to Pro version?".localized(),
                         fontName: Constants.FontString.semibold,
                         fontSize: 16,
                         colorHex: "#101010FF"
                     )
                     .padding(.top,16)
                     CustomText(
-                        text: "无需承诺，随时取消".localized(),
+                        text: "No commitment required, cancel anytime".localized(),
                         fontName: Constants.FontString.medium,
                         fontSize: 14,
                         colorHex: "#7D7D7DFF"
@@ -163,7 +163,7 @@ extension GuideView {
                             .padding(.top,10)
                             Spacer()
                         }
-                        CustomText(text: "Dual Chat、消息备份、隐私保护、无限翻译文本".localized(),
+                        CustomText(text: "Dual Chat, message backup, privacy protection, unlimited text translation.".localized(),
                                    fontName: Constants.FontString.medium,
                                    fontSize: 14,
                                    colorHex: "#7D7D7DFF")
@@ -172,7 +172,7 @@ extension GuideView {
                         
                         HStack{
                             CustomText(
-                                text: "或继续使用受限版本".localized(),
+                                text: "Or continue using the restricted version".localized(),
                                 fontName: Constants.FontString.medium,
                                 fontSize: 14,
                                 colorHex: "#7D7D7DFF"
@@ -198,7 +198,7 @@ extension GuideView {
                         Image("guide_icon1")
                             .frame(width: 20,height: 20)
                         CustomText(
-                            text: "扣款前提醒我",
+                            text: "Remind me before deducting money".localized(),
                             fontName: Constants.FontString.medium,
                             fontSize: 12,
                             colorHex: "#424242FF"
@@ -222,7 +222,7 @@ extension GuideView {
                     }) {
                         
                         CustomText(
-                            text: "免费试用".localized(),
+                            text: "Free trial".localized(),
                             fontName: Constants.FontString.semibold,
                             fontSize: 20,
                             colorHex: "#FFFFFFFF"
@@ -248,14 +248,14 @@ extension GuideView {
                         VStack(spacing:4){
                             HStack{
                                 CustomText(
-                                    text: "今天".localized(),
+                                    text: "today".localized(),
                                     fontName: Constants.FontString.medium,
                                     fontSize: 12,
                                     colorHex: "#101010FF"
                                 )
                                 Spacer()
                                 CustomText(
-                                    text: "3天免费".localized(),
+                                    text: "3 days free".localized(),
                                     fontName: Constants.FontString.medium,
                                     fontSize: 12,
                                     colorHex: "#00B81CFF"
@@ -269,14 +269,14 @@ extension GuideView {
                             }
                             HStack{
                                 CustomText(
-                                    text: "2025 年 10 月 1 日到期",
+                                    text: "Expires on October 1, 2025",
                                     fontName: Constants.FontString.medium,
                                     fontSize: 12,
                                     colorHex: "#7D7D7DFF"
                                 )
                                 Spacer()
                                 CustomText(
-                                    text: "周".localized(),
+                                    text: "Week".localized(),
                                     fontName: Constants.FontString.medium,
                                     fontSize: 12,
                                     colorHex: "#7D7D7DFF"
@@ -296,7 +296,7 @@ extension GuideView {
                     
                     HStack(spacing:0){
                         CustomText(
-                            text: "条款".localized(),
+                            text: "terms".localized(),
                             fontName: Constants.FontString.medium,
                             fontSize: 10,
                             colorHex: "#838383FF"
@@ -314,7 +314,7 @@ extension GuideView {
                         )
                         
                         CustomText(
-                            text: "隐私".localized(),
+                            text: "privacy".localized(),
                             fontName: Constants.FontString.medium,
                             fontSize: 10,
                             colorHex: "#838383FF"
@@ -325,7 +325,7 @@ extension GuideView {
                         }
                         Spacer()
                         CustomText(
-                            text: "恢复".localized(),
+                            text: "recover".localized(),
                             fontName: Constants.FontString.medium,
                             fontSize: 10,
                             colorHex: "#838383FF"
@@ -343,12 +343,4 @@ extension GuideView {
             }
         }
     }
-}
-
-#Preview {
-    GuideView(onComplete: {
-        
-    }, onPayCancelComplete: {
-        
-    })
 }

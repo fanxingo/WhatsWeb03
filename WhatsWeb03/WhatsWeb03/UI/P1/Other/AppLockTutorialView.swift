@@ -86,7 +86,7 @@ private struct AppLockTutorialItem: Identifiable {
 }
 
 private let tutorialItem: [AppLockTutorialItem] = [
-    AppLockTutorialItem(icon: "applock_tips1", title: "Step 1".localized(), desc: "点击开启使用密码，设置新密码".localized()),
-    AppLockTutorialItem(icon: "applock_tips2", title: "Step 2".localized(), desc: "开启使用密码，点击双信使或者消息备份，需要输入正确密码".localized()),
-    AppLockTutorialItem(icon: "applock_tips3", title: "Step 3".localized(), desc: "需要关闭，点击关闭密码锁".localized())
+    AppLockTutorialItem(icon: "applock_tips1", title: "Step 1".localized(), desc: "Click to enable password protection and set a new password.".localized()),
+    AppLockTutorialItem(icon: "applock_tips2", title: "Step 2".localized(), desc: "To enable password protection, click on Dual Messenger or Message Backup, and you will need to enter the correct password.".localized()),
+    AppLockTutorialItem(icon: "applock_tips3", title: "Step 3".localized(), desc: "To disable the password lock, click to disable it.".localized())
 ]

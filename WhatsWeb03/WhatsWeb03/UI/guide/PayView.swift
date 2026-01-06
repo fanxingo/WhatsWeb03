@@ -31,7 +31,7 @@ struct PayView : View {
                     Button(action:{
                         
                     }){
-                        CustomText(text: "恢复".localized(), fontName: Constants.FontString.medium, fontSize: 12, colorHex: "#101010FF")
+                        CustomText(text: "recover".localized(), fontName: Constants.FontString.medium, fontSize: 12, colorHex: "#101010FF")
                     }
                 }
                 ZStack{
@@ -50,11 +50,11 @@ struct PayView : View {
                 .frame(width: 234,height: 70)
                 .padding(.top,20)
                 
-                let names = ["双信使，无缝切换".localized(),
-                             "消息备份".localized(),
-                             "隐私保护".localized(),
-                             "无限翻译文本".localized(),
-                             "解锁所有功能".localized()]
+                let names = ["Dual Messengers, Seamless Switching".localized(),
+                             "Message Backup".localized(),
+                             "Privacy protection".localized(),
+                             "Unlimited translation text".localized(),
+                             "Unlock all features".localized()]
 
                 VStack(alignment: .leading, spacing: 12) {
                     ForEach(names, id: \.self) { name in
@@ -93,12 +93,12 @@ struct PayView : View {
                         .scaledToFit()
                     VStack(spacing:16){
                         HStack{
-                            CustomText(text: "今天开始".localized(), fontName: Constants.FontString.semibold, fontSize: 14, colorHex: "#00B81CFF")
+                            CustomText(text: "Starting today".localized(), fontName: Constants.FontString.semibold, fontSize: 14, colorHex: "#00B81CFF")
                             Spacer()
-                            CustomText(text: "3天免费 %@".localized("HK$0"), fontName: Constants.FontString.semibold, fontSize: 14, colorHex: "#00B81CFF")
+                            CustomText(text: "3 days free %@".localized("HK$0"), fontName: Constants.FontString.semibold, fontSize: 14, colorHex: "#00B81CFF")
                         }
                         HStack{
-                            CustomText(text: "2025年3月14日到期", fontName: Constants.FontString.medium, fontSize: 14, colorHex: "#121212FF")
+                            CustomText(text: "Expires on March 14, 2025", fontName: Constants.FontString.medium, fontSize: 14, colorHex: "#121212FF")
                             Spacer()
                             CustomText(text: "HK$88", fontName: Constants.FontString.semibold, fontSize: 14, colorHex: "#121212FF")
                         }
@@ -161,7 +161,7 @@ struct PayView : View {
                     
                 }){
                     CustomText(
-                        text: "免费试用".localized(),
+                        text: "Free trial".localized(),
                         fontName: Constants.FontString.semibold,
                         fontSize: 20,
                         colorHex: "#FFFFFFFF"

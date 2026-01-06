@@ -59,9 +59,9 @@ struct ImageScreenView: View {
                        let pngData = image.pngData(),
                        let pngImage = UIImage(data: pngData) {
                         UIImageWriteToSavedPhotosAlbum(pngImage, nil, nil, nil)
-                        ToastManager.shared.showToast(message: "已保存到相册".localized())
+                        ToastManager.shared.showToast(message: "Saved to album".localized())
                     } else {
-                        ToastManager.shared.showToast(message: "保存失败".localized())
+                        ToastManager.shared.showToast(message: "Save failed".localized())
                     }
                     
                 }) {

@@ -17,7 +17,7 @@ struct TipsAffirmView : View {
 
     var priceText: AttributedString {
         let price = "$9.99"
-        let rawString = "Dual Chat、消息备份、隐私保护、无限翻译文本等，3天免费试用，然后%@/周，随时取消".localized(price)
+        let rawString = "Dual Chat, message backup, privacy protection, unlimited text translation, and more. 3-day free trial, then %@/week, cancel anytime.".localized(price)
         var attrStr = AttributedString(rawString)
         attrStr.font = .custom(Constants.FontString.medium, size: 14)
         attrStr.foregroundColor = Color(hex: "#7D7D7DFF")
@@ -38,7 +38,7 @@ struct TipsAffirmView : View {
                             .frame(width: 274,height: 181)
                             .padding(.top,26)
                         CustomText(
-                            text: "有疑问？",
+                            text: "Questions?".localized(),
                             fontName: Constants.FontString.semibold,
                             fontSize: 20,
                             colorHex: "#00B81CFF")
@@ -55,8 +55,14 @@ struct TipsAffirmView : View {
                                 .resizable()
                                 .frame(width: 54,height: 54)
                             VStack(alignment: .leading,spacing: 4){
-                                CustomText(text: "您可以随时取消订阅", fontName: Constants.FontString.semibold, fontSize: 16, colorHex: "#101010FF")
-                                CustomText(text: "无需现在付款", fontName: Constants.FontString.medium, fontSize: 14, colorHex: "#00B81CFF")
+                                CustomText(text: "You can unsubscribe at any time.".localized(),
+                                           fontName: Constants.FontString.semibold,
+                                           fontSize: 16,
+                                           colorHex: "#101010FF")
+                                CustomText(text: "No payment required now".localized(),
+                                           fontName: Constants.FontString.medium,
+                                           fontSize: 14,
+                                           colorHex: "#00B81CFF")
                             }
                             Spacer()
                         }
@@ -68,7 +74,10 @@ struct TipsAffirmView : View {
                         .padding(.top,16)
                         .padding(.horizontal,16)
                         
-                        CustomText(text: "您的免费试用如何运作".localized(), fontName: Constants.FontString.semibold, fontSize: 20, colorHex: "#00B81CFF")
+                        CustomText(text: "How your free trial works".localized(),
+                                   fontName: Constants.FontString.semibold,
+                                   fontSize: 20,
+                                   colorHex: "#00B81CFF")
                             .padding(.top,16)
                             .padding(.horizontal,16)
                         
@@ -98,19 +107,36 @@ struct TipsAffirmView : View {
                                 }
                             }
                             VStack(alignment: .leading){
-                                CustomText(text: "今天".localized(), fontName: Constants.FontString.semibold, fontSize: 14, colorHex: "#101010FF")
+                                CustomText(text: "today".localized(),
+                                           fontName: Constants.FontString.semibold,
+                                           fontSize: 14,
+                                           colorHex: "#101010FF")
                                     .padding(.top,14)
-                                CustomText(text: "免费解锁所有功能".localized(), fontName: Constants.FontString.medium, fontSize: 14, colorHex: "#7D7D7DFF")
+                                CustomText(text: "Unlock all features for free".localized(),
+                                           fontName: Constants.FontString.medium,
+                                           fontSize: 14,
+                                           colorHex: "#7D7D7DFF")
                                 
-                                CustomText(text: "第2天：提醒".localized(), fontName: Constants.FontString.semibold, fontSize: 14, colorHex: "#101010FF")
+                                CustomText(text: "Day 2: Reminder".localized(),
+                                           fontName: Constants.FontString.semibold,
+                                           fontSize: 14,
+                                           colorHex: "#101010FF")
                                     .padding(.top,14)
-                                CustomText(text: "提前1天提醒，随时取消以避免收费".localized(), fontName: Constants.FontString.medium, fontSize: 14, colorHex: "#7D7D7DFF")
+                                CustomText(text: "Please give us a 1-day advance notice and cancel at any time to avoid charges.".localized(),
+                                           fontName: Constants.FontString.medium,
+                                           fontSize: 14,
+                                           colorHex: "#7D7D7DFF")
                                 
                                 RemindButton(remindMe:$remindMe)
                                 
-                                CustomText(text: "第3天：试用结束".localized(), fontName: Constants.FontString.semibold, fontSize: 14, colorHex: "#101010FF")
+                                CustomText(text: "Day 3: Trial ends".localized(),
+                                           fontName: Constants.FontString.semibold,
+                                           fontSize: 14,
+                                           colorHex: "#101010FF")
                                     .padding(.top,14)
-                                CustomText(text: "您的订阅将在3天试用后开始，可此之前随时取消".localized(), fontName: Constants.FontString.medium, fontSize: 14, colorHex: "#7D7D7DFF")
+                                CustomText(text: "Your subscription will begin after a 3-day trial, which you can cancel at any time before then.".localized(),
+                                           fontName: Constants.FontString.medium,
+                                           fontSize: 14, colorHex: "#7D7D7DFF")
                             }
                             Spacer()
                         }
@@ -118,11 +144,17 @@ struct TipsAffirmView : View {
                         .padding(.top,16)
                         
                         VStack(alignment: .leading,spacing: 12){
-                            CustomText(text: "如何取消?".localized(), fontName: Constants.FontString.semibold, fontSize: 14, colorHex: "#101010FF")
-                            CustomText(text: "打开手机设置>Apple，选择“订阅”。选择应用，点击“取消订阅”并确认。".localized(), fontName: Constants.FontString.medium, fontSize: 14, colorHex: "#7D7D7DFF")
+                            CustomText(text: "How to cancel?".localized(),
+                                       fontName: Constants.FontString.semibold,
+                                       fontSize: 14,
+                                       colorHex: "#101010FF")
+                            CustomText(text: "Open your phone's Settings > Apple, then select \"Subscriptions\". Select the app, tap \"Cancel Subscription\", and confirm.".localized(),
+                                       fontName: Constants.FontString.medium,
+                                       fontSize: 14,
+                                       colorHex: "#7D7D7DFF")
                             HStack{
                                 Spacer()
-                                CustomText(text: "退款保证".localized(), fontName: Constants.FontString.medium, fontSize: 12, colorHex: "#FFB12BFF")
+                                CustomText(text: "Money-back guarantee".localized(), fontName: Constants.FontString.medium, fontSize: 12, colorHex: "#FFB12BFF")
                                 Spacer()
                                 
                             }
@@ -136,15 +168,18 @@ struct TipsAffirmView : View {
                         .padding(.horizontal,16)
                         .padding(.top,20)
                         
-                        CustomText(text: "您将获得什么".localized(), fontName: Constants.FontString.semibold, fontSize: 20, colorHex: "#00B81CFF")
+                        CustomText(text: "What will you get?".localized(),
+                                   fontName: Constants.FontString.semibold,
+                                   fontSize: 20,
+                                   colorHex: "#00B81CFF")
                             .padding(.top,16)
                             .padding(.horizontal,16)
                         
-                        let names = ["双信使，无缝切换".localized(),
-                                     "消息备份".localized(),
-                                     "隐私保护".localized(),
-                                     "无限翻译文本".localized(),
-                                     "解锁所有功能".localized()]
+                        let names = ["Dual Messengers, Seamless Switching".localized(),
+                                     "Message Backup".localized(),
+                                     "Privacy protection".localized(),
+                                     "Unlimited translation text".localized(),
+                                     "Unlock all features".localized()]
 
                         VStack(alignment: .leading, spacing: 12) {
                             ForEach(names, id: \.self) { name in
@@ -160,27 +195,27 @@ struct TipsAffirmView : View {
 
 
                         HStack(spacing:0){
-                            CustomText(text: "条款".localized(), fontName: Constants.FontString.medium, fontSize: 10, colorHex: "#838383FF")
+                            CustomText(text: "terms".localized(), fontName: Constants.FontString.medium, fontSize: 10, colorHex: "#838383FF")
                                 .underline()
                                 .onTapGesture {
                                     UIApplication.shared.open(URL(string: "https://www.baidu.com")!)
                                 }
                             CustomText(text: "&", fontName: Constants.FontString.medium, fontSize: 10, colorHex: "#838383FF")
-                            CustomText(text: "隐私".localized(), fontName: Constants.FontString.medium, fontSize: 10, colorHex: "#838383FF")
+                            CustomText(text: "privacy".localized(), fontName: Constants.FontString.medium, fontSize: 10, colorHex: "#838383FF")
                                 .underline()
                                 .onTapGesture {
                                     UIApplication.shared.open(URL(string: "https://www.baidu.com")!)
                                 }
                             Spacer()
                             if showCloseButton{
-                                CustomText(text: "限制版".localized(), fontName: Constants.FontString.medium, fontSize: 10, colorHex: "#838383FF")
+                                CustomText(text: "Limited Edition".localized(), fontName: Constants.FontString.medium, fontSize: 10, colorHex: "#838383FF")
                                     .underline()
                                     .onTapGesture {
                                         onComplete()
                                     }
                             }
                             Spacer()
-                            CustomText(text: "恢复".localized(), fontName: Constants.FontString.medium, fontSize: 10, colorHex: "#838383FF")
+                            CustomText(text: "recover".localized(), fontName: Constants.FontString.medium, fontSize: 10, colorHex: "#838383FF")
                                 .underline()
                         }
                         .padding(24)
@@ -214,7 +249,10 @@ extension TipsAffirmView{
                 }
             }){
                 ZStack{
-                    CustomText(text: remindMe ? "您将收到通知".localized() : "提醒我".localized(), fontName: Constants.FontString.medium, fontSize: 12, colorHex: "#00B81CFF")
+                    CustomText(text: remindMe ? "You will receive a notification".localized() : "Remind me".localized(),
+                               fontName: Constants.FontString.medium,
+                               fontSize: 12,
+                               colorHex: "#00B81CFF")
                 }
                 .padding(EdgeInsets(top: 10, leading: 12, bottom: 10, trailing: 12))
                 .background(
@@ -235,7 +273,7 @@ extension TipsAffirmView{
                             .resizable()
                             .frame(width: 20,height: 20)
                         CustomText(
-                            text: "别担心，到期前会提醒".localized(),
+                            text: "Don't worry, you'll be reminded before it expires.".localized(),
                             fontName: Constants.FontString.medium,
                             fontSize: 12, colorHex: "#424242FF")
                         Toggle("", isOn: $remindMe)
@@ -253,7 +291,7 @@ extension TipsAffirmView{
                         onComplete()
                     }) {
                         CustomText(
-                            text: "免费试用".localized(),
+                            text: "Free trial".localized(),
                             fontName: Constants.FontString.semibold,
                             fontSize: 20,
                             colorHex: "#FFFFFFFF"
@@ -289,11 +327,4 @@ extension TipsAffirmView{
                 )
             }
         }
-}
-
-
-#Preview {
-    TipsAffirmView(onComplete: {
-        
-    })
 }

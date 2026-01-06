@@ -59,7 +59,7 @@ struct TranslateView: View {
                     // 左侧按钮
                     CountryButton(
                         locale: leftLocale,
-                        placeholder: "选择语言".localized()
+                        placeholder: "Select language".localized()
                     ) {
                         isShowingLeftPicker = true
                     }
@@ -84,7 +84,7 @@ struct TranslateView: View {
 
                     CountryButton(
                         locale: rightLocale,
-                        placeholder: "选择语言".localized()
+                        placeholder: "Select language".localized()
                     ) {
                         isShowingRightPicker = true
                     }
@@ -99,15 +99,15 @@ struct TranslateView: View {
                 .padding(.top,12)
 
                 BorderedTextEditor(text: $inputString,
-                                   placeholder: "请输入翻译内容".localized(),
+                                   placeholder: "Please enter the translation content.".localized(),
                                    cornerRadius: 20,
                                    minHeight: 200,
                                    maxHeight: 200)
                 
                 Button(action:{
-                    createString = "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"
+
                 }){
-                    CustomText(text: "生成".localized(),
+                    CustomText(text: "generate".localized(),
                                fontName: Constants.FontString.semibold,
                                fontSize: 14,
                                colorHex: "#FFFFFFFF")
@@ -118,11 +118,11 @@ struct TranslateView: View {
                 if !createString.isEmpty {
                     VStack(spacing: 0){
                         HStack{
-                            CustomText(text: "生成结果".localized(), fontName: Constants.FontString.medium, fontSize: 14, colorHex: "#101010FF")
+                            CustomText(text: "Result".localized(), fontName: Constants.FontString.medium, fontSize: 14, colorHex: "#101010FF")
                             Spacer()
                             Button(action:{
                                 UIPasteboard.general.string = createString
-                                ToastManager.shared.showToast(message: "复制成功".localized())
+                                ToastManager.shared.showToast(message: "Copy successful".localized())
                             }){
                                 Image("lab_icon12")
                                     .resizable()
@@ -164,10 +164,4 @@ struct TranslateView: View {
             leftLocale = Locale.current
         }
     }
-}
-
-
-
-#Preview {
-    TranslateView()
 }

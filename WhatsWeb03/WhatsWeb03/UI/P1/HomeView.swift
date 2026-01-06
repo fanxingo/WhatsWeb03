@@ -10,6 +10,7 @@ struct HomeView: View{
     @Binding var currentTab: CustomTab
     @EnvironmentObject var navManager: NavigationManager
     @EnvironmentObject var settings: SettingsManager
+    
     @State private var showFullPayScreen = false
     
     @State private var showInputLockView = false
@@ -22,6 +23,7 @@ struct HomeView: View{
                 
                 TitleView(showFullPayScreen: $showFullPayScreen, title: "Home".localized())
                 
+
                 Button(action:{
                     currentTab = .chat
                 }){
@@ -38,31 +40,45 @@ struct HomeView: View{
                             navManager.path.append(AppRoute.messageList)
                         }
                     }){
-                        ItemView(bgImg: "home_linebg_item2", iconImg: "home_icon2", title: "消息备份".localized(), desc: "数据备份".localized())
+                        ItemView(bgImg: "home_linebg_item2",
+                                 iconImg: "home_icon2",
+                                 title: "Message Backup".localized(),
+                                 desc: "Data backup".localized())
                     }
                     Button(action:{
                         navManager.path.append(AppRoute.appLockView)
                     }){
-                        ItemView(bgImg: "home_linebg_item2", iconImg: "home_icon3", title: "应用锁".localized(), desc: "保护您的隐私".localized())
+                        ItemView(bgImg: "home_linebg_item2",
+                                 iconImg: "home_icon3",
+                                 title: "Application Lock".localized(),
+                                 desc: "Protect your privacy".localized())
                     }
                 }
 
-                LineSpace(title: "更多功能".localized())
+                LineSpace(title: "More features".localized())
                 
                 Button(action: {
-                    navManager.path.append(AppRoute.userIconView)
+                    navManager.path.append(
+                        AppRoute.userIconView
+                    )
                 }){
-                    ItemView2(bgImg: "home_linebg_item3", iconImg: "home_icon4", title: "社交头像".localized())
+                    ItemView2(bgImg: "home_linebg_item3",
+                              iconImg: "home_icon4",
+                              title: "Social profile picture".localized())
                 }
                 Button(action: {
                     navManager.path.append(AppRoute.generateQRCodesView)
                 }){
-                    ItemView2(bgImg: "home_linebg_item3", iconImg: "home_icon5", title: "生成二维码".localized())
+                    ItemView2(bgImg: "home_linebg_item3",
+                              iconImg: "home_icon5",
+                              title: "Generate QR code".localized())
                 }
                 Button(action: {
                     navManager.path.append(AppRoute.remindView)
                 }){
-                    ItemView2(bgImg: "home_linebg_item3", iconImg: "home_icon6", title: "日程提醒".localized())
+                    ItemView2(bgImg: "home_linebg_item3",
+                              iconImg: "home_icon6",
+                              title: "Schedule reminders".localized())
                 }
                 Spacer()
             }
@@ -109,8 +125,14 @@ extension HomeView{
                 Image("home_icon1")
                     .frame(width: 40,height: 40)
                 VStack(alignment: .leading){
-                    CustomText(text: "聊天".localized(), fontName: Constants.FontString.semibold,fontSize: 20, colorHex: "#101010FF")
-                    CustomText(text: "Dual Chat".localized(), fontName: Constants.FontString.medium,fontSize: 14, colorHex: "#7D7D7DFF")
+                    CustomText(text: "Chat".localized(),
+                               fontName: Constants.FontString.semibold,
+                               fontSize: 20,
+                               colorHex: "#101010FF")
+                    CustomText(text: "Dual Chat".localized(),
+                               fontName: Constants.FontString.medium,
+                               fontSize: 14,
+                               colorHex: "#7D7D7DFF")
                 }
                 Spacer()
                 Image("home_arrow")
@@ -139,11 +161,16 @@ extension HomeView{
                         .frame(width: 40,height: 40)
                     VStack(alignment: .leading){
                         CustomText(text: title, fontName: Constants.FontString.medium,fontSize: 14, colorHex: "#101010FF")
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
                         CustomText(text: desc, fontName: Constants.FontString.medium,fontSize: 12, colorHex: "#7D7D7DFF")
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
                     }
                     Spacer()
                 }
-                .padding(.horizontal,24)
+                .padding(.leading,14)
+                .padding(.trailing,14)
                 .padding(.bottom,8)
 
             }
@@ -177,15 +204,15 @@ extension HomeView{
         }
     }
 }
-
-#Preview {
-
-    @Previewable @StateObject var settings = SettingsManager()
-    @Previewable @StateObject var navManager = NavigationManager()
-    @Previewable @StateObject var popManager = PopManager.shared
-    
-    TabMainView()
-        .environmentObject(settings)
-        .environmentObject(navManager)
-        .environmentObject(popManager)
-}
+//
+//#Preview {
+//
+//    @Previewable @StateObject var settings = SettingsManager()
+//    @Previewable @StateObject var navManager = NavigationManager()
+//    @Previewable @StateObject var popManager = PopManager.shared
+//    
+//    TabMainView()
+//        .environmentObject(settings)
+//        .environmentObject(navManager)
+//        .environmentObject(popManager)
+//}

@@ -18,7 +18,7 @@ struct ShuffleView:View {
         ZStack {
             VStack(spacing: 16){
                 BorderedTextEditor(text: $inputString,
-                                   placeholder: "编辑您需要的文本".localized(),
+                                   placeholder: "Edit the text you need".localized(),
                                    cornerRadius: 20,
                                    minHeight: 100,
                                    maxHeight: 100)
@@ -45,7 +45,7 @@ struct ShuffleView:View {
                         }
                     }()
                 }){
-                    CustomText(text: "生成".localized(),
+                    CustomText(text: "generate".localized(),
                                fontName: Constants.FontString.semibold,
                                fontSize: 14,
                                colorHex: "#FFFFFFFF")
@@ -56,11 +56,11 @@ struct ShuffleView:View {
                 
                 VStack(spacing: 0){
                     HStack{
-                        CustomText(text: "生成结果".localized(), fontName: Constants.FontString.medium, fontSize: 14, colorHex: "#101010FF")
+                        CustomText(text: "Result".localized(), fontName: Constants.FontString.medium, fontSize: 14, colorHex: "#101010FF")
                         Spacer()
                         Button(action:{
                             UIPasteboard.general.string = createString
-                            ToastManager.shared.showToast(message: "复制成功".localized())
+                            ToastManager.shared.showToast(message: "Copy successful".localized())
                         }){
                             Image("lab_icon12")
                                 .resizable()
@@ -89,7 +89,7 @@ struct ShuffleView:View {
             .padding(.horizontal,16)
         }
         .fullScreenColorBackground("#FBFFFCFF", false)
-        .navigationModifiers(title: "Flip Text".localized(), onBack: {
+        .navigationModifiers(title: "Randomly arrange words".localized(), onBack: {
             dismiss()
         })
         .ignoresSafeArea(.keyboard)

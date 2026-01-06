@@ -56,13 +56,13 @@ struct RemindView:View {
                                     .scaledToFit()
                                     .frame(width: 20,height: 20)
                                     .onTapGesture {
-                                        PopManager.shared.show(DeletePopView(title: "确认是否删除", onComplete: {
+                                        PopManager.shared.show(DeletePopView(title: "Confirm whether to delete", onComplete: {
                                             PlistManager.shared.removeItem(by: item.id)
                                             items.removeAll { $0.id == item.id }
                                             if items.isEmpty {
                                                 isEdit = false
                                             }
-                                            ToastManager.shared.showToast(message: "删除成功".localized())
+                                            ToastManager.shared.showToast(message: "Deletion successful".localized())
                                         }))
                                     }
                             }
@@ -126,7 +126,10 @@ extension RemindView{
                 .resizable()
                 .scaledToFit()
                 .frame(width: 236,height: 139)
-            CustomText(text: "There are Currently No Schedule Reminders", fontName: Constants.FontString.medium, fontSize: 14, colorHex: "#AEAEAEFF")
+            CustomText(text: "There are Currently No Schedule Reminders".localized(),
+                       fontName: Constants.FontString.medium,
+                       fontSize: 14,
+                       colorHex: "#AEAEAEFF")
                 .padding(.horizontal,60)
                 .multilineTextAlignment(.center)
             

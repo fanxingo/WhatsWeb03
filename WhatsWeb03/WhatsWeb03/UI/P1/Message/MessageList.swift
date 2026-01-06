@@ -122,11 +122,11 @@ extension MessageList{
                 ForEach(filteredChats) { item in
                     MessageListCell(item: item, keyword: searchTextString) {
                         
-                        PopManager.shared.show(DeletePopView(title: "确认是否删除", onComplete: {
+                        PopManager.shared.show(DeletePopView(title: "Confirm whether to delete".localized(), onComplete: {
                             FileDefManager.deleteChatFileDirectory(withID: item.id) { isSuccess in
                                 if isSuccess{
                                     loadChatItems()
-                                    ToastManager.shared.showToast(message: "删除成功".localized())
+                                    ToastManager.shared.showToast(message: "Deletion successful".localized())
                                 }
                             }
                         }))
@@ -245,7 +245,7 @@ struct ChatModelManager {
     }
     
     static func pickType(for content: String) -> MessageType {
-        if content.contains("已成为联系人".localized()) ||
+        if content.contains("已成为联系人") ||
             content.contains("消息和通话都进行端到端加密。对话之外的任何人，甚至包含 WhatsApp 都无法读取或收听。") ||
             content.contains("Messages and calls are end-to-end encrypted. Only people in this chat can read, listen to, or share them.")
         {

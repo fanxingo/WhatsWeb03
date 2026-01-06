@@ -11,8 +11,13 @@ struct ChatView: View{
     @Binding var currentTab: CustomTab
     
     @State private var showFullPayScreen = false
-    @State private var titleWebString = "请选择网址".localized()
+    @State private var webItem : WebItem?
     @State private var isEdit = false
+    @State private var currentURL: URL?
+    
+    @StateObject private var recentCacheManager = RecentCacheManager.shared
+    
+    @EnvironmentObject var navManager: NavigationManager
     
     private let columns = Array(repeating: GridItem(.flexible()), count: 3)
     
@@ -23,17 +28,21 @@ struct ChatView: View{
                 SearchView()
                 WebGridView()
                 HStack{
-                    LineSpace(title: "最近使用".localized())
+                    LineSpace(title: "Recently used".localized())
                     Spacer()
-                    Button(action:{
-                        isEdit = !isEdit
-                    }){
-                        CustomText(text: isEdit ? "Cancel".localized() : "Edit".localized(),
-                                   fontName: Constants.FontString.semibold,
-                                   fontSize: 14,
-                                   colorHex: isEdit ? "#FF4545FF" : "#7D7D7DFF")
+                    if !recentCacheManager.recentItems.isEmpty {
+                        Button(action: {
+                            isEdit.toggle()
+                        }) {
+                            CustomText(
+                                text: isEdit ? "Cancel".localized() : "Edit".localized(),
+                                fontName: Constants.FontString.semibold,
+                                fontSize: 14,
+                                colorHex: isEdit ? "#FF4545FF" : "#7D7D7DFF"
+                            )
+                        }
+                        .padding(.trailing, 12)
                     }
-                    .padding(.trailing,12)
                 }
                 RecentListView()
                 Spacer()
@@ -45,10 +54,107 @@ struct ChatView: View{
         .fullScreenCover(isPresented: $showFullPayScreen) {
             PayView()
         }
+        .onAppear {
+            recentCacheManager.reloadRecentItems()
+        }
         .onDisappear {
             isEdit = false
         }
+    }
 
+}
+
+extension ChatView{
+    private func openWhatsWithNewView(_ title:String){
+        LoadingMaskManager.shared.show()
+        MbDoubleOpenManager.shared().clearWebDataStore { success in
+            MbDoubleOpenManager.shared().restoreDef(title) { success in
+                let newId = title + UUID().uuidString
+                if success{
+                    MbDoubleOpenManager.shared().clearWebKitData { success in
+                        MbDoubleOpenManager.shared().clearWebKitData { success in
+                            MbDoubleOpenManager.shared().restoreDef(title) { success in
+                                DispatchQueue.main.async {
+                                    LoadingMaskManager.shared.hide()
+                                    navManager.path.append(
+                                        AppRoute.whatsWebView(ids: newId)
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }else{
+                    DispatchQueue.main.async {
+                        LoadingMaskManager.shared.hide()
+                        navManager.path.append(
+                            AppRoute.whatsWebView(ids: newId)
+                        )
+                    }
+                }
+            }
+        }
+    }
+    private func openWhatsItemWithRestore(_ productId:String){
+        LoadingMaskManager.shared.show()
+        MbDoubleOpenManager.shared().clearWebKitData { success in
+            MbDoubleOpenManager.shared().clearWebKitData { success in
+                MbDoubleOpenManager.shared().restoreWebKitData(withIdentifier: productId) { success in
+                    DispatchQueue.main.async {
+                        LoadingMaskManager.shared.hide()
+                        navManager.path.append(
+                            AppRoute.whatsWebView(ids:productId)
+                        )
+                    }
+                }
+            }
+        }
+    }
+    private func openWebItemWithRestore(_ webItem: WebItem) {
+        LoadingMaskManager.shared.show()
+        
+        MbDoubleOpenManager.shared().restoreDef(webItem.title) { success in
+            if success {
+                MbDoubleOpenManager.shared().clearWebKitData { success in
+                    MbDoubleOpenManager.shared().clearWebKitData { success in
+                        MbDoubleOpenManager.shared().restoreDef(webItem.title) { success in
+                            DispatchQueue.main.async {
+                                LoadingMaskManager.shared.hide()
+                                navManager.path.append(
+                                    AppRoute.defWebView(
+                                        urlString: webItem.webValue,
+                                        titleString: webItem.title
+                                    )
+                                )
+                            }
+                        }
+                    }
+                }
+            } else {
+                DispatchQueue.main.async {
+                    LoadingMaskManager.shared.hide()
+                    navManager.path.append(
+                        AppRoute.defWebView(
+                            urlString: webItem.webValue,
+                            titleString: webItem.title
+                        )
+                    )
+                }
+            }
+        }
+    }
+    
+    private func deleteWhatsSaveData(_ item:RecentItem){
+        LoadingMaskManager.shared.show()
+        MbDoubleOpenManager.shared().deleteSavedWebKitData(withIdentifier: item.productId) { success in
+            LoadingMaskManager.shared.hide()
+            if success {
+                DispatchQueue.main.async {
+                    ToastManager.shared.showToast(message: "Deletion successful".localized())
+                    recentCacheManager.reloadRecentItems()
+                    isEdit.toggle()
+                }
+            }
+        }
     }
 }
 
@@ -64,20 +170,32 @@ extension ChatView{
                     Image("chat_icon4")
                         .resizable()
                         .frame(width: 20,height: 20)
-                    CustomText(text: titleWebString,
+                    CustomText(text: webItem?.title ?? "Please select a URL".localized(),
                                fontName: Constants.FontString.medium,
                                fontSize: 12,
-                               colorHex: titleWebString == "请选择网址".localized() ? "#A9A9A9FF" : "#101010FF")
+                               colorHex: (webItem == nil) ? "#A9A9A9FF" : "#101010FF")
                     Spacer()
                 }
                 .padding(.bottom,6)
                 .padding(.horizontal,24)
             }
             Button(action:{
-                print("Sure tapped, value:", titleWebString)
+                
+                if (webItem != nil) {
+                    if webItem!.type == 1 {
+                        
+                        openWhatsWithNewView(webItem!.title)
+                        
+                    }else{
+                        
+                        openWebItemWithRestore(webItem!)
+                        
+                    }
+                }
+                
             }){
                 ZStack{
-                    CustomText(text: "Sure".localized(),
+                    CustomText(text: "sure".localized(),
                                fontName: Constants.FontString.semibold,
                                fontSize: 14,
                                colorHex: "#363636FF")
@@ -93,7 +211,7 @@ extension ChatView{
         }
         .padding(.top,8)
     }
-
+    
     @ViewBuilder
     private func WebGridView() -> some View {
         ZStack{
@@ -104,11 +222,11 @@ extension ChatView{
                 ForEach(webItems) { item in
                     WebItemView(
                         item: item,
-                        isSelected: titleWebString == item.webValue
+                        isSelected: webItem?.webValue == item.webValue
                     )
                     .onTapGesture {
                         withAnimation(.spring(response: 0.25, dampingFraction: 0.7)) {
-                            titleWebString = item.webValue
+                            webItem = item
                         }
                     }
                 }
@@ -117,13 +235,21 @@ extension ChatView{
             .padding(.bottom,6)
         }
     }
-    
+
     @ViewBuilder
     private func RecentListView() -> some View {
         ScrollView {
             VStack(spacing: 0) {
-                ForEach(recentItems) { item in
-                    RecentRowView(item: item,isEdit: isEdit)
+                ForEach(recentCacheManager.recentItems) { item in
+                    RecentRowView(item: item,isEdit: isEdit, onDelete: { itemToDelete in
+                        PopManager.shared.show(DeletePopView(title: "Do you want to confirm whether to delete \"WhatsApp\"?".localized(), onComplete: {
+                            deleteWhatsSaveData(itemToDelete)
+                        }))
+                    })
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            openWhatsItemWithRestore(item.productId)
+                        }
                 }
             }
             .padding(.bottom,safeBottom + 80)
@@ -131,8 +257,80 @@ extension ChatView{
         .scrollIndicators(.hidden)
         
     }
-}
+    
+    private struct RecentRowView: View {
 
+        let item: RecentItem
+        let isEdit: Bool
+        let onDelete: (RecentItem) -> Void
+
+        var body: some View {
+
+            ZStack(alignment: .topTrailing){
+                ZStack{
+                    Image("chat_icon5")
+                        .resizable()
+                        .scaledToFit()
+                    
+                    HStack(spacing: 12) {
+                        // 优先显示Documents目录下的图片，否则显示默认icon
+                        Group {
+                            if let uiImage = loadDocumentImage(for: item.productId) {
+                                Image(uiImage: uiImage)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 34, height: 34)
+                                    .cornerRadius(10)
+                            } else {
+                                Image(item.icon)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 34, height: 34)
+                                    .cornerRadius(10)
+                            }
+                        }
+
+                        VStack(alignment: .leading, spacing: 4) {
+                            CustomText(
+                                text: item.title,
+                                fontName: Constants.FontString.medium,
+                                fontSize: 14,
+                                colorHex: "#101010FF"
+                            )
+                        }
+                        Spacer()
+                        Image("home_arrow")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                    }
+                    .padding(.horizontal,20)
+                    .padding(.bottom,6)
+                }
+                .padding(.top,10)
+                
+                if isEdit{
+                    Button(action:{
+                        onDelete(item)
+                    }){
+                        Image("chat_icon6")
+                            .resizable()
+                            .frame(width: 20,height: 20)
+                    }
+                }
+            }
+        }
+        // Helper: 从Documents目录加载图片
+        private func loadDocumentImage(for productId: String) -> UIImage? {
+            let fileName = "\(productId).png"
+            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            if let documentsDirectory = paths.first {
+                let fileURL = documentsDirectory.appendingPathComponent(fileName)
+                return UIImage(contentsOfFile: fileURL.path)
+            }
+            return nil
+        }
+    }
+}
 private struct WebItemView: View {
 
     let item: WebItem
@@ -157,108 +355,20 @@ private struct WebItemView: View {
     }
     
 }
-
-private struct RecentRowView: View {
-
-    let item: RecentItem
-    let isEdit: Bool
-
-    var body: some View {
-
-        ZStack(alignment: .topTrailing){
-            ZStack{
-                Image("chat_icon5")
-                    .resizable()
-                    .scaledToFit()
-                
-                HStack(spacing: 12) {
-                    Image(item.icon)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 34, height: 34)
-
-                    VStack(alignment: .leading, spacing: 4) {
-                        CustomText(
-                            text: item.title,
-                            fontName: Constants.FontString.medium,
-                            fontSize: 14,
-                            colorHex: "#101010FF"
-                        )
-                    }
-                    Spacer()
-                    Image("home_arrow")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                }
-                .padding(.horizontal,20)
-                .padding(.bottom,6)
-            }
-            .padding(.top,10)
-            
-            if isEdit{
-                Button(action:{
-                    PopManager.shared.show(DeletePopView(title: "确认是否删除“WhatsApp”？", onComplete: {
-                        print(item.id)
-                    }))
-                }){
-                    Image("chat_icon6")
-                        .resizable()
-                        .frame(width: 20,height: 20)
-                }
-            }
-        }
-        .contentShape(Rectangle()) // 整行可点
-        .onTapGesture {
-            print("点击最近使用:", item.title)
-        }
-    }
-}
-
-
 private struct WebItem: Identifiable {
     let id = UUID()
+    let type : Int
     let icon: String
     let title: String
     let webValue: String
 }
 
-private struct RecentItem: Identifiable {
-    let id = UUID()
-    let icon: String
-    let title: String
-}
 
 private let webItems: [WebItem] = [
-    WebItem(icon: "chat_item1", title: "WhatsApp", webValue: "https://web.whatsapp.com"),
-    WebItem(icon: "chat_item2", title: "Telegram", webValue: "https://web.telegram.org"),
-    WebItem(icon: "chat_item3", title: "Instagram", webValue: "https://www.instagram.com"),
-    WebItem(icon: "chat_item4", title: "X", webValue: "https://x.com"),
-    WebItem(icon: "chat_item5", title: "TikTok", webValue: "https://www.tiktok.com"),
-    WebItem(icon: "chat_item6", title: "Facebook", webValue: "https://www.facebook.com")
+    WebItem(type:1, icon: "chat_item1", title: "WhatsApp", webValue: ""),
+    WebItem(type:2, icon: "chat_item2", title: "Telegram", webValue: "https://web.telegram.org/a/"),
+    WebItem(type:2, icon: "chat_item3", title: "Instagram", webValue: "https://www.instagram.com/"),
+    WebItem(type:2, icon: "chat_item4", title: "X", webValue: "https://x.com/i/flow/login"),
+    WebItem(type:2, icon: "chat_item5", title: "TikTok", webValue: "https://www.tiktok.com/login"),
+    WebItem(type:2, icon: "chat_item6", title: "Facebook", webValue: "https://m.facebook.com/")
 ]
-
-private let recentItems: [RecentItem] = [
-    RecentItem(icon: "chat_item1", title: "WhatsApp Web"),
-    RecentItem(icon: "chat_item2", title: "Telegram Web"),
-    RecentItem(icon: "chat_item1", title: "WhatsApp Web"),
-    RecentItem(icon: "chat_item1", title: "WhatsApp Web"),
-    RecentItem(icon: "chat_item1", title: "WhatsApp Web"),
-    RecentItem(icon: "chat_item2", title: "Telegram Web"),
-    RecentItem(icon: "chat_item1", title: "WhatsApp Web"),
-    RecentItem(icon: "chat_item1", title: "WhatsApp Web"),
-    RecentItem(icon: "chat_item1", title: "WhatsApp Web"),
-    RecentItem(icon: "chat_item2", title: "Telegram Web"),
-    RecentItem(icon: "chat_item1", title: "WhatsApp Web"),
-    RecentItem(icon: "chat_item1", title: "WhatsApp Web")
-]
-
-#Preview {
-    @Previewable @StateObject var settings = SettingsManager()
-    @Previewable @StateObject var navManager = NavigationManager()
-    @Previewable @StateObject var popManager = PopManager.shared
-    
-    TabMainView()
-        .environmentObject(settings)
-        .environmentObject(navManager)
-        .environmentObject(popManager)
-}

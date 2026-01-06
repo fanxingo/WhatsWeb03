@@ -119,21 +119,21 @@ extension AppLockView{
     private func CreatePasswordView() -> some View{
         VStack(spacing: 0){
             if disableKeyboard {
-                CustomText(text: "两次密码不一致".localized(),
+                CustomText(text: "The two passwords do not match".localized(),
                            fontName: Constants.FontString.semibold,
                            fontSize: 16,
                            colorHex: "#FF0000FF")
-                CustomText(text: "请重新输入".localized(),
+                CustomText(text: "Please re-enter.".localized(),
                            fontName: Constants.FontString.medium,
                            fontSize: 14,
                            colorHex: "#7D7D7DFF")
                     .padding(.top,15)
             } else {
-                CustomText(text: isSecondEntry ? "请再次输入密码".localized() : "创建密码".localized(),
+                CustomText(text: isSecondEntry ? "Please enter your password again.".localized() : "Create a password".localized(),
                            fontName: Constants.FontString.semibold,
                            fontSize: 16,
                            colorHex: "#101010FF")
-                CustomText(text: "请输入4位安全密码".localized(),
+                CustomText(text: "Please enter a 4-digit security password.".localized(),
                            fontName: Constants.FontString.medium,
                            fontSize: 14,
                            colorHex: "#7D7D7DFF")
@@ -166,12 +166,12 @@ extension AppLockView{
     
     private func CreateQuestionView() -> some View{
         VStack(spacing: 16){
-            CustomText(text: "设置安全问题".localized(),
+            CustomText(text: "Set security questions".localized(),
                        fontName: Constants.FontString.semibold,
                        fontSize: 16,
                        colorHex: "#101010FF")
                 .padding(.top,34)
-            CustomText(text: "请设置安全问题，以便在您忘记密码时找回".localized(),
+            CustomText(text: "Please set up security questions so you can retrieve your password if you forget it.".localized(),
                        fontName: Constants.FontString.medium,
                        fontSize: 12,
                        colorHex: "#00B81CFF")
@@ -179,7 +179,7 @@ extension AppLockView{
             ForEach(questionsManager.titles.indices, id: \.self) { index in
                 questionTitle(title: questionsManager.titles[index])
                     .padding(.top, index == 0 ? 0 : 4)
-                answerInputView(placeholder: "请填写您的答案".localized(), text: $questionsManager.answers[index])
+                answerInputView(placeholder: "Please fill in your answer.".localized(), text: $questionsManager.answers[index])
             }
 
             Spacer()
@@ -198,7 +198,7 @@ extension AppLockView{
                 showFirstView = true
                 
             }) {
-                CustomText(text: "确定".localized(),
+                CustomText(text: "Sure".localized(),
                            fontName: Constants.FontString.semibold,
                            fontSize: 14,
                            colorHex: "#FFFFFFFF")
@@ -275,14 +275,3 @@ public func answerInputView(placeholder: String, text: Binding<String>) -> some 
     )
 }
 
-
-#Preview {
-
-    @Previewable @StateObject var settings = SettingsManager()
-    @Previewable @StateObject var navManager = NavigationManager()
-    
-    AppLockView()
-        .environmentObject(settings)
-        .environmentObject(navManager)
-
-}
