@@ -105,9 +105,9 @@ struct TranslateView: View {
                                    maxHeight: 200)
                 
                 Button(action:{
-
+                    submitTranslate()
                 }){
-                    CustomText(text: "generate".localized(),
+                    CustomText(text: "Generate".localized(),
                                fontName: Constants.FontString.semibold,
                                fontSize: 14,
                                colorHex: "#FFFFFFFF")
@@ -136,6 +136,7 @@ struct TranslateView: View {
                         ScrollView{
                             CustomText(text: createString,fontName: Constants.FontString.medium,fontSize: 14,colorHex: "#101010FF")
                                 .padding(16)
+                                .frame(maxWidth: .infinity,maxHeight: .infinity,alignment: .leading)
                         }
                     }
                     .background(
@@ -162,6 +163,50 @@ struct TranslateView: View {
         .dismissKeyboardOnTap()
         .onAppear{
             leftLocale = Locale.current
+        }
+    }
+    
+    
+    private func submitTranslate() {
+        
+        guard !inputString.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            
+            ToastManager.shared.showToast(message: "Please enter the text to be translated.".localized())
+            
+            return
+        }
+        
+        
+        let params = [
+            "uid": UUIDTool.getUUIDInKeychain(),
+            "lang": rightLocale?.language.languageCode?.identifier ?? "",
+            "text": inputString,
+            "source": leftLocale?.language.languageCode?.identifier ?? ""
+        ]
+
+        LoadingMaskManager.shared.show()
+
+        let urlString = BaseUrl("/lang.php")
+        
+        NetworkManager.shared.sendPOST2Request(urlString: urlString, parameters: params) { result in
+            DispatchQueue.main.async {
+                
+                LoadingMaskManager.shared.hide()
+                
+                switch result {
+                case .success(let responseString):
+
+                    if let data = responseString.data(using: .utf8),
+                       let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+                       let text = json["text"] as? String {
+
+                        createString = text
+                    }
+
+                case .failure(let error):
+                    print("Translate error:", error)
+                }
+            }
         }
     }
 }

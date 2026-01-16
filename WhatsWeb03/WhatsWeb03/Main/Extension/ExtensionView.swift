@@ -64,7 +64,7 @@ struct TitleView: View {
         ZStack {
             TitleText(title: title)
 
-            if !settings.hasWhatsPayStatusTest {
+            if !settings.hasWhatsPayStatus {
                 HStack {
                     Spacer()
                     Button(action:{

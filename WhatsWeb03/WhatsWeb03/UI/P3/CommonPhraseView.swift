@@ -64,7 +64,7 @@ func PhraseRow(phrase: String) -> some View {
         ToastManager.shared.showToast(message: "Copy successful".localized())
     }
     // 关键：消除 List 默认边距，并设置外边距（行间距）
-    .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
+    .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
     .listRowSeparator(.hidden)
     .listRowBackground(Color.clear)
 }

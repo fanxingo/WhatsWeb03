@@ -25,7 +25,7 @@ struct FeedbackView:View {
                 Spacer()
                 
                 Button(action:{
-                    
+                    submitFeedback()
                 }) {
                     CustomText(text: "submit".localized(),
                                fontName: Constants.FontString.semibold,
@@ -46,8 +46,61 @@ struct FeedbackView:View {
         .ignoresSafeArea(.keyboard)
         .dismissKeyboardOnTap()
     }
-}
-
-#Preview {
-    FeedbackView()
+    
+    
+    private func submitFeedback() {
+        
+        guard !inputString.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            
+            ToastManager.shared.showToast(message: "Please enter your question or suggestion here".localized())
+            
+            return
+        }
+        
+        guard canPerformAction(withKey: "FxFeedbackVC") else {
+            
+            ToastManager.shared.showToast(message: "Commit too often, try again later!".localized())
+            
+            return
+        }
+        
+        let params = [
+            "uid": UUIDTool.getUUIDInKeychain(),
+            "version": Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "unknown",
+            "question": inputString
+        ]
+        
+        LoadingMaskManager.shared.show()
+        
+        let urlString = BaseUrl("/a/feedback")
+        
+        NetworkManager.shared.sendPOST2Request(urlString: urlString, parameters: params) { result in
+            DispatchQueue.main.async {
+                
+                LoadingMaskManager.shared.hide()
+                
+                switch result {
+                case .success(_):
+                    
+                    ToastManager.shared.showToast(message:"Submit Success!".localized())
+                    dismiss()
+                    
+                case .failure(_): break
+                    
+                }
+            }
+        }
+        
+        func canPerformAction(withKey key: String) -> Bool {
+            let currentDate = Date()
+            if let lastDate = UserDefaults.standard.object(forKey: key) as? Date {
+                let timeInterval = currentDate.timeIntervalSince(lastDate)
+                if timeInterval < 60 {
+                    return false
+                }
+            }
+            UserDefaults.standard.set(currentDate, forKey: key)
+            return true
+        }
+    }
 }

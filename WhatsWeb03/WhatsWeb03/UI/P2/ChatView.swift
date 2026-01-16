@@ -18,6 +18,7 @@ struct ChatView: View{
     @StateObject private var recentCacheManager = RecentCacheManager.shared
     
     @EnvironmentObject var navManager: NavigationManager
+    @EnvironmentObject var settings: SettingsManager
     
     private let columns = Array(repeating: GridItem(.flexible()), count: 3)
     
@@ -172,7 +173,7 @@ extension ChatView{
                         .frame(width: 20,height: 20)
                     CustomText(text: webItem?.title ?? "Please select a URL".localized(),
                                fontName: Constants.FontString.medium,
-                               fontSize: 12,
+                               fontSize: 14,
                                colorHex: (webItem == nil) ? "#A9A9A9FF" : "#101010FF")
                     Spacer()
                 }
@@ -180,6 +181,11 @@ extension ChatView{
                 .padding(.horizontal,24)
             }
             Button(action:{
+                
+                if !settings.hasWhatsPayStatus{
+                    showFullPayScreen.toggle()
+                    return
+                }
                 
                 if (webItem != nil) {
                     if webItem!.type == 1 {
@@ -195,7 +201,7 @@ extension ChatView{
                 
             }){
                 ZStack{
-                    CustomText(text: "sure".localized(),
+                    CustomText(text: "Sure".localized(),
                                fontName: Constants.FontString.semibold,
                                fontSize: 14,
                                colorHex: "#363636FF")
@@ -281,12 +287,14 @@ extension ChatView{
                                     .scaledToFit()
                                     .frame(width: 34, height: 34)
                                     .cornerRadius(10)
+                                    .padding(.bottom,4)
                             } else {
                                 Image(item.icon)
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 34, height: 34)
                                     .cornerRadius(10)
+                                    .padding(.bottom,4)
                             }
                         }
 

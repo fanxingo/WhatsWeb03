@@ -146,8 +146,6 @@ struct TabMainView: View {
                     .zIndex(1000)
             }
         }
-        .toast()
-        .loadingMask()
         .edgesIgnoringSafeArea(.bottom)
     }
 }

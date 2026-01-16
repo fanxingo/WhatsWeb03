@@ -6,12 +6,43 @@
 //
 
 import SwiftUI
+import StoreKit
 
 struct PayView : View {
     
     @Environment(\.dismiss) var dismiss
     
-    @State private var remindMe = false
+    @EnvironmentObject var settings: SettingsManager
+    
+    @State private var freeStatus = false
+    
+    
+    @State private var yearProduct: Product?
+    @State private var weekProduct: Product?
+    
+    @State private var currentProduct: Product?
+    
+    @StateObject private var productStore = SubscriptionProductStore.shared
+    @StateObject private var payManager = PayManager.shared
+    
+    var weekPriceText: String {
+        guard let yearProduct = yearProduct else { return "$0.0" }
+
+        // 获取年价格数值
+        let priceDecimal = yearProduct.price  // StoreKit 2 的 Decimal 类型
+        let yearPriceDouble = NSDecimalNumber(decimal: priceDecimal).doubleValue
+
+        // 一年按 52 周
+        let weekPrice = yearPriceDouble / 52
+
+        // 保留 1 位小数
+        let formattedWeekPrice = String(format: "%.1f", weekPrice)
+
+        // 获取年价格的货币符号
+        let currencySymbol = yearProduct.priceFormatStyle.locale.currencySymbol ?? "$"
+
+        return "\(currencySymbol)\(formattedWeekPrice)"
+    }
     
     var body: some View {
         ZStack{
@@ -29,7 +60,15 @@ struct PayView : View {
                     }
                     Spacer()
                     Button(action:{
-                        
+                        LoadingMaskManager.shared.show()
+                        Task {
+                            // 10 秒后自动隐藏
+                            Task {
+                                try? await Task.sleep(nanoseconds: 10 * 1_000_000_000) // 10秒
+                                LoadingMaskManager.shared.hide()
+                            }
+                            await payManager.restore()
+                        }
                     }){
                         CustomText(text: "recover".localized(), fontName: Constants.FontString.medium, fontSize: 12, colorHex: "#101010FF")
                     }
@@ -69,7 +108,7 @@ struct PayView : View {
                 .padding(.top,25)
                 
                 HStack{
-                    Toggle(isOn: $remindMe) {
+                    Toggle(isOn: $freeStatus) {
                         CustomText(text: "3-Day Free Trial Activation".localized(), fontName: Constants.FontString.medium, fontSize: 14, colorHex: "#121212FF")
                     }
                     .tint(Color(hex: "#00B81CFF"))
@@ -87,81 +126,103 @@ struct PayView : View {
                 .cornerRadius(20)
                 .padding(.top,30)
                 
-                
-                HStack{
-                    Image("payview_icon2")
-                        .scaledToFit()
-                    VStack(spacing:16){
-                        HStack{
-                            CustomText(text: "Starting today".localized(), fontName: Constants.FontString.semibold, fontSize: 14, colorHex: "#00B81CFF")
-                            Spacer()
-                            CustomText(text: "3 days free %@".localized("HK$0"), fontName: Constants.FontString.semibold, fontSize: 14, colorHex: "#00B81CFF")
-                        }
-                        HStack{
-                            CustomText(text: "Expires on March 14, 2025", fontName: Constants.FontString.medium, fontSize: 14, colorHex: "#121212FF")
-                            Spacer()
-                            CustomText(text: "HK$88", fontName: Constants.FontString.semibold, fontSize: 14, colorHex: "#121212FF")
-                        }
-                    }
-                }
-                .padding(.horizontal,12)
-                .padding(.top,12)
-                
-                ZStack(alignment: .topTrailing){
+                if freeStatus {
                     HStack{
-                        VStack(alignment: .leading){
-                            CustomText(text: "Year".localized(), fontName: Constants.FontString.semibold, fontSize: 16, colorHex: "#00B81CFF")
-                            CustomText(text: "%@/Week".localized("HK$20"), fontName: Constants.FontString.semibold, fontSize: 12, colorHex: "#00B81CFF")
+                        Image("payview_icon2")
+                            .scaledToFit()
+                        VStack(spacing:16){
+                            HStack{
+                                CustomText(text: "Starting today".localized(), fontName: Constants.FontString.semibold, fontSize: 14, colorHex: "#00B81CFF")
+                                Spacer()
+                                CustomText(text: "3 days free %@".localized("HK$0"), fontName: Constants.FontString.semibold, fontSize: 14, colorHex: "#00B81CFF")
+                            }
+                            HStack{
+                                CustomText(text: "Expires on March 14, 2025", fontName: Constants.FontString.medium, fontSize: 14, colorHex: "#121212FF")
+                                Spacer()
+                                CustomText(text: currentProduct?.displayPrice ?? "", fontName: Constants.FontString.semibold, fontSize: 14, colorHex: "#121212FF")
+                            }
                         }
-                        Spacer()
-                        CustomText(text: "%@/Year".localized("HK$488"), fontName: Constants.FontString.semibold, fontSize: 16, colorHex: "#00B81CFF")
                     }
-                    .padding(.vertical,8)
-                    .padding(.horizontal,16)
-                    .background(
-                        Color(hex: "#D1FFD9FF")
-                    )
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 20)
-                            .stroke(Color(hex: "#00B81CFF"), lineWidth: 2)
-                    )
-                    .frame(maxWidth: .infinity)
-                    .cornerRadius(20)
-                    .padding(.top,14)
-                    
-                    CustomText(text: "Best Choice".localized(), fontName: Constants.FontString.medium, fontSize: 12, colorHex: "#FFFFFFFF")
-                        .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
-                        .background(
-                            LinearGradient(colors: [Color(hex: "#FD6952FF"),
-                                                    Color(hex: "#FF9000FF")], startPoint: .leading, endPoint: .trailing)
+                    .padding(.horizontal,12)
+                    .padding(.top,12)
+                }
+
+                Button(action: {
+                    currentProduct = yearProduct
+                }) {
+                    ZStack(alignment: .topTrailing) {
+                        HStack {
+                            VStack(alignment: .leading){
+                                CustomText(text: "Year".localized(), fontName: Constants.FontString.semibold, fontSize: 16, colorHex: "#00B81CFF")
+                                CustomText(text: "%@/Week".localized(weekPriceText), fontName: Constants.FontString.semibold, fontSize: 12, colorHex: "#00B81CFF")
+                            }
+                            Spacer()
+                            CustomText(text: "%@/Year".localized(yearProduct?.displayPrice ?? ""), fontName: Constants.FontString.semibold, fontSize: 16, colorHex: "#00B81CFF")
+                        }
+                        .padding(.vertical,8)
+                        .padding(.horizontal,16)
+                        .background(currentProduct?.id == yearProduct?.id ? Color(hex: "#D1FFD9FF") : Color(hex: "#FFFFFF"))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(Color(hex: "#00B81CFF"), lineWidth: currentProduct?.id == yearProduct?.id ? 2 : 1)
                         )
                         .cornerRadius(20)
+                        .padding(.top,14)
+                        
+                        if currentProduct?.id == yearProduct?.id {
+                            CustomText(text: "Best Choice".localized(), fontName: Constants.FontString.medium, fontSize: 12, colorHex: "#FFFFFFFF")
+                                .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
+                                .background(
+                                    LinearGradient(colors: [Color(hex: "#FD6952FF"),
+                                                            Color(hex: "#FF9000FF")], startPoint: .leading, endPoint: .trailing)
+                                )
+                                .cornerRadius(20)
+                        }
+                    }
                 }
+                .buttonStyle(PlainButtonStyle()) // 避免系统按钮样式干扰
                 
-                HStack{
-                    CustomText(text: "Week".localized(), fontName: Constants.FontString.semibold, fontSize: 16, colorHex: "#101010FF")
-                    Spacer()
-                    CustomText(text: "HK$20".localized(), fontName: Constants.FontString.semibold, fontSize: 16, colorHex: "#AEAEAEFF")
+                // Week 选项
+                Button(action: {
+                    currentProduct = weekProduct
+                }) {
+                    HStack{
+                        CustomText(text: "Week".localized(), fontName: Constants.FontString.semibold, fontSize: 16, colorHex: "#101010FF")
+                        Spacer()
+                        CustomText(text: weekProduct?.displayPrice ?? "", fontName: Constants.FontString.semibold, fontSize: 16, colorHex: "#AEAEAEFF")
+                    }
+                    .padding(.vertical,6)
+                    .padding(.horizontal,16)
+                    .background(currentProduct?.id == weekProduct?.id ? Color(hex: "#D1FFD9FF") : Color(hex: "#FFFFFFCC"))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(currentProduct?.id == weekProduct?.id ? Color(hex: "#00B81CFF") : Color(hex: "#F1F1F1FF"), lineWidth: currentProduct?.id == weekProduct?.id ? 2 : 1)
+                    )
+                    .cornerRadius(20)
                 }
-                .padding(.vertical,6)
-                .padding(.horizontal,16)
-                .background(
-                    Color(hex: "#FFFFFFCC")
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color(hex: "#F1F1F1FF"), lineWidth: 2)
-                )
-                .frame(maxWidth: .infinity)
-                .cornerRadius(20)
+                .buttonStyle(PlainButtonStyle())
 
                 Spacer()
-                CustomText(text: "Free trial for 3 days, then %@ per week".localized("$9.9"), fontName: Constants.FontString.medium, fontSize: 10, colorHex: "#444444FF")
+                if freeStatus {
+                    CustomText(text: "Free trial for 3 days, then %@ per week".localized(currentProduct?.displayPrice ?? ""), fontName: Constants.FontString.medium, fontSize: 10, colorHex: "#444444FF")
+                }
                 Button(action:{
-                    
+                    LoadingMaskManager.shared.show()
+                    Task {
+                        // 10 秒后自动隐藏
+                        Task {
+                            try? await Task.sleep(nanoseconds: 10 * 1_000_000_000) // 10秒
+                            LoadingMaskManager.shared.hide()
+                        }
+
+                        // 执行购买
+                        if let id = currentProduct?.id {
+                            await payManager.purchase(productId: "\(id)")
+                        }
+                    }
                 }){
                     CustomText(
-                        text: "Free trial".localized(),
+                        text: freeStatus ? "Free trial".localized() : "Sure".localized(),
                         fontName: Constants.FontString.semibold,
                         fontSize: 20,
                         colorHex: "#FFFFFFFF"
@@ -179,10 +240,10 @@ struct PayView : View {
                     .environment(\.openURL, OpenURLAction { url in
                         switch url.absoluteString {
                         case "app://userAgreement":
-                            UIApplication.shared.open(URL(string: "https://www.baidu.com")!)
+                            UIApplication.shared.open(URL(string: "https://sites.google.com/view/dual-chat-terms-of-service")!)
                             return .handled
                         case "app://privacyPolicy":
-                            UIApplication.shared.open(URL(string: "https://www.baidu.com")!)
+                            UIApplication.shared.open(URL(string: "https://sites.google.com/view/dual-chat-privacy-policy")!)
                             return .handled
                         default:
                             return .systemAction
@@ -195,9 +256,38 @@ struct PayView : View {
             .padding(.horizontal,16)
         }
         .ignoresSafeArea(.all)
-    }
-}
+        .loadingMask()
+        .onReceive(payManager.$purchaseSuccess) { success in
+            if let success = success {
+                
+                print("购买成功：\(success.productId)")
+                AnalyticsManager.saveBurialPoint(eventName: "first_sub_success", check: true)
 
-#Preview {
-    PayView()
+                //修改支付结果
+                settings.hasWhatsPayStatus = true
+                LoadingMaskManager.shared.hide()
+                dismiss()
+            }
+        }
+        .onReceive(payManager.$purchaseError) { error in
+            if error != nil {
+                LoadingMaskManager.shared.hide()
+            }
+        }
+        .onChange(of: freeStatus) {oldValue, newValue in
+            if newValue {
+                yearProduct = productStore.product(for: "whats04_3dsub_year1")
+                weekProduct = productStore.product(for: "whats04_3dsub_week1")
+            } else {
+                yearProduct = productStore.product(for: "whats04_sub_year1")
+                weekProduct = productStore.product(for: "whats04_sub_week1")
+            }
+            currentProduct = yearProduct
+        }
+        .onAppear{
+            yearProduct = productStore.product(for: "whats04_sub_year1")
+            weekProduct = productStore.product(for: "whats04_sub_week1")
+            currentProduct = yearProduct
+        }
+    }
 }

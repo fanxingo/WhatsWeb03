@@ -38,23 +38,26 @@ struct ForgetPasswordView: View {
                            fontSize: 12,
                            colorHex: "#06C36EFF")
                 
-                HStack {
-                    CustomText(text: questionsManager.titles[selectedQuestionIndex],
-                               fontName: Constants.FontString.medium,
-                               fontSize: 14,
-                               colorHex: "#101010FF")
+                HStack(alignment: .center, spacing: 8) {
+                    Text(questionsManager.titles[selectedQuestionIndex])
+                        .font(.custom(Constants.FontString.medium, size: 14))
+                        .foregroundColor(Color(hex: "#101010FF"))
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.vertical, 8)
                     Spacer()
-                    Button(action:{
+
+                    Button(action: {
                         withAnimation {
                             showFloatingWindow.toggle()
                         }
-                    }){
+                    }) {
                         Image(showFloatingWindow ? "applock_down2" : "applock_down1")
+                            .resizable()
                             .scaledToFit()
+                            .frame(width: 24, height: 24)
                     }
-                    .frame(width: 44,height: 44)
                 }
-                .frame(maxWidth: .infinity, maxHeight: 44)
+                .frame(minHeight: 44)
                 .padding(.horizontal, 16)
                 .background(
                     RoundedRectangle(cornerRadius: 22)
@@ -64,13 +67,13 @@ struct ForgetPasswordView: View {
                                 .stroke(Color(hex: "#F1F1F1FF"), lineWidth: 1)
                         )
                 )
-                .padding(.top,34)
+                .padding(.top, 34)
                 
                 HStack {
                     TextField("Please fill in your answer.".localized(),
                               text: $inputQuestionAnswer)
                         .foregroundColor(Color(hex: "#101010FF"))
-                        .font(.custom(Constants.FontString.medium, size: 12))
+                        .font(.custom(Constants.FontString.medium, size: 14))
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
                 .frame(maxWidth: .infinity, maxHeight: 44)

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import StoreKit
 
 
 struct GuideItem {
@@ -20,10 +21,25 @@ struct GuideView: View {
     var onComplete: () -> Void
     var onPayCancelComplete:() -> Void
     
+    @EnvironmentObject var settings: SettingsManager
+    
     @State private var currentPage = 0
     
     @State var currentIndex = 0
     @State private var isOn: Bool = false
+    
+    @StateObject private var productStore = SubscriptionProductStore.shared
+    @StateObject private var payManager = PayManager.shared
+    
+    @State private var product: Product?
+    
+    var threeDaysLater: String {
+        let calendar = Calendar.current
+        let date = calendar.date(byAdding: .day, value: 3, to: Date()) ?? Date()
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long  // "October 1, 2025"
+        return "Expires on \(formatter.string(from: date))"
+    }
     
     let baseGuideData: [GuideItem] = [
         GuideItem(image: "guide1",
@@ -45,6 +61,17 @@ struct GuideView: View {
             }
         }
         .fullScreenBackground("loding_bgimage",true)
+        .onAppear {
+            AnalyticsManager.saveBurialPoint(eventName: "first_in_guide", check: true)
+        }
+        .task {
+            let hasTrial = await hasIntroTrial(productID: "whats04_3dsub_week2")
+            let productId = hasTrial
+                ? "whats04_3dsub_week2"
+                : "whats04_3dsub_week1"
+
+            product = productStore.product(for: productId)
+        }
     }
 }
 
@@ -185,7 +212,7 @@ extension GuideView {
                         .padding(.horizontal,12)
                         .padding(.bottom,10)
                         .onTapGesture {
-                            print("aa")
+                            onComplete()
                         }
                     }
                     .frame(maxWidth: .infinity)
@@ -204,6 +231,8 @@ extension GuideView {
                             colorHex: "#424242FF"
                         )
                         Toggle("", isOn: $isOn)
+                            .labelsHidden()
+                            .toggleStyle(.switch)
                             .padding()
                     }
                     .padding(.horizontal,16)
@@ -218,7 +247,20 @@ extension GuideView {
                     .padding(.top,16)
                     
                     Button(action: {
-                        onPayCancelComplete()
+                        AnalyticsManager.saveBurialPoint(eventName: "first_in_buy_vip", check: true)
+                        LoadingMaskManager.shared.show()
+                        Task {
+                            // 10 秒后自动隐藏
+                            Task {
+                                try? await Task.sleep(nanoseconds: 10 * 1_000_000_000) // 10秒
+                                LoadingMaskManager.shared.hide()
+                            }
+
+                            // 执行购买
+                            if let id = product?.id {
+                                await payManager.purchase(productId: "\(id)")
+                            }
+                        }
                     }) {
                         
                         CustomText(
@@ -243,6 +285,8 @@ extension GuideView {
                     }
                     .padding(.top,10)
                     
+
+                    
                     HStack{
                         Image("guide_icon3")
                         VStack(spacing:4){
@@ -260,8 +304,9 @@ extension GuideView {
                                     fontSize: 12,
                                     colorHex: "#00B81CFF"
                                 )
+                                
                                 CustomText(
-                                    text: "$0.00",
+                                    text: (product?.priceFormatStyle.locale.currencySymbol ?? "$") + "0.00",
                                     fontName: Constants.FontString.medium,
                                     fontSize: 12,
                                     colorHex: "#101010FF"
@@ -269,7 +314,7 @@ extension GuideView {
                             }
                             HStack{
                                 CustomText(
-                                    text: "Expires on October 1, 2025",
+                                    text: threeDaysLater,
                                     fontName: Constants.FontString.medium,
                                     fontSize: 12,
                                     colorHex: "#7D7D7DFF"
@@ -282,8 +327,9 @@ extension GuideView {
                                     colorHex: "#7D7D7DFF"
                                 )
                                 
+
                                 CustomText(
-                                    text: "$9.99",
+                                    text: product?.displayPrice ?? "$9.99",
                                     fontName: Constants.FontString.medium,
                                     fontSize: 12,
                                     colorHex: "#7D7D7DFF"
@@ -303,7 +349,7 @@ extension GuideView {
                         )
                         .underline()
                         .onTapGesture {
-                            UIApplication.shared.open(URL(string: "https://www.baidu.com")!)
+                            UIApplication.shared.open(URL(string: "https://sites.google.com/view/dual-chat-terms-of-service")!)
                         }
                         
                         CustomText(
@@ -321,7 +367,7 @@ extension GuideView {
                         )
                         .underline()
                         .onTapGesture {
-                            UIApplication.shared.open(URL(string: "https://www.baidu.com")!)
+                            UIApplication.shared.open(URL(string: "https://sites.google.com/view/dual-chat-privacy-policy")!)
                         }
                         Spacer()
                         CustomText(
@@ -331,6 +377,17 @@ extension GuideView {
                             colorHex: "#838383FF"
                         )
                         .underline()
+                        .onTapGesture {
+                            LoadingMaskManager.shared.show()
+                            Task {
+                                // 10 秒后自动隐藏
+                                Task {
+                                    try? await Task.sleep(nanoseconds: 10 * 1_000_000_000) // 10秒
+                                    LoadingMaskManager.shared.hide()
+                                }
+                                await payManager.restore()
+                            }
+                        }
                     }
                     .padding(.horizontal,16)
                     .padding(.top,10)
@@ -340,6 +397,32 @@ extension GuideView {
                 .padding(.horizontal,16)
                 .background(.white)
                 .clipShape(RoundedCorner(radius: 20, corners: [.topLeft, .topRight]))
+            }
+        }
+        .onAppear{
+            AnalyticsManager.saveBurialPoint(eventName: "first_in_vip", check: true)
+        }
+        .onReceive(payManager.$purchaseSuccess) { success in
+            if let success = success {
+                print("购买成功：\(success.productId)")
+                AnalyticsManager.saveBurialPoint(eventName: "first_sub_success", check: true)
+                
+                if let product = product {
+                    if "\(product.id)" == "whats04_3dsub_week1" {
+                        AnalyticsManager.saveBurialPoint(eventName: "sub_sec_success", check: false)
+                    }
+                }
+
+                //修改支付结果
+                settings.hasWhatsPayStatus = true
+                LoadingMaskManager.shared.hide()
+                onComplete()
+            }
+        }
+        .onReceive(payManager.$purchaseError) { error in
+            if error != nil {
+                LoadingMaskManager.shared.hide()
+                onPayCancelComplete()
             }
         }
     }

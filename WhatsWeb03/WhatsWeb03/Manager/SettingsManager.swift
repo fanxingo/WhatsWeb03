@@ -16,10 +16,10 @@ extension SettingsManager{
 }
 class SettingsManager: ObservableObject {
     
-    // MARK: 用户订阅状态
-    @Published var hasWhatsPayStatusTest: Bool{
+
+    @Published var hasWhatsPayStatus: Bool{
         didSet {
-            UserDefaultsHelper.set(hasWhatsPayStatusTest, forKey: Constants.UserDefaultsKeys.hasWhatsPayStatusTest)
+            UserDefaultsHelper.set(hasWhatsPayStatus, forKey: Constants.UserDefaultsKeys.hasWhatsPayStatus)
         }
     }
     
@@ -50,7 +50,7 @@ class SettingsManager: ObservableObject {
     
     // MARK: - Init
     init() {
-        self.hasWhatsPayStatusTest = UserDefaultsHelper.get(forKey: Constants.UserDefaultsKeys.hasWhatsPayStatusTest, as: Bool.self) ?? false
+        self.hasWhatsPayStatus = UserDefaultsHelper.get(forKey: Constants.UserDefaultsKeys.hasWhatsPayStatus, as: Bool.self) ?? false
         
         self.userPassword = UserDefaultsHelper.get(forKey: Constants.AppLockKeys.userPassword, as: String.self) ?? ""
         

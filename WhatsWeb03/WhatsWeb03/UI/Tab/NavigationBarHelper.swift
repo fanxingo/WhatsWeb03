@@ -69,10 +69,13 @@ extension View {
                 }
                 ToolbarItem(placement: .principal) {
                     CustomText(text: title, fontName: Constants.FontString.medium, fontSize: 16, colorHex: "#101010FF")
+                        .padding(.bottom,4)
                 }
             }
             .onAppear {
-                NavigationBarHelper.setDarkAppearance()
+                DispatchQueue.main.async {
+                    NavigationBarHelper.setDarkAppearance()
+                }
             }
             .enableSwipeBack()
     }
@@ -93,6 +96,7 @@ extension View {
                 }
                 ToolbarItem(placement: .principal) {
                     CustomText(text: title, fontName: Constants.FontString.medium, fontSize: 16, colorHex: "#101010FF")
+                        .padding(.bottom,4)
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: onRightButtonTap) {
@@ -121,6 +125,7 @@ extension View {
                 }
                 ToolbarItem(placement: .principal) {
                     CustomText(text: title, fontName: Constants.FontString.medium, fontSize: 16, colorHex: "#101010FF")
+                        .padding(.bottom,4)
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     rightView()
@@ -161,6 +166,7 @@ extension View {
                 }
                 ToolbarItem(placement: .principal) {
                     centerView()
+                        .padding(.bottom,4)
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: onRightButtonTap) {

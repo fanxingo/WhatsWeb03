@@ -26,17 +26,24 @@ struct RemindView:View {
                     ForEach(items) { item in
                         ZStack(alignment: .topTrailing){
                             VStack{
-                                CustomText(text: item.title,
-                                           fontName: Constants.FontString.medium,
-                                           fontSize: 12,
-                                           colorHex: "#101010FF")
-                                .frame(maxWidth: .infinity,alignment: .leading)
-                                CustomText(text: item.content,
-                                           fontName: Constants.FontString.medium,
-                                           fontSize: 10,
-                                           colorHex: "#7D7D7DFF")
-                                .frame(maxWidth: .infinity,alignment: .leading)
-                                Divider()
+                                if !item.title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                                    CustomText(text: item.title,
+                                               fontName: Constants.FontString.medium,
+                                               fontSize: 12,
+                                               colorHex: "#101010FF")
+                                    .frame(maxWidth: .infinity,alignment: .leading)
+                                }
+                                if !item.content.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                                    CustomText(text: item.content,
+                                               fontName: Constants.FontString.medium,
+                                               fontSize: 10,
+                                               colorHex: "#7D7D7DFF")
+                                    .frame(maxWidth: .infinity,alignment: .leading)
+                                    .lineLimit(1)
+                                }
+                                Rectangle()
+                                    .fill(Color(hex: "#F1F1F1"))
+                                    .frame(height: 1)
                                 
                                 CustomText(text: DateFormatter.localizedString(from: item.date, dateStyle: .medium, timeStyle: .none) + "  " + item.time, fontName: Constants.FontString.regular, fontSize: 12, colorHex: "#7D7D7DFF")
                                     .frame(maxWidth: .infinity,alignment: .leading)
@@ -147,4 +154,3 @@ extension RemindView{
         }
     }
 }
-

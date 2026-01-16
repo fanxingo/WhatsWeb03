@@ -35,10 +35,18 @@ struct CreateRemindView: View {
                     InputView()
                     SelectDateView()
                         .onTapGesture {
+                            hideKeyboard()
+                            if openTime {
+                                openTime = false
+                            }
                             openDate.toggle()
                         }
                     SelectTimeView(selectedTime: $selectTime)
                         .onTapGesture {
+                            hideKeyboard()
+                            if openDate {
+                                openDate = false
+                            }
                             openTime.toggle()
                         }
                     SelectToggle()
@@ -50,12 +58,9 @@ struct CreateRemindView: View {
             
             if !isEditing {
                 Button(action: {
-                    if inputTitle.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                        ToastManager.shared.showToast(message: "Title cannot be empty.".localized())
-                        return
-                    }
-                    if inputDesc.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                        ToastManager.shared.showToast(message: "Content cannot be empty.".localized())
+                    hideKeyboard()
+                    if inputTitle.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && inputDesc.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                        ToastManager.shared.showToast(message: "Title and content cannot both be empty.".localized())
                         return
                     }
                     guard let date = selectDate else {
@@ -88,6 +93,7 @@ struct CreateRemindView: View {
             } else {
                 HStack(spacing: 20) {
                     Button(action: {
+                        hideKeyboard()
                         if let id = itemID {
                             PopManager.shared.show(DeletePopView(title: "Confirm whether to delete".localized(), onComplete: {
                                 PlistManager.shared.removeItem(by: id)
@@ -106,12 +112,9 @@ struct CreateRemindView: View {
                             .cornerRadius(22)
                     }
                     Button(action: {
-                        if inputTitle.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                            ToastManager.shared.showToast(message: "Title cannot be empty.".localized())
-                            return
-                        }
-                        if inputDesc.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                            ToastManager.shared.showToast(message: "Content cannot be empty.".localized())
+                        hideKeyboard()
+                        if inputTitle.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && inputDesc.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                            ToastManager.shared.showToast(message: "Title and content cannot both be empty.".localized())
                             return
                         }
                         guard let date = selectDate else {
@@ -133,7 +136,7 @@ struct CreateRemindView: View {
                         }
                         dismiss()
                     }) {
-                        CustomText(text: "save".localized(),
+                        CustomText(text: "Save".localized(),
                                    fontName: Constants.FontString.semibold,
                                    fontSize: 14,
                                    colorHex: "#FFFFFFFF")
@@ -171,6 +174,13 @@ struct CreateRemindView: View {
             }
         }
     }
+    
+    private func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder),
+                                        to: nil,
+                                        from: nil,
+                                        for: nil)
+    }
 }
 
 extension CreateRemindView{
@@ -178,11 +188,15 @@ extension CreateRemindView{
     private func InputView() -> some View{
         VStack(spacing: 0){
             
-            TextField("title".localized(), text: $inputTitle)
+            TextField("Title".localized(), text: $inputTitle)
                 .font(.custom(Constants.FontString.medium, size: 14))
                 .padding(EdgeInsets(top: 12, leading: 14, bottom: 10, trailing: 14))
-            Divider()
-                .padding(.horizontal,10)
+            
+            Rectangle()
+                .fill(Color(hex: "#F1F1F1"))
+                .frame(height: 1)
+                .padding(.horizontal, 10)
+            
             ZStack(alignment: .topLeading) {
                 TextEditor(text: $inputDesc)
                     .font(.custom(Constants.FontString.medium, size: 14))
@@ -223,8 +237,10 @@ extension CreateRemindView{
             )
             
             if openDate {
-                Divider()
-                    .padding(.horizontal,12)
+                Rectangle()
+                    .fill(Color(hex: "#F1F1F1"))
+                    .frame(height: 1)
+                    .padding(.horizontal, 10)
     
                 MonthCalendarView(selectedDate: $selectDate)
                     .padding(12)
@@ -251,9 +267,26 @@ extension CreateRemindView{
             )
             
             if openTime {
-                Divider()
-                    .padding(.horizontal,12)
-                CustomTimePicker(selectedTime: selectedTime)
+                
+                Rectangle()
+                    .fill(Color(hex: "#F1F1F1"))
+                    .frame(height: 1)
+                    .padding(.horizontal, 10)
+                
+                CustomTimePicker(selectedTime: Binding<String>(
+                    get: {
+                        if selectedTime.wrappedValue.isEmpty {
+                            let formatter = DateFormatter()
+                            formatter.dateFormat = "HH:mm"
+                            return formatter.string(from: Date())
+                        } else {
+                            return selectedTime.wrappedValue
+                        }
+                    },
+                    set: { newValue in
+                        selectedTime.wrappedValue = newValue
+                    }
+                ))
                         .frame(height: 130)
             }
         }
@@ -307,8 +340,8 @@ extension CreateRemindView{
     
     
     private func whiteRoundedBorder(
-        cornerRadius: CGFloat = 12,
-        borderColor: Color = Color(hex: "#BABDBD"),
+        cornerRadius: CGFloat = 10,
+        borderColor: Color = Color(hex: "#F1F1F1"),
         lineWidth: CGFloat = 1
     ) -> some View {
         RoundedRectangle(cornerRadius: cornerRadius)

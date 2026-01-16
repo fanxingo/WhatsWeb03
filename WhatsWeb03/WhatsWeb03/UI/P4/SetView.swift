@@ -28,7 +28,7 @@ struct SetView: View{
             VStack{
                 TitleView(showFullPayScreen: $showFullPayScreen, title: "Settings".localized())
                 
-                if !settings.hasWhatsPayStatusTest {
+                if !settings.hasWhatsPayStatus {
                     Button(action: {
                         showFullPayScreen = true
                     }){
@@ -56,20 +56,20 @@ struct SetView: View{
                         icon: "set_icon5",
                         title: "Privacy Policy".localized()
                     ) {
-                        UIApplication.shared.open(URL(string: "https://www.baidu.com")!)
+                        UIApplication.shared.open(URL(string: "https://sites.google.com/view/dual-chat-privacy-policy")!)
                     },
                     SettingItem(
                         icon: "set_icon6",
                         title: "Terms of Use".localized()
                     ) {
-                        UIApplication.shared.open(URL(string: "https://www.baidu.com")!)
+                        UIApplication.shared.open(URL(string: "https://sites.google.com/view/dual-chat-terms-of-service")!)
                     },
-                    SettingItem(
-                        icon: "set_icon7",
-                        title: "Restore Subscription".localized()
-                    ) {
-                        print("Restore Subscription")
-                    },
+//                    SettingItem(
+//                        icon: "set_icon7",
+//                        title: "Restore Subscription".localized()
+//                    ) {
+//                        print("Restore Subscription")
+//                    },
                     SettingItem(
                         icon: "set_icon8",
                         title: "Feedback".localized()
@@ -147,7 +147,7 @@ extension SetView {
                         CustomText(
                             text: items[index].title,
                             fontName: Constants.FontString.medium,
-                            fontSize: 14,
+                            fontSize: 16,
                             colorHex: "#101010FF"
                         )
 

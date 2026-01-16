@@ -66,77 +66,78 @@ struct GenerateQRCodesView : View {
     }
     
     var body: some View {
-        ZStack {
-            VStack(spacing: 16) {
-                BorderedTextEditor(text: $inputString,
-                                   placeholder: "Edit the text you need".localized(),
-                                   cornerRadius: 20,
-                                   minHeight: 150,
-                                   maxHeight: 150)
-                
-                Button(action: {
-                    if !inputString.isEmpty {
-                        qrCodeImage = generateQRCode(from: inputString)
+        GeometryReader { _ in
+            ZStack {
+                VStack(spacing: 16) {
+                    BorderedTextEditor(text: $inputString,
+                                       placeholder: "Edit the text you need".localized(),
+                                       cornerRadius: 20,
+                                       minHeight: 150,
+                                       maxHeight: 150)
+                    
+                    Button(action: {
+                        if !inputString.isEmpty {
+                            qrCodeImage = generateQRCode(from: inputString)
+                        } else {
+                            qrCodeImage = nil
+                        }
+                    }) {
+                        CustomText(text: "Generate".localized(),
+                                   fontName: Constants.FontString.semibold,
+                                   fontSize: 14,
+                                   colorHex: "#FFFFFFFF")
+                            .frame(maxWidth: 300, maxHeight: 44)
+                            .background(Color(hex: "#00B81CFF"))
+                            .cornerRadius(22)
+                    }
+                    
+                    if let qrImage = qrCodeImage {
+                        Image(uiImage: qrImage)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 254, height: 254)
+                            .padding(.top,30)
                     } else {
-                        qrCodeImage = nil
+                        Spacer().frame(height: 254 + 30)
                     }
-                }) {
-                    CustomText(text: "generate".localized(),
-                               fontName: Constants.FontString.semibold,
-                               fontSize: 14,
-                               colorHex: "#FFFFFFFF")
-                        .frame(maxWidth: 300, maxHeight: 44)
-                        .background(Color(hex: "#00B81CFF"))
-                        .cornerRadius(22)
+                    
+                    Spacer()
+                    
+                    HStack(spacing: 0) {
+                        Spacer()
+                        Button(action: {
+                            inputString = ""
+                            qrCodeImage = nil
+                        }) {
+                            QRCodeActionButton(imageName: "code_icon1",
+                                               text: "Delete".localized(),
+                                               colorHex: "#FF4545FF")
+                        }
+                        Spacer()
+                        Button(action: {
+                            copyQRCodeToClipboard()
+                            ToastManager.shared.showToast(message: "Copy successful".localized())
+                        }) {
+                            QRCodeActionButton(imageName: "code_icon2",
+                                               text: "Copy".localized(),
+                                               colorHex: "#00B81CFF")
+                        }
+                        Spacer()
+                        Button(action: {
+                            saveQRCodeToPhotos()
+                            ToastManager.shared.showToast(message: "Saved successfully".localized())
+                        }) {
+                            QRCodeActionButton(imageName: "code_icon3",
+                                               text: "Save".localized(),
+                                               colorHex: "#00AEFFFF")
+                        }
+                        Spacer()
+                    }
+                    .padding(.bottom, 20)
                 }
-                
-                if let qrImage = qrCodeImage {
-                    Image(uiImage: qrImage)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 254, height: 254)
-                        .padding(.top,30)
-                } else {
-                    Spacer().frame(height: 254 + 30)
-                }
-                
-                Spacer()
-                
-                HStack(spacing: 0) {
-                    Spacer()
-                    Button(action: {
-                        inputString = ""
-                        qrCodeImage = nil
-                    }) {
-                        QRCodeActionButton(imageName: "code_icon1",
-                                           text: "delete".localized(),
-                                           colorHex: "#FF4545FF")
-                    }
-                    Spacer()
-                    Button(action: {
-                        copyQRCodeToClipboard()
-                        ToastManager.shared.showToast(message: "Copy successful".localized())
-                    }) {
-                        QRCodeActionButton(imageName: "code_icon2",
-                                           text: "copy".localized(),
-                                           colorHex: "#00B81CFF")
-                    }
-                    Spacer()
-                    Button(action: {
-                        saveQRCodeToPhotos()
-                        ToastManager.shared.showToast(message: "Saved successfully".localized())
-                    }) {
-                        QRCodeActionButton(imageName: "code_icon3",
-                                           text: "save".localized(),
-                                           colorHex: "#00AEFFFF")
-                    }
-                    Spacer()
-                }
-                .safeAreaPadding(.bottom)
-                .padding(.bottom, 20)
+                .padding(.horizontal, 16)
+                .padding(.top,16)
             }
-            .padding(.horizontal, 16)
-            .padding(.top,16)
         }
         .fullScreenColorBackground("#FBFFFCFF", false)
         .navigationModifiers(title: "Generate QR Codes".localized(), onBack: {
@@ -146,4 +147,3 @@ struct GenerateQRCodesView : View {
         .dismissKeyboardOnTap()
     }
 }
-

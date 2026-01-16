@@ -14,9 +14,12 @@ struct MessageList:View {
     
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var navManager: NavigationManager
+    @EnvironmentObject var settings: SettingsManager
     
     @State private var searchTextString : String = ""
     @State private var chatItems: [ChatItem] = []
+    
+    @State private var showFullPayScreen = false
     
     private var filteredChats: [ChatItem] {
         if searchTextString.isEmpty {
@@ -57,6 +60,12 @@ struct MessageList:View {
         .onReceive(NotificationCenter.default.publisher(for: .didReceiveSharedFileURL)) { _ in
             loadChatItems()
         }
+        .onReceive(NotificationCenter.default.publisher(for: .openPayView)){ _ in
+            showFullPayScreen.toggle()
+        }
+        .fullScreenCover(isPresented: $showFullPayScreen) {
+            PayView()
+        }
     }
     
     private func loadChatItems() {
@@ -83,7 +92,7 @@ extension MessageList{
             }
             .padding(.horizontal,24)
         }
-        .padding(EdgeInsets(top: 16, leading: 16, bottom: 0, trailing: 16))
+        .padding(EdgeInsets(top: 8, leading: 8, bottom: 0, trailing: 8))
     }
     
     @ViewBuilder
@@ -99,6 +108,10 @@ extension MessageList{
                 .fixedSize()
             
             Button(action:{
+                if !settings.hasWhatsPayStatus{
+                    showFullPayScreen.toggle()
+                    return
+                }
                 navManager.path.append(AppRoute.backupTutorial)
             }){
                 CustomText(text: "Backup Chats".localized(), fontName: Constants.FontString.semibold, fontSize: 14, colorHex: "#FFFFFFFF")

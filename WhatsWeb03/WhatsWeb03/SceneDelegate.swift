@@ -34,38 +34,46 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         openURLContexts URLContexts: Set<UIOpenURLContext>
     ) {
         guard let url = URLContexts.first?.url else { return }
-
-        //  /UUID()
         print("✅ SceneDelegate 收到分享文件:", url)
+        
+        if let isPays = UserDefaultsHelper.get(forKey: Constants.UserDefaultsKeys.hasWhatsPayStatus, as: Bool.self){
+            if isPays {
+                let needAccess = url.startAccessingSecurityScopedResource()
+                defer {
+                    if needAccess {
+                        url.stopAccessingSecurityScopedResource()
+                    }
+                }
+                FileDefManager.handleZipFile(url: url) { result in
+                    switch result {
+                    case .success(let destinationURL):
+                        print("✅ ZIP 解压成功，路径：\(destinationURL)")
+                        
+                        FileDefManager.saveZipFileNameToTxt(zipFilePath: url.path, saveTo: destinationURL.path)
 
-        let needAccess = url.startAccessingSecurityScopedResource()
-        defer {
-            if needAccess {
-                url.stopAccessingSecurityScopedResource()
-            }
-        }
-        FileDefManager.handleZipFile(url: url) { result in
-            switch result {
-            case .success(let destinationURL):
-                print("✅ ZIP 解压成功，路径：\(destinationURL)")
-                
-                FileDefManager.saveZipFileNameToTxt(zipFilePath: url.path, saveTo: destinationURL.path)
+                        FileDefManager.deleteFile(at: url)
+                        
+                        // 在这里通知 SwiftUI 或刷新 UI
+                        NotificationCenter.default.post(
+                            name: .didReceiveSharedFileURL,
+                            object: destinationURL
+                        )
 
-                FileDefManager.deleteFile(at: url)
-                
-                // 在这里通知 SwiftUI 或刷新 UI
+                    case .failure(let error):
+                        print("❌ ZIP 解压失败：\(error.localizedDescription)")
+                    }
+                }
+            }else{
                 NotificationCenter.default.post(
-                    name: .didReceiveSharedFileURL,
-                    object: destinationURL
+                    name: .openPayView,
+                    object: nil
                 )
-
-            case .failure(let error):
-                print("❌ ZIP 解压失败：\(error.localizedDescription)")
             }
         }
     }
 }
 extension Notification.Name {
-    static let didReceiveSharedFileURL =
-        Notification.Name("didReceiveSharedFileURL")
+    static let didReceiveSharedFileURL = Notification.Name("didReceiveSharedFileURL")
+    
+    static let openPayView = Notification.Name("openPayView")
 }

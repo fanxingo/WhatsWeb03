@@ -105,5 +105,5 @@ private let tutorialItem: [BackupTutorialItem] = [
     BackupTutorialItem(icon: "message_tips2", title: "Step 2".localized(), desc: "Open Chat & %@".localized("Click on Profile".localized()),cDesc: "Click on Profile".localized()),
     BackupTutorialItem(icon: "message_tips3", title: "Step 3".localized(), desc: "Choose %@".localized("Exprort Chat".localized()),cDesc: "Exprort Chat".localized()),
     BackupTutorialItem(icon: "message_tips4", title: "Step 4".localized(), desc: "Choose %@".localized("Attach Media".localized()),cDesc: "Attach Media".localized()),
-    BackupTutorialItem(icon: "message_tips5", title: "Step 5".localized(), desc: "Find %@ & Click On It".localized("Dual WAMR".localized()),cDesc: "Dual WAMR".localized()),
+    BackupTutorialItem(icon: "message_tips5", title: "Step 5".localized(), desc: "Find %@ & Click On It".localized("Dual Web Chat".localized()),cDesc: "Dual Web Chat".localized()),
 ]

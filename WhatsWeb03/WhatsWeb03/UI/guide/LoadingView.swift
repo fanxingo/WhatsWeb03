@@ -11,7 +11,7 @@ struct LoadingView: View {
     
     @EnvironmentObject var settings: SettingsManager
     
-    let totalDuration: Double = 1.0
+    let totalDuration: Double = 3.0
     let updateInterval: Double = 0.01
     
     @State private var progress: Double = 0.0
@@ -26,7 +26,7 @@ struct LoadingView: View {
     var body: some View {
         VStack {
             if isActive {
-                if settings.hasWhatsPayStatusTest {
+                if settings.hasWhatsPayStatus {
                     routeToMain()
                 } else if !guideFinished {
                     GuideView(onComplete: {
@@ -61,6 +61,8 @@ struct LoadingView: View {
             }
         }
         .fullScreenBackground("loding_bgimage", true)
+        .loadingMask()
+        .toast()
     }
     
     @ViewBuilder

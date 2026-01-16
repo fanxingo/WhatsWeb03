@@ -22,7 +22,7 @@ struct TextView: View{
                 ScrollView{
                     VStack(spacing:0){
                         longItemButtonsSection()
-                        LineSpace(title: "工具".localized())
+                        LineSpace(title: "Tool".localized())
                             .padding(.top,8)
                         shortItemsGridSection()
                         Color.clear
@@ -50,7 +50,7 @@ struct TextView: View{
     private func handleAction(_ action: TextToolAction) {
         
         
-        if !settings.hasWhatsPayStatusTest{
+        if !settings.hasWhatsPayStatus && action == .translate{
             showFullPayScreen.toggle()
             return
         }
@@ -85,18 +85,18 @@ extension TextView {
         [
             ("lab_icon1", "Send quickly".localized(), "Make your reply faster".localized(), .fastSend),
             ("lab_icon2", "Artistic Fonts".localized(), "Make words more expressive".localized(), .artFont),
-            ("lab_icon3", "emojis".localized(), "Expressing emotions is more direct than using words.".localized(), .emoji),
+            ("lab_icon3", "Emojis".localized(), "Expressing emotions is more direct than using words.".localized(), .emoji),
             ("lab_icon4", "Common phrases".localized(), "Start a fun conversation with one click".localized(), .commonPhrase)
         ]
     }
     // Data for ShortItemView grid (2 per row, last row may have one item)
     private var shortItems: [(isVip: Bool, iconImg: String, title: String, action: TextToolAction)] {
         [
-            (settings.hasWhatsPayStatusTest, "lab_icon6", "Text translation".localized(), .translate),
-            (settings.hasWhatsPayStatusTest, "lab_icon7", "Repeated text".localized(), .repeatText),
-            (settings.hasWhatsPayStatusTest, "lab_icon8", "Flip text".localized(), .reverse),
-            (settings.hasWhatsPayStatusTest, "lab_icon9", "Randomly arrange words".localized(), .shuffle),
-            (settings.hasWhatsPayStatusTest, "lab_icon10", "Text to emoji".localized(), .textToEmoji)
+            (settings.hasWhatsPayStatus, "lab_icon6", "Text translation".localized(), .translate),
+            (true, "lab_icon7", "Repeated text".localized(), .repeatText),
+            (true, "lab_icon8", "Flip text".localized(), .reverse),
+            (true, "lab_icon9", "Randomly arrange words".localized(), .shuffle),
+            (true, "lab_icon10", "Text to emoji".localized(), .textToEmoji)
         ]
     }
 
@@ -159,6 +159,7 @@ extension TextView{
                     .minimumScaleFactor(0.8)
                     Spacer()
                 }
+                .frame(maxHeight: 80)
                 .padding(EdgeInsets(top: 16, leading: 16, bottom: 24, trailing: 8))
                 .background(
                     Image("home_linebg_item3")
@@ -192,23 +193,23 @@ extension TextView{
                         .resizable()
                         .frame(width: 34, height: 34)
 
-                    VStack(alignment: .leading, spacing: 4) {
+                    VStack(alignment: .leading, spacing: 0) {
                         CustomText(
                             text: title,
                             fontName: Constants.FontString.medium,
-                            fontSize: 14,
+                            fontSize: 16,
                             colorHex: "#101010FF"
                         )
+                        .multilineTextAlignment(.leading)
 
                         CustomText(
                             text: desc,
                             fontName: Constants.FontString.medium,
-                            fontSize: 12,
+                            fontSize: 14,
                             colorHex: "#7D7D7DFF"
                         )
                         .fixedSize(horizontal: false, vertical: true)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.5)
+                        .multilineTextAlignment(.leading)
                     }
 
                     Spacer()

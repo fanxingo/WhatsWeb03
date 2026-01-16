@@ -37,9 +37,9 @@ struct EmojisView: View {
                 }
             }
             .padding(.top,16)
-            .padding(.horizontal,16)
-            .frame(maxWidth: .infinity,maxHeight: .infinity)
-            
+            .frame(maxHeight: .infinity)
+            .frame(width:UIScreen.main.bounds.width - 50)
+            .scrollIndicators(.hidden)
         }
         .fullScreenColorBackground("#FBFFFCFF", false)
         .navigationModifiers(title: "Emojis".localized(), onBack: {

@@ -6,17 +6,25 @@
 //
 
 import SwiftUI
+import StoreKit
 
 
 struct TipsAffirmView : View {
     
     var onComplete: () -> Void
     
+    @EnvironmentObject var settings: SettingsManager
+    @StateObject private var productStore = SubscriptionProductStore.shared
+    @StateObject private var payManager = PayManager.shared
+    
+    
     @State private var remindMe = false
     @State private var showCloseButton = false
+    
+    @State private var product: Product?
 
     var priceText: AttributedString {
-        let price = "$9.99"
+        let price = product?.displayPrice ?? "$9.99"
         let rawString = "Dual Chat, message backup, privacy protection, unlimited text translation, and more. 3-day free trial, then %@/week, cancel anytime.".localized(price)
         var attrStr = AttributedString(rawString)
         attrStr.font = .custom(Constants.FontString.medium, size: 14)
@@ -198,13 +206,13 @@ struct TipsAffirmView : View {
                             CustomText(text: "terms".localized(), fontName: Constants.FontString.medium, fontSize: 10, colorHex: "#838383FF")
                                 .underline()
                                 .onTapGesture {
-                                    UIApplication.shared.open(URL(string: "https://www.baidu.com")!)
+                                    UIApplication.shared.open(URL(string: "https://sites.google.com/view/dual-chat-terms-of-service")!)
                                 }
                             CustomText(text: "&", fontName: Constants.FontString.medium, fontSize: 10, colorHex: "#838383FF")
                             CustomText(text: "privacy".localized(), fontName: Constants.FontString.medium, fontSize: 10, colorHex: "#838383FF")
                                 .underline()
                                 .onTapGesture {
-                                    UIApplication.shared.open(URL(string: "https://www.baidu.com")!)
+                                    UIApplication.shared.open(URL(string: "https://sites.google.com/view/dual-chat-privacy-policy")!)
                                 }
                             Spacer()
                             if showCloseButton{
@@ -217,6 +225,17 @@ struct TipsAffirmView : View {
                             Spacer()
                             CustomText(text: "recover".localized(), fontName: Constants.FontString.medium, fontSize: 10, colorHex: "#838383FF")
                                 .underline()
+                                .onTapGesture {
+                                    LoadingMaskManager.shared.show()
+                                    Task {
+                                        // 10 秒后自动隐藏
+                                        Task {
+                                            try? await Task.sleep(nanoseconds: 10 * 1_000_000_000) // 10秒
+                                            LoadingMaskManager.shared.hide()
+                                        }
+                                        await payManager.restore()
+                                    }
+                                }
                         }
                         .padding(24)
         
@@ -225,7 +244,19 @@ struct TipsAffirmView : View {
                 }
                 .scrollIndicators(.hidden)
                 BottomView(remindMe: $remindMe, onComplete: {
-                    onComplete()
+                    LoadingMaskManager.shared.show()
+                    Task {
+                        // 10 秒后自动隐藏
+                        Task {
+                            try? await Task.sleep(nanoseconds: 10 * 1_000_000_000) // 10秒
+                            LoadingMaskManager.shared.hide()
+                        }
+
+                        // 执行购买
+                        if let id = product?.id {
+                            await payManager.purchase(productId: "\(id)")
+                        }
+                    }
                 })
             }
             .id(remindMe)
@@ -235,6 +266,36 @@ struct TipsAffirmView : View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
                 showCloseButton = true
             }
+        }
+        .onReceive(payManager.$purchaseSuccess) { success in
+            if let success = success {
+                print("购买成功：\(success.productId)")
+                
+                AnalyticsManager.saveBurialPoint(eventName: "first_sub_success", check: true)
+                
+                if let product = product {
+                    if "\(product.id)" == "whats04_3dsub_week1" {
+                        AnalyticsManager.saveBurialPoint(eventName: "sub_sec_success", check: false)
+                    }
+                }
+                
+                settings.hasWhatsPayStatus = true
+                LoadingMaskManager.shared.hide()
+                onComplete()
+            }
+        }
+        .onReceive(payManager.$purchaseError) { error in
+            if error != nil {
+                LoadingMaskManager.shared.hide()
+            }
+        }
+        .task {
+            let hasTrial = await hasIntroTrial(productID: "whats04_3dsub_week2")
+            let productId = hasTrial
+                ? "whats04_3dsub_week2"
+                : "whats04_3dsub_week1"
+
+            product = productStore.product(for: productId)
         }
     }
 }
@@ -268,7 +329,7 @@ extension TipsAffirmView{
             
             var body: some View {
                 VStack(spacing: 0) {
-                    HStack {
+                    HStack(spacing:12){
                         Image("guide_icon1")
                             .resizable()
                             .frame(width: 20,height: 20)
@@ -276,7 +337,10 @@ extension TipsAffirmView{
                             text: "Don't worry, you'll be reminded before it expires.".localized(),
                             fontName: Constants.FontString.medium,
                             fontSize: 12, colorHex: "#424242FF")
+         
                         Toggle("", isOn: $remindMe)
+                            .labelsHidden()
+                            .toggleStyle(.switch)
                             .padding(.trailing)
                             .tint(Color(hex: "#00B81CFF"))
                     }

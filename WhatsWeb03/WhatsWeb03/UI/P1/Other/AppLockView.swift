@@ -175,6 +175,7 @@ extension AppLockView{
                        fontName: Constants.FontString.medium,
                        fontSize: 12,
                        colorHex: "#00B81CFF")
+            .multilineTextAlignment(.center)
             
             ForEach(questionsManager.titles.indices, id: \.self) { index in
                 questionTitle(title: questionsManager.titles[index])
@@ -260,7 +261,7 @@ public func answerInputView(placeholder: String, text: Binding<String>) -> some 
     HStack {
         TextField(placeholder.localized(), text: text)
             .foregroundColor(Color(hex: "#101010FF"))
-            .font(.custom(Constants.FontString.medium, size: 12))
+            .font(.custom(Constants.FontString.medium, size: 14))
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     .frame(maxWidth: .infinity, maxHeight: 44)

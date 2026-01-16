@@ -250,7 +250,7 @@ struct WenMenuPopView: View {
                 }
                 .scrollIndicators(.hidden)
             }
-            .frame(width:UIScreen.main.bounds.width - 32,height: 300)
+            .frame(width:UIScreen.main.bounds.width - 50,height: 300)
             .padding(.top,16)
         }
         .safeAreaPadding(.bottom)

@@ -69,7 +69,7 @@ struct FlipTextView : View {
                     createString += newString
                     
                 }){
-                    CustomText(text: "generate".localized(),
+                    CustomText(text: "Generate".localized(),
                                fontName: Constants.FontString.semibold,
                                fontSize: 14,
                                colorHex: "#FFFFFFFF")
@@ -78,37 +78,44 @@ struct FlipTextView : View {
                         .cornerRadius(10)
                 }
                 
-                VStack(spacing: 0){
-                    HStack{
-                        CustomText(text: "Result".localized(), fontName: Constants.FontString.medium, fontSize: 14, colorHex: "#101010FF")
-                        Spacer()
-                        Button(action:{
-                            UIPasteboard.general.string = createString
-                            ToastManager.shared.showToast(message: "Copy successful".localized())
-                        }){
-                            Image("lab_icon12")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 24, height: 24)
+                if !createString.isEmpty {
+                    VStack(spacing: 0){
+                        HStack{
+                            CustomText(
+                                text: "Result".localized(),
+                                fontName: Constants.FontString.medium,
+                                fontSize: 14,
+                                colorHex: "#101010FF"
+                            )
+                            Spacer()
+                            Button(action:{
+                                UIPasteboard.general.string = createString
+                                ToastManager.shared.showToast(message: "Copy successful".localized())
+                            }){
+                                Image("lab_icon12")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 24, height: 24)
+                            }
                         }
+                        .padding()
+                        Divider()
+                            .padding(.horizontal,16)
+                        
+                        TextEditor(text: $createString)
+                            .disabled(true)
+                            .padding(16)
                     }
-                    .padding()
-                    Divider()
-                        .padding(.horizontal,16)
-                    
-                    TextEditor(text: $createString)
-                        .padding(16)
+                    .background(Color.white)
+                    .cornerRadius(20)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(Color(hex: "#DCDCDCFF"), lineWidth: 1)
+                    )
+                    .frame(maxWidth: .infinity)
+                    .safeAreaPadding(.bottom)
                 }
-                .background(
-                    Color.white
-                )
-                .cornerRadius(20)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color(hex: "#DCDCDCFF"), lineWidth: 1)
-                )
-                .frame(maxWidth: .infinity)
-                .safeAreaPadding(.bottom)
+                Spacer()
             }
             .padding(.horizontal,16)
         }

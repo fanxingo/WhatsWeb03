@@ -23,6 +23,7 @@ struct ArtisticFontsView : View {
     @State var inputText : String = ""
     @State private var fontStyles: [[String]] = []
     @State private var resultList: [String] = []
+    private let placeholderText = "Add text here to get started".localized()
     
     var body: some View {
         VStack {
@@ -50,9 +51,8 @@ struct ArtisticFontsView : View {
 
         fontStyles = fonts
 
-        if !inputText.isEmpty {
-            updateResultList(text: inputText)
-        }
+        let text = inputText.isEmpty ? placeholderText : inputText
+        updateResultList(text: text)
     }
     private func isLetter(_ char: Character) -> Bool {
         char.isLetter && char.unicodeScalars.first!.isASCII

@@ -23,7 +23,6 @@ struct HomeView: View{
                 
                 TitleView(showFullPayScreen: $showFullPayScreen, title: "Home".localized())
                 
-
                 Button(action:{
                     currentTab = .chat
                 }){
@@ -94,8 +93,8 @@ struct HomeView: View{
                 switch action {
                 case .forgetPassword:
                     showInputLockView = false
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3){
-                        navManager.path.append(AppRoute.forgetPasswordView)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak navManager] in
+                        navManager?.path.append(AppRoute.forgetPasswordView)
                     }
                 case .success:
                     showInputLockView = false
@@ -109,6 +108,10 @@ struct HomeView: View{
                     showInputLockView = false
                 }
             }
+        }
+        .onAppear{
+            AnalyticsManager.saveBurialPoint(eventName: "first_in_home", check: true)
+            AnalyticsManager.saveBurialPoint(eventName: "in_home_page", check: false)
         }
     }
 }
@@ -152,28 +155,26 @@ extension HomeView{
         
         var body: some View{
             ZStack{
-                Image(bgImg)
-                    .resizable()
-                    .scaledToFit()
-                HStack{
-                    Image(iconImg)
-                        .resizable()
-                        .frame(width: 40,height: 40)
-                    VStack(alignment: .leading){
-                        CustomText(text: title, fontName: Constants.FontString.medium,fontSize: 14, colorHex: "#101010FF")
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.5)
-                        CustomText(text: desc, fontName: Constants.FontString.medium,fontSize: 12, colorHex: "#7D7D7DFF")
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.5)
+                VStack(spacing:2){
+                    HStack{
+                        Image(iconImg)
+                            .resizable()
+                            .frame(width: 40,height: 40)
+                        Spacer()
                     }
-                    Spacer()
+                    CustomText(text: title, fontName: Constants.FontString.medium,fontSize: 16, colorHex: "#101010FF")
+                        .frame(maxWidth: .infinity,alignment: .leading)
+ 
+                    CustomText(text: desc, fontName: Constants.FontString.medium,fontSize: 12, colorHex: "#7D7D7DFF")
+                        .frame(maxWidth: .infinity,alignment: .leading)
                 }
-                .padding(.leading,14)
-                .padding(.trailing,14)
-                .padding(.bottom,8)
-
+                .padding(.horizontal,24)
+                .padding(.vertical,16)
             }
+            .background(
+                Image(bgImg)
+                    .resizable(capInsets: EdgeInsets(top: 30, leading: 30, bottom: 30, trailing: 30))
+            )
         }
     }
     
@@ -191,7 +192,7 @@ extension HomeView{
                     Image(iconImg)
                         .resizable()
                         .frame(width: 34,height: 34)
-                    CustomText(text: title, fontName: Constants.FontString.medium,fontSize: 14, colorHex: "#101010FF")
+                    CustomText(text: title, fontName: Constants.FontString.medium,fontSize: 16, colorHex: "#101010FF")
                     Spacer()
                     Image("home_arrow")
                         .resizable()
@@ -204,15 +205,3 @@ extension HomeView{
         }
     }
 }
-//
-//#Preview {
-//
-//    @Previewable @StateObject var settings = SettingsManager()
-//    @Previewable @StateObject var navManager = NavigationManager()
-//    @Previewable @StateObject var popManager = PopManager.shared
-//    
-//    TabMainView()
-//        .environmentObject(settings)
-//        .environmentObject(navManager)
-//        .environmentObject(popManager)
-//}
